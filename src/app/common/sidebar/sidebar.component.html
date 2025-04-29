@@ -1,0 +1,56 @@
+<div
+    class="sidebar-area bg-white transition"
+    [ngClass]="{'active': isToggled}"
+>
+    <div class="logo bg-white">
+        <a routerLink="/" class="d-flex align-items-center">
+            <img src="images/logo-icon.png" alt="logo-icon" width="33px">
+            <span>
+                District Operations LTD
+            </span>
+        </a>
+    </div>
+    <div
+        class="burger-menu transition cursor-pointer"
+        [ngClass]="{'active': isToggled}"
+        (click)="toggle()"
+    >
+        <span class="top-bar transition bg-dark d-block"></span>
+        <span class="middle-bar transition bg-dark d-block"></span>
+        <span class="bottom-bar transition bg-dark d-block"></span>
+    </div>
+    <ng-scrollbar visibility="hover">
+        <div class="sidebar-inner">
+            <div class="sidebar-menu">
+                <mat-accordion>
+                    <span class="sub-title text-body">
+                        MAIN
+                    </span>
+                    <a routerLink="/info" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                        <i-feather name="file-minus"></i-feather>
+                        <span class="title">
+                            Entity informations
+                        </span>
+                    </a>
+                    <a routerLink="/locations" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                        <i-feather name="home"></i-feather>
+                        <span class="title">
+                            Locations
+                        </span>
+                    </a>
+                    <a routerLink="/workers" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                        <i-feather name="users"></i-feather>
+                        <span class="title">
+                            Workers
+                        </span>
+                    </a>
+
+                    <a class="sidebar-menu-link" (click)="logout()" href="#">
+                        <i-feather name="bar-chart-2"></i-feather>
+                        <span class="title">Logout</span>
+                    </a>
+                </mat-accordion>
+            </div>
+        </div>
+    </ng-scrollbar>
+</div>

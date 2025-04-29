@@ -1,0 +1,122 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a routerLink="/workers">Workers</a>
+        </li>
+        <li aria-current="page" class="breadcrumb-item active">Planning of {{date}} of {{completeWorkerPlanning?.worker?.name}} {{completeWorkerPlanning?.worker?.lastName}}</li>
+    </ol>
+</nav>
+
+<mat-card
+    class="trinta-card to-do-list-card mb-25 bg-white border-none d-block"
+>
+    <mat-card-content>
+        <div class="to-do-list-table">
+            <div class="table-responsive">
+                <table mat-table [dataSource]="dataSource">
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="month">
+                        <th mat-header-cell *matHeaderCellDef class="pl-0">
+                            Month
+                        </th>
+                        <td mat-cell *matCellDef="let element" class="pl-0">
+                            <div class="position-relative">
+                                <h6 class="mt-0 mb-0">
+                                    {{element.planning.workMonth}}
+                                </h6>
+                            </div>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="location">
+                        <th mat-header-cell *matHeaderCellDef class="pl-0">
+                            Location
+                        </th>
+                        <td mat-cell *matCellDef="let element" class="pl-0">
+                            <div class="position-relative">
+                                <h6 class="mt-0 mb-0">
+                                    {{element.planning.location.name}}
+                                </h6>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="entityType">
+                        <th mat-header-cell *matHeaderCellDef class="pl-0">
+                            Entity type
+                        </th>
+                        <td mat-cell *matCellDef="let element" class="pl-0">
+                            <div class="position-relative">
+                                <h6 class="mt-0 mb-0">
+                                    {{element.planning.entity.name}}
+                                </h6>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="startWork">
+                        <th mat-header-cell *matHeaderCellDef class="pl-0">
+                            Start
+                        </th>
+                        <td mat-cell *matCellDef="let element" class="pl-0">
+                            <div class="position-relative">
+                                <h6 class="mt-0 mb-0">
+                                    {{element.planning.planning.startWork | customDateFormat}}
+                                </h6>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="endWork">
+                        <th mat-header-cell *matHeaderCellDef class="pl-0">
+                            End
+                        </th>
+                        <td mat-cell *matCellDef="let element" class="pl-0">
+                            <div class="position-relative">
+                                <h6 class="mt-0 mb-0">
+                                    {{element.planning.planning.endWork | customDateFormat}}
+                                </h6>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="totalHours">
+                        <th mat-header-cell *matHeaderCellDef class="pl-0 text-center">
+                            Total hours
+                        </th>
+                        <td mat-cell *matCellDef="let element" class="pl-0 text-center">
+                            <div class="position-relative">
+                                <h6 class="mt-0 mb-0">
+                                    {{ calculateTotalHours(element.planning.startTime.workingHour, element.planning.endTime.workingHour) | number:'1.2-2' }}
+                                </h6>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="as">
+                        <th mat-header-cell *matHeaderCellDef class="pl-0 text-center">
+                            Attendance sheet
+                        </th>
+                        <td mat-cell *matCellDef="let element" class="pl-0">
+                            <div class="position-relative text-center">
+                                <h6 class="mt-0 mb-0">
+                                    <a *ngIf="element.planning.planning.pathFile" 
+                                        [href]="api_url + element.planning.planning.pathFile" 
+                                        target="_blank" class="aDown">
+                                            <i class="ri-file-download-line"></i>
+                                    </a>
+                                    <i *ngIf="!element.planning.planning.pathFile" class="ri-file-download-line"></i>
+                                </h6>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                </table>
+            </div>
+            <mat-paginator [pageSizeOptions]="[20, 50, 100]"></mat-paginator>
+        </div>
+    </mat-card-content>
+</mat-card>

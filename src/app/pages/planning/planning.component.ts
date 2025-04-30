@@ -18,6 +18,7 @@ import { CommonModule } from '@angular/common';
 import { API_URL_DOC } from '../../../main';
 import { CompleteLocation } from '../../interfaces/CompleteLocation';
 import { LocationsService } from '../../services/locations.service';
+import { TemplatePdfService } from '../../services/template-pdf.service';
 
 
 @Component({
@@ -28,7 +29,7 @@ import { LocationsService } from '../../services/locations.service';
 })
 export class PlanningComponent {
 
-  displayedColumns: string[] = ['month', 'location', 'entityType', 'startWork', 'endWork', 'totalHours','as'];
+  displayedColumns: string[] = ['month', 'location', 'entityType', 'startWork', 'endWork', 'totalHours','as', 'generate'];
 
   completeWorkerPlanning: CompleteWorkerPlanning | null = null;
   completeWp: CompleteWp[] = [];
@@ -38,7 +39,9 @@ export class PlanningComponent {
   api_url: string | null = API_URL_DOC;
 
   locationId: string | null = null;
-  
+
+  generatingMap: { [key: string]: boolean } = {};
+
   completeLocation: CompleteLocation | undefined = undefined;
 
   constructor(
@@ -46,7 +49,8 @@ export class PlanningComponent {
       private router: Router,
       private route: ActivatedRoute,
       private workerPlanningService: WoerkerPlanningService,
-      private locationsService: LocationsService
+      private locationsService: LocationsService,
+      private templatePdfService: TemplatePdfService
   ) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -97,6 +101,21 @@ export class PlanningComponent {
     });
   }
 
+  generateAs(planningId: number, workerId: number){
+    const key = `${planningId}_${workerId}`;
+    this.generatingMap[key] = true;
+    //id2 -workerId
+    //id -planningId
+    this.templatePdfService.createAttendanceSheet(planningId, workerId)
+      .subscribe((data: boolean) => {
+        this.generatingMap[key] = false;
+        if(data)
+          this.getWorkerPlanning(workerId,parseInt(this.date!));       
+        else 
+          console.log("errore");
+      });
+  }
+
   // Funzione per calcolare la differenza in ore tra startTime e endTime
   calculateTotalHours(startTime: string, endTime: string): number {
     const start = this.convertToDate(startTime);
@@ -112,4 +131,12 @@ export class PlanningComponent {
     date.setHours(hours, minutes, 0, 0); // Imposta ore e minuti
     return date;
   }
+
+  downloadAllSheets(workerId: number): void {
+    this.templatePdfService.createAttendanceSheetZip(workerId, parseInt(this.date!))
+    .subscribe(url => {
+      window.open(API_URL_DOC + url, '_blank');  
+    });
+  }
+  
 }

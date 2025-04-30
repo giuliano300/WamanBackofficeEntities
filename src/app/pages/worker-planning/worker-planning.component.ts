@@ -18,6 +18,7 @@ import { CommonModule } from '@angular/common';
 import { API_URL_DOC } from '../../../main';
 import { CompleteLocation } from '../../interfaces/CompleteLocation';
 import { LocationsService } from '../../services/locations.service';
+import { TemplatePdfService } from '../../services/template-pdf.service';
 
 
 @Component({
@@ -28,7 +29,7 @@ import { LocationsService } from '../../services/locations.service';
 })
 export class WorkerPlanningComponent {
 
-  displayedColumns: string[] = ['month', 'location', 'entityType', 'startWork', 'endWork', 'totalHours','as'];
+  displayedColumns: string[] = ['month', 'location', 'entityType', 'startWork', 'endWork', 'totalHours','as', 'generate'];
 
   completeWorkerPlanning: CompleteWorkerPlanning | null = null;
   completeWp: CompleteWp[] = [];
@@ -37,14 +38,16 @@ export class WorkerPlanningComponent {
   dataSource = new MatTableDataSource<CompleteWp>(this.completeWp);
   api_url: string | null = API_URL_DOC;
 
-  
+  generatingMap: { [key: string]: boolean } = {};
+
   completeLocation: CompleteLocation | undefined = undefined;
 
   constructor(
       private dialog: MatDialog, 
       private router: Router,
       private route: ActivatedRoute,
-      private workerPlanningService: WoerkerPlanningService
+      private workerPlanningService: WoerkerPlanningService,
+      private templatePdfService: TemplatePdfService
   ) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -59,7 +62,6 @@ export class WorkerPlanningComponent {
     const id = this.route.snapshot.paramMap.get('id');
     if(!id)
       this.router.navigate(['/']);
-
 
     const entity = localStorage.getItem('entity');
     if (!entity)
@@ -94,6 +96,22 @@ export class WorkerPlanningComponent {
     });
   }
 
+    generateAs(planningId: number, workerId: number){
+      const key = `${planningId}_${workerId}`;
+      this.generatingMap[key] = true;
+      //id2 -workerId
+      //id -planningId
+      this.templatePdfService.createAttendanceSheet(planningId, workerId)
+        .subscribe((data: boolean) => {
+          this.generatingMap[key] = false;
+          if(data)
+            this.getWorkerPlanning(workerId, parseInt(this.date!));       
+          else 
+            console.log("errore");
+        });
+    }
+
+
   // Funzione per calcolare la differenza in ore tra startTime e endTime
   calculateTotalHours(startTime: string, endTime: string): number {
     const start = this.convertToDate(startTime);
@@ -109,4 +127,12 @@ export class WorkerPlanningComponent {
     date.setHours(hours, minutes, 0, 0); // Imposta ore e minuti
     return date;
   }
+
+  downloadAllSheets(workerId: number): void {
+    this.templatePdfService.createAttendanceSheetZip(workerId, parseInt(this.date!))
+    .subscribe(url => {
+      window.open(API_URL_DOC + url, '_blank');  
+    });
+  }
+  
 }

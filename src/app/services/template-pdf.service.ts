@@ -26,4 +26,13 @@ export class TemplatePdfService {
       );
   }  
   
+  createAttendanceSheetZipOfAllWorkers(month: number, year: number, locationId: number, jobType?: number, options?: any): Observable<string> {
+    return this.http.get<string>(this.apiUrl + "/zip-attendance-sheets-of-all-workers?month=" + month + "&year=" + year + "&locationId=" + locationId + "&jobType=" + jobType)
+      .pipe(
+        map((response: string) => {
+          return response;  
+        })
+      );
+  }  
+  
 }

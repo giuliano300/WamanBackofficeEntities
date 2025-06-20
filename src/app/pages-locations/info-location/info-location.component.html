@@ -1,0 +1,84 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li aria-current="page" class="breadcrumb-item active">Location informations</li>
+    </ol>
+</nav>
+<mat-card class="trinta-card mb-25 bg-white border-none d-block">
+    <mat-card-content>
+        <form>
+            <div class="row">
+                <div class="col-sm-6">
+                    <mat-form-field>
+                        <i-feather name="Home"></i-feather>
+                        <mat-label>Location name</mat-label>
+                        <input matInput value="{{completeLocation?.location?.name}}" readonly>
+                    </mat-form-field>
+                </div>
+                <div class="col-sm-6">
+                    <mat-form-field>
+                        <i-feather name="map"></i-feather>
+                        <mat-label>City</mat-label>
+                        <input matInput value="{{completeLocation?.city?.name}}" readonly>
+                    </mat-form-field>
+                </div>
+                <div class="col-sm-12">
+                    <mat-form-field>
+                        <i-feather name="map-pin"></i-feather>
+                        <mat-label>Address</mat-label>
+                        <input matInput value="{{completeLocation?.location?.address}}" readonly>
+                    </mat-form-field>
+                </div>
+                <div class="col-sm-6">
+                    <mat-form-field>
+                        <i-feather name="Clock"></i-feather>
+                        <mat-label>Time In</mat-label>
+                        <input matInput value="{{completeLocation?.location?.timeIn}}" readonly>
+                    </mat-form-field>
+                </div>
+                <div class="col-sm-6">
+                    <mat-form-field>
+                        <i-feather name="Clock"></i-feather>
+                        <mat-label>Time Out</mat-label>
+                        <input matInput value="{{completeLocation?.location?.timeOut}}" readonly>
+                    </mat-form-field>
+                </div>
+                <div class="col-sm-6">
+                    <mat-form-field>
+                        <i-feather name="Code"></i-feather>
+                        <mat-label>Job Title</mat-label>
+                        <input matInput value="{{completeLocation?.location?.jobTitle}}" readonly>
+                    </mat-form-field>
+                </div>
+                <div class="col-sm-6">
+                    <mat-form-field>
+                        <i-feather name="user"></i-feather>
+                        <mat-label>Head of location</mat-label>
+                        <input matInput value="{{completeLocation?.location?.entityRapresentative}}" readonly>
+                    </mat-form-field>
+                </div>
+                <div class="col-sm-6">
+                    <mat-form-field>
+                        <i-feather name="phone"></i-feather>
+                        <mat-label>Head of location phone</mat-label>
+                        <input matInput value="{{completeLocation?.location?.mobileEntityRapresentative}}" readonly>
+                    </mat-form-field>
+                </div>
+                <div class="col-sm-6">
+                    <mat-form-field>
+                        <i-feather name="mail"></i-feather>
+                        <mat-label>Head of location email</mat-label>
+                        <input matInput value="{{completeLocation?.location?.email}}" readonly>
+                    </mat-form-field>
+                </div>
+                <div class="col-sm-12">
+                    <mat-form-field class="textarea">
+                        <i-feather name="file-text"></i-feather>
+                        <mat-label>Note</mat-label>
+                        <textarea matInput readonly>If you want change one of this values, you can write email to info@waman.app</textarea>
+                    </mat-form-field>
+                </div>
+
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

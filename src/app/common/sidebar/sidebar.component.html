@@ -22,12 +22,12 @@
     <ng-scrollbar visibility="hover">
         <div class="sidebar-inner">
             <div class="sidebar-menu">
-                <mat-accordion>
+                <mat-accordion [hidden]="!isEntity">
                     <span class="sub-title text-body">
                         MAIN
                     </span>
                     <a routerLink="/info" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                        <i-feather name="file-minus"></i-feather>
+                        <i-feather name="Home"></i-feather>
                         <span class="title">
                             Entity informations
                         </span>
@@ -39,6 +39,34 @@
                         </span>
                     </a>
                     <a routerLink="/workers" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                        <i-feather name="users"></i-feather>
+                        <span class="title">
+                            Workers
+                        </span>
+                    </a>
+
+                    <a class="sidebar-menu-link" (click)="logout()" href="#">
+                        <i-feather name="bar-chart-2"></i-feather>
+                        <span class="title">Logout</span>
+                    </a>
+                </mat-accordion>
+                <mat-accordion [hidden]="!isLocation">
+                    <span class="sub-title text-body">
+                        MAIN
+                    </span>
+                    <a routerLink="/info-location" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                        <i-feather name="Home"></i-feather>
+                        <span class="title">
+                            Location informations
+                        </span>
+                    </a>
+                    <a routerLink="/plannings" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                        <i-feather name="Layers"></i-feather>
+                        <span class="title">
+                            Plannings
+                        </span>
+                    </a>
+                    <a routerLink="/index" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                         <i-feather name="users"></i-feather>
                         <span class="title">
                             Workers

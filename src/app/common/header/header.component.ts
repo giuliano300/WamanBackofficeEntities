@@ -4,6 +4,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { FeathericonsModule } from '../../icons/feathericons/feathericons.module';
 import { ToggleService } from './toggle.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
     selector: 'app-header',
@@ -16,14 +17,21 @@ import { ToggleService } from './toggle.service';
 })
 export class HeaderComponent {
 
+    loginName: string = "";
+
     constructor(
         public toggleService: ToggleService,
-        private datePipe: DatePipe
+        private datePipe: DatePipe,
+        private authService: AuthService
     ) {
         this.toggleService.isToggled$.subscribe(isToggled => {
             this.isToggled = isToggled;
         });
         this.formattedDate = this.datePipe.transform(this.currentDate, 'dd MMMM yyyy');
+
+        this.authService.loginName$.subscribe(val => {
+            this.loginName = val || (localStorage.getItem('loginName')?.replace(/^"|"$/g, '')) || '';
+        });
     }
 
     // Toggle Service

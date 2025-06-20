@@ -13,7 +13,7 @@ import { ToggleService } from './common/header/toggle.service';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'oktariffa-frontend';
+  title = 'district-operation-frontend';
 
   constructor(public router: Router,  public toggleService: ToggleService) {}
   

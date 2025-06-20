@@ -1,0 +1,190 @@
+<nav aria-label="breadcrumb" class="position-relative">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a routerLink="/index">Plannings of all workers</a>
+        </li>
+    </ol>
+    <button color="primary" class="btn-download btn btn-primary"
+    (click)="downloadAllSheets()">Download all attendance sheets</button>
+
+</nav>
+
+<mat-card class="trinta-card to-do-list-card mb-10 bg-white border-none d-block">
+    <mat-card-content>
+        <form [formGroup]="form">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <mat-form-field>
+                            <i-feather name="Calendar"></i-feather>
+                            <mat-label>Select month</mat-label>
+                            <mat-select formControlName="month">
+                                <mat-option *ngFor="let option of months" [value]="option.id">
+                                {{ option.name }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>                        
+                    </div>
+                    <div class="col-lg-2">
+                        <mat-form-field>
+                            <i-feather name="Calendar"></i-feather>
+                            <mat-label>Select year</mat-label>
+                            <mat-select formControlName="year">
+                                <mat-option *ngFor="let option of years" [value]="option">
+                                {{ option }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>                        
+                    </div>
+                    <div class="col-lg-3">
+                        <mat-form-field>
+                            <i-feather name="Check"></i-feather>
+                            <mat-label>Select job type</mat-label>
+                            <mat-select formControlName="jobType">
+                                <mat-option *ngFor="let option of jobtypes" [value]="option.id">
+                                {{ option.name }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>                        
+                    </div>
+                    <div class="col-lg-2">
+                         <button mat-button type="submit" [disabled]="form.invalid" (click)="onSubmit()">
+                            Filter plannings
+                        </button>               
+                    </div>
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-2">
+                         <button mat-button type="submit" [disabled]="nessunElementoGenerabile" class="generateAllFiles" (click)="generateAllMissingAttendanceSheets()">
+                            Gen. all missing att.sheets
+                        </button>               
+                    </div>
+                </div>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>
+
+<mat-card
+    class="trinta-card to-do-list-card mb-25 bg-white border-none d-block"
+>
+    <mat-card-content>
+        <div class="to-do-list-table">
+            <div class="table-responsive">
+                <table mat-table [dataSource]="dataSource">
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef class="pl-0">
+                            Name
+                        </th>
+                        <td mat-cell *matCellDef="let element" class="pl-0">
+                            <div class="position-relative">
+                                <h6 class="mt-0 mb-0">
+                                    {{element.worker.name}}
+                                </h6>
+                            </div>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="lastName">
+                        <th mat-header-cell *matHeaderCellDef class="pl-0">
+                            Last Name
+                        </th>
+                        <td mat-cell *matCellDef="let element" class="pl-0">
+                            <div class="position-relative">
+                                <h6 class="mt-0 mb-0">
+                                    {{element.worker.lastName}}
+                                </h6>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="job">
+                        <th mat-header-cell *matHeaderCellDef class="pl-0">
+                            Job type
+                        </th>
+                        <td mat-cell *matCellDef="let element" class="pl-0">
+                            <div class="position-relative">
+                                <h6 class="mt-0 mb-0">
+                                    {{element.jobType.name}}
+                                </h6>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="startWork">
+                        <th mat-header-cell *matHeaderCellDef class="pl-0">
+                            Start
+                        </th>
+                        <td mat-cell *matCellDef="let element" class="pl-0">
+                            <div class="position-relative">
+                                <h6 class="mt-0 mb-0">
+                                    {{element.planning.startWork | customDateFormat}}
+                                </h6>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="endWork">
+                        <th mat-header-cell *matHeaderCellDef class="pl-0">
+                            End
+                        </th>
+                        <td mat-cell *matCellDef="let element" class="pl-0">
+                            <div class="position-relative">
+                                <h6 class="mt-0 mb-0">
+                                    {{element.planning.endWork | customDateFormat}}
+                                </h6>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="as">
+                        <th mat-header-cell *matHeaderCellDef class="pl-0 text-center">
+                            Attendace sheets
+                        </th>
+                        <td mat-cell *matCellDef="let element" class="pl-0">
+                            <div class="position-relative text-center">
+                                <h6 class="mt-0 mb-0">
+                                    <a *ngIf="element.planning.pathFile" 
+                                        [href]="api_url + element.planning.pathFile" 
+                                        target="_blank" class="aDown">
+                                            <i class="ri-file-download-line" title="download attendance sheet file"></i>
+                                    </a>
+                                    <i *ngIf="!element.planning.pathFile" class="ri-file-download-line"></i>
+                                </h6>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="generate"> 
+                        <th mat-header-cell *matHeaderCellDef class="pl-0 text-center">
+                            Gen.att.sheet
+                        </th>
+                        <td mat-cell *matCellDef="let element" class="pl-0">
+                            <div class="position-relative text-center">
+                                <h6 class="mt-0 mb-0">
+                                    <a *ngIf="!element.planning.pathFile">
+                                        <i class="ri-restart-fill generate"
+                                        [class.rotate-icon]="generatingMap[element.planning.id + '_' + element.planning.workerId]"
+                                        [class.disabled]="generatingMap[element.planning.id + '_' + element.planning.workerId]"
+                                        title="generate attendance sheet file" 
+                                        (click)="generateAs(element.planning.id, element.planning.workerId)"></i>                                    
+                                    </a>
+                                </h6>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    <!-- Riga nessun dato -->
+                    <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell text-center no-data" [attr.colspan]="displayedColumns.length">
+                            No data available
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <mat-paginator [pageSizeOptions]="[20, 50, 100]"></mat-paginator>
+        </div>
+    </mat-card-content>
+</mat-card>

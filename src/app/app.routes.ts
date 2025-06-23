@@ -12,6 +12,9 @@ import { LocationIndexComponent } from './pages-locations/location-index/locatio
 import { PlanningWorkerLocationComponent } from './pages-locations/planning-worker-location/planning-worker-location.component';
 import { InfoLocationComponent } from './pages-locations/info-location/info-location.component';
 import { PlanningsComponent } from './pages-locations/plannings/plannings/plannings.component';
+import { WorkerDisciplinaryReportsComponent } from './pages-locations/worker-disciplinary-reports/worker-disciplinary-reports.component';
+import { WorkerDisciplinaryReportsDetailsComponent } from './pages-locations/worker-disciplinary-reports-details/worker-disciplinary-reports-details.component';
+import { WorkerIncidentAccidentReportsComponent } from './pages-locations/worker-incident-accident-reports/worker-incident-accident-reports.component';
 
 export const routes: Routes = [
     { path: '', redirectTo : '/authentication', pathMatch: 'full' },
@@ -33,6 +36,9 @@ export const routes: Routes = [
     { path: 'info-location', component: InfoLocationComponent},
     { path: 'planning-worker-location/:id', component: PlanningWorkerLocationComponent},
     { path: 'plannings', component: PlanningsComponent},
+    { path: 'worker-disciplinary-reports', component: WorkerDisciplinaryReportsComponent},
+    { path: 'worker-incident-accident-reports', component: WorkerIncidentAccidentReportsComponent},
+    { path: 'worker-disciplinary-reports-details/:id', component: WorkerDisciplinaryReportsDetailsComponent},
 
     { path: '**', component: NotFoundComponent},
 ];

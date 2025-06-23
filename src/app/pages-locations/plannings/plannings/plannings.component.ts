@@ -13,7 +13,6 @@ import { CustomDateFormatPipe } from "../../../custom-date-format.pipe";
 import { CommonModule, NgFor } from '@angular/common';
 import { API_URL_DOC } from '../../../../main';
 import { CompleteLocation } from '../../../interfaces/CompleteLocation';
-import { LocationsService } from '../../../services/locations.service';
 import { TemplatePdfService } from '../../../services/template-pdf.service';
 import { PlanningWorker } from '../../../interfaces/PlanningWorker';
 import { UtilsService } from '../../../utils.service';

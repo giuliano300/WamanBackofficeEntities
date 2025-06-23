@@ -25,7 +25,7 @@ import { Workers } from '../../interfaces/Workers';
 })
 export class LocationIndexComponent {
 
-  displayedColumns: string[] = ['name', 'lastName', 'mobile', 'email', 'idCardNumber', 'empNumber', 'jobType', 'viewDetails'];
+  displayedColumns: string[] = ['name', 'lastName', 'mobile', 'email', 'idCardNumber', 'empNumber', 'jobType', 'viewDetails','disciplinaryReport'];
 
   completeWorker: CompleteWorker[] = [];
 
@@ -69,7 +69,8 @@ export class LocationIndexComponent {
                 ...c, 
                 action: {
                     viewDetails: 'ri-menu-search-line',
-                    viewWorkers: 'ri-user-search-line'
+                    viewWorkers: 'ri-user-search-line',
+                    disciplinaryReports: 'ri-bank-card-2-fill'
                 }
             }));;
             this.dataSource = new MatTableDataSource<CompleteWorker>(this.completeWorker);
@@ -82,4 +83,8 @@ export class LocationIndexComponent {
       this.router.navigate(['/planning-worker-location', worker.id]);
   }
   
+
+  gotoDisciplinaryReport(worker: Workers){
+      this.router.navigate(['/worker-disciplinary-reports-details', worker.id]);
+  }
 }

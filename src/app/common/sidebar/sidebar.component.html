@@ -73,6 +73,20 @@
                         </span>
                     </a>
 
+                    <a routerLink="/worker-disciplinary-reports" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                        <i-feather name="List"></i-feather>
+                        <span class="title">
+                            Workers disciplinary report
+                        </span>
+                    </a>
+
+                    <a routerLink="/worker-incident-accident-reports" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                        <i-feather name="Minimize"></i-feather>
+                        <span class="title">
+                            Workers inc./acc. report
+                        </span>
+                    </a>
+
                     <a class="sidebar-menu-link" (click)="logout()" href="#">
                         <i-feather name="bar-chart-2"></i-feather>
                         <span class="title">Logout</span>

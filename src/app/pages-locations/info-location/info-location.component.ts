@@ -6,7 +6,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { FeathericonsModule } from '../../icons/feathericons/feathericons.module';
 import { Router } from '@angular/router';
 import { EntitiesService } from '../../services/Entities.service';
-import { CompleteEntity } from '../../interfaces/CompleteEntity';
 import { CompleteLocation } from '../../interfaces/CompleteLocation';
 
 @Component({

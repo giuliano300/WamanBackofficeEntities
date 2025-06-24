@@ -4,6 +4,7 @@ export interface WorkerIncidentAccidentReports {
   entityId: number;
   locationId: number;
   date: Date;
-  place: string;
+  place?: string;
+  uploadFiles?: string;
   deleted: boolean;
 }

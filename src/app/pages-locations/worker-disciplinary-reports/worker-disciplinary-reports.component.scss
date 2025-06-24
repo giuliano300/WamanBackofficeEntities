@@ -339,7 +339,7 @@ a.aDown{
     padding: 25px 25px 5px;
 }
 
-.mat-mdc-button {
+.filter {
     width: 100%;
     height: auto;
     display: block;
@@ -360,4 +360,9 @@ a.aDown{
 
 .generateAllFiles:disabled{
     background: #a6e2d9 !important;
+}
+
+.down-file{
+    color: #3761ee;
+    font-size: 20px;
 }

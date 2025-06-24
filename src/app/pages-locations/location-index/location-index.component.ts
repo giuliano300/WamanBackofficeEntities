@@ -25,7 +25,7 @@ import { Workers } from '../../interfaces/Workers';
 })
 export class LocationIndexComponent {
 
-  displayedColumns: string[] = ['name', 'lastName', 'mobile', 'email', 'idCardNumber', 'empNumber', 'jobType', 'viewDetails','disciplinaryReport'];
+  displayedColumns: string[] = ['name', 'lastName', 'mobile', 'email', 'idCardNumber', 'empNumber', 'jobType', 'viewDetails'];
 
   completeWorker: CompleteWorker[] = [];
 

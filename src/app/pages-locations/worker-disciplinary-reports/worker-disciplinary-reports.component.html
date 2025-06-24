@@ -34,12 +34,147 @@
                         </mat-form-field>                        
                     </div>
                     <div class="col-lg-2">
-                         <button mat-button type="submit" [disabled]="form.invalid" (click)="onSubmit()">
+                         <button mat-button class="filter" type="submit" [disabled]="form.invalid" (click)="onSubmit()">
                             Filter reports
                         </button>               
                     </div>
                 </div>
             </div>
         </form>
+    </mat-card-content>
+</mat-card>
+<mat-card
+    class="trinta-card to-do-list-card mb-25 bg-white border-none d-block"
+>
+    <mat-card-content>
+
+        <div *ngIf="isLoading" class="text-center my-5 loader">
+            <mat-progress-spinner mode="indeterminate" diameter="40" color="primary"></mat-progress-spinner>
+        </div>
+        <div class="to-do-list-table">
+            <div class="table-responsive">
+                <table mat-table [dataSource]="dataSource">
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="insertDate">
+                        <th mat-header-cell *matHeaderCellDef class="pl-0">
+                            Date
+                        </th>
+                        <td mat-cell *matCellDef="let element" class="pl-0">
+                            <div class="position-relative">
+                                <h6 class="mt-0 mb-0">
+                                    {{element.workerDisciplinaryReport.insertDate | customDateFormat}}
+                                </h6>
+                            </div>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef class="pl-0">
+                            Name
+                        </th>
+                        <td mat-cell *matCellDef="let element" class="pl-0">
+                            <div class="position-relative">
+                                <h6 class="mt-0 mb-0">
+                                    {{element.worker.name}}
+                                </h6>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="lastName">
+                        <th mat-header-cell *matHeaderCellDef class="pl-0">
+                            Last Name
+                        </th>
+                        <td mat-cell *matCellDef="let element" class="pl-0">
+                            <div class="position-relative">
+                                <h6 class="mt-0 mb-0">
+                                    {{element.worker.lastName}}
+                                </h6>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="disciplinaryAction">
+                        <th mat-header-cell *matHeaderCellDef class="pl-0">
+                           Disciplinary action
+                        </th>
+                        <td mat-cell *matCellDef="let element" class="pl-0">
+                            <div class="position-relative">
+                                <h6 class="mt-0 mb-0">
+                                    {{element.workerDisciplinaryReport.disciplinaryAction}}
+                                </h6>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="actionsTaken">
+                        <th mat-header-cell *matHeaderCellDef class="pl-0">
+                           Actions taken
+                        </th>
+                        <td mat-cell *matCellDef="let element" class="pl-0">
+                            <div class="position-relative">
+                                <h6 class="mt-0 mb-0">
+                                    {{element.workerDisciplinaryReport.actionsTaken}}
+                                </h6>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="reason">
+                        <th mat-header-cell *matHeaderCellDef class="pl-0">
+                           Reason
+                        </th>
+                        <td mat-cell *matCellDef="let element" class="pl-0">
+                            <div class="position-relative">
+                                <h6 class="mt-0 mb-0">
+                                    {{element.workerDisciplinaryReport.reason}}
+                                </h6>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="uploadFiles">
+                        <th mat-header-cell *matHeaderCellDef class="pl-0">
+                           Upload Files
+                        </th>
+                        <td mat-cell *matCellDef="let element" class="pl-0">
+                            <div class="position-relative">
+                               <ng-container *ngFor="let file of element.workerDisciplinaryReport.uploadFiles">
+                                    <h6 class="mt-0 mb-0">
+                                        <a (click)="downloadFile(file)" style="cursor: pointer; margin-bottom: 10px; float: left; width: 100%;">
+                                         <i class="ri-file-download-fill down-file"></i> {{ file.name }}
+                                        </a>
+                                    </h6>
+                                </ng-container>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef class="text-end pr-1">Action</th>
+                        <td mat-cell *matCellDef="let element" class="text-end">
+                            <div class="action" style="margin: 0 15px 0 0;">
+                                <button type="button" mat-button class="p-0 min-w-auto lh-1 h-auto" (click)="UpdateItem(element)">
+                                    <i class="{{element.action.edit}}"></i>
+                                </button>
+                                <button type="button" mat-button class="p-0 min-w-auto lh-1 h-auto pr-1" (click)="DeleteItem(element)">
+                                    <i class="{{element.action.delete}}"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    <!-- Riga nessun dato -->
+                    <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell text-center no-data" [attr.colspan]="displayedColumns.length">
+                            No data available
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <mat-paginator [pageSizeOptions]="[20, 50, 100]"></mat-paginator>
+        </div>
     </mat-card-content>
 </mat-card>

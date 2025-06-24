@@ -73,19 +73,51 @@
                         </span>
                     </a>
 
-                    <a routerLink="/worker-disciplinary-reports" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                        <i-feather name="List"></i-feather>
-                        <span class="title">
-                            Workers disciplinary report
-                        </span>
-                    </a>
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <i-feather name="List"></i-feather>
+                                <span class="title">
+                                    Disciplinary report
+                                </span>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <ul class="sidebar-sub-menu">
+                            <li class="sidemenu-item">
+                                <a routerLink="/worker-disciplinary-reports" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    View all
+                                </a>
+                            </li>
+                            <li class="sidemenu-item">
+                                <a routerLink="/worker-disciplinary-reports/add" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    Add new
+                                </a>
+                            </li>
+                        </ul>
+                    </mat-expansion-panel>
 
-                    <a routerLink="/worker-incident-accident-reports" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                        <i-feather name="Minimize"></i-feather>
-                        <span class="title">
-                            Workers inc./acc. report
-                        </span>
-                    </a>
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <i-feather name="Minimize"></i-feather>
+                                <span class="title">
+                                    Incident/accident report
+                                </span>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <ul class="sidebar-sub-menu">
+                            <li class="sidemenu-item">
+                                <a routerLink="/worker-incident-accident-reports" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    View all
+                                </a>
+                            </li>
+                            <li class="sidemenu-item">
+                                <a routerLink="/worker-incident-accident-reports/add" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    Add new
+                                </a>
+                            </li>
+                        </ul>
+                    </mat-expansion-panel>
 
                     <a class="sidebar-menu-link" (click)="logout()" href="#">
                         <i-feather name="bar-chart-2"></i-feather>

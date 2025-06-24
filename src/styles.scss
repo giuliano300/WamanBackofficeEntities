@@ -305,3 +305,45 @@ h5{
 .error{
     color: var(--dangerColor);
 }
+
+.ngx-file-drop__drop-zone{
+    background-color: #f5f7fa!important;
+    border-radius: 10px!important;
+    border: 1px solid #f5f7fa!important;
+}
+
+.drop-zone{
+    color: var(--blackColor)!important;
+}
+
+
+.ngx-file-drop__content[_ngcontent-ng-c2301008647] {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 35px 0;
+    cursor: pointer;
+}
+
+.back{
+    background-color:var(--bodyColor)!important;
+}
+
+.loader{
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    height: 100vh;
+    background:rgba(255,255,255, 0.4);
+    top: 0;
+    left: 0;
+    
+    .mat-mdc-progress-spinner{
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+        top: 38vh;
+    }
+}

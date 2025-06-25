@@ -111,8 +111,6 @@ export class AddComponent {
   };
 
   onFileDrop(files: NgxFileDropEntry[]) {
-    this.uploadedFiles = []; // reset
-
     for (const droppedFile of files) {
       if (droppedFile.fileEntry.isFile) {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;

@@ -1,7 +1,7 @@
 <nav aria-label="breadcrumb" class="position-relative">
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
-            <a routerLink="/index">Disciplinary report of all workers</a>
+            <a routerLink="/index">Incident/Accident report of all workers</a>
         </li>
     </ol>
 </nav>
@@ -56,18 +56,31 @@
                 <table mat-table [dataSource]="dataSource">
 
                     <!-- Name Column -->
-                    <ng-container matColumnDef="insertDate">
+                    <ng-container matColumnDef="date">
                         <th mat-header-cell *matHeaderCellDef class="pl-0">
                             Date
                         </th>
                         <td mat-cell *matCellDef="let element" class="pl-0">
                             <div class="position-relative">
                                 <h6 class="mt-0 mb-0">
-                                    {{element.workerDisciplinaryReport.insertDate | customDateFormat}}
+                                    {{element.workerIncidentAccidentReport.date | customDateFormat}}
                                 </h6>
                             </div>
                         </td>
                     </ng-container>
+                    <ng-container matColumnDef="location">
+                        <th mat-header-cell *matHeaderCellDef class="pl-0">
+                            Location
+                        </th>
+                        <td mat-cell *matCellDef="let element" class="pl-0">
+                            <div class="position-relative">
+                                <h6 class="mt-0 mb-0 truncate">
+                                    {{element.location.name}}
+                                </h6>
+                            </div>
+                        </td>
+                    </ng-container>
+
                     <ng-container matColumnDef="name">
                         <th mat-header-cell *matHeaderCellDef class="pl-0">
                             Name
@@ -94,52 +107,25 @@
                         </td>
                     </ng-container>
 
-                    <ng-container matColumnDef="disciplinaryAction">
+                    <ng-container matColumnDef="place">
                         <th mat-header-cell *matHeaderCellDef class="pl-0">
-                           Disciplinary action
+                           Place
                         </th>
                         <td mat-cell *matCellDef="let element" class="pl-0">
                             <div class="position-relative">
-                                <h6 class="mt-0 mb-0 truncate">
-                                    {{element.workerDisciplinaryReport.disciplinaryAction}}
+                                <h6 class="mt-0 mb-0">
+                                    {{element.workerIncidentAccidentReport.place}}
                                 </h6>
                             </div>
                         </td>
                     </ng-container>
-
-                    <ng-container matColumnDef="actionsTaken">
-                        <th mat-header-cell *matHeaderCellDef class="pl-0">
-                           Actions taken
-                        </th>
-                        <td mat-cell *matCellDef="let element" class="pl-0">
-                            <div class="position-relative">
-                                <h6 class="mt-0 mb-0 truncate">
-                                    {{element.workerDisciplinaryReport.actionsTaken}}
-                                </h6>
-                            </div>
-                        </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="reason">
-                        <th mat-header-cell *matHeaderCellDef class="pl-0">
-                           Reason
-                        </th>
-                        <td mat-cell *matCellDef="let element" class="pl-0">
-                            <div class="position-relative">
-                                <h6 class="mt-0 mb-0 truncate">
-                                    {{element.workerDisciplinaryReport.reason}}
-                                </h6>
-                            </div>
-                        </td>
-                    </ng-container>
-
                     <ng-container matColumnDef="uploadFiles">
                         <th mat-header-cell *matHeaderCellDef class="pl-0">
                            Upload Files
                         </th>
                         <td mat-cell *matCellDef="let element" class="pl-0">
                             <div class="position-relative">
-                               <ng-container *ngFor="let file of element.workerDisciplinaryReport.uploadFiles">
+                               <ng-container *ngFor="let file of element.workerIncidentAccidentReport.uploadFiles">
                                     <h6 class="mt-0 mb-0">
                                         <a (click)="downloadFile(file)" style="cursor: pointer; margin-bottom: 10px; float: left; width: 100%;">
                                          <i class="ri-file-download-fill down-file"></i> {{ file.name }}
@@ -151,14 +137,11 @@
                     </ng-container>
 
                     <ng-container matColumnDef="action">
-                        <th mat-header-cell *matHeaderCellDef class="text-end pr-1">Action</th>
-                        <td mat-cell *matCellDef="let element" class="text-end">
-                            <div class="action" style="margin: 0 15px 0 0;">
-                                <button type="button" mat-button class="p-0 min-w-auto lh-1 h-auto" (click)="UpdateItem(element)">
-                                    <i class="{{element.action.edit}}"></i>
-                                </button>
-                                <button type="button" mat-button class="p-0 min-w-auto lh-1 h-auto pr-1" (click)="DeleteItem(element)">
-                                    <i class="{{element.action.delete}}"></i>
+                        <th mat-header-cell *matHeaderCellDef class="text-center pr-1">View Details</th>
+                        <td mat-cell *matCellDef="let element" class="text-center">
+                            <div class="action">
+                                <button type="button" mat-button class="p-0 min-w-auto lh-1 h-auto" (click)="openDetail(element)">
+                                    <i class="{{element.action.view}}"></i>
                                 </button>
                             </div>
                         </td>

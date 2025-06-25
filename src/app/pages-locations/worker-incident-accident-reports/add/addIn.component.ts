@@ -85,6 +85,7 @@ export class AddInComponent {
       workerId: [null, Validators.required],
       date: ['', Validators.required],
       place: ['', Validators.required],
+      description: ['', Validators.required],
       uploadControl: [null],
       id: ['0']
     });
@@ -118,6 +119,7 @@ export class AddInComponent {
               workerId: data.worker.id,
               date: data.workerIncidentAccidentReport.date,
               place: data.workerIncidentAccidentReport.place,
+              description: data.workerIncidentAccidentReport.description,
               id: id
             });
 
@@ -137,8 +139,6 @@ export class AddInComponent {
   };
 
   onFileDrop(files: NgxFileDropEntry[]) {
-    this.uploadedFiles = []; // reset
-
     for (const droppedFile of files) {
       if (droppedFile.fileEntry.isFile) {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
@@ -199,6 +199,7 @@ export class AddInComponent {
         workerId: formData.workerId,
         place: formData.place,
         uploadFiles: JSON.stringify(formData.uploadFiles),
+        description: formData.description,
         deleted: false
       };
 

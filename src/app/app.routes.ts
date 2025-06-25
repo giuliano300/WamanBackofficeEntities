@@ -16,6 +16,10 @@ import { WorkerDisciplinaryReportsComponent } from './pages-locations/worker-dis
 import { WorkerIncidentAccidentReportsComponent } from './pages-locations/worker-incident-accident-reports/worker-incident-accident-reports.component';
 import { AddComponent } from './pages-locations/worker-disciplinary-reports/add/add.component';
 import { AddInComponent } from './pages-locations/worker-incident-accident-reports/add/addIn.component';
+import { EntityIncidentAccidentReportComponent } from './pages/entity-incident-accident-report/entity-incident-accident-report.component';
+import { EntityDisciplinaryReportComponent } from './pages/entity-disciplinary-report/entity-disciplinary-report.component';
+import { EntityAuthGuard } from './authGuard/EntityAuthGuard';
+import { LocationAuthGuard } from './authGuard/LocationAuthGuard';
 
 export const routes: Routes = [
     { path: '', redirectTo : '/authentication', pathMatch: 'full' },
@@ -26,23 +30,38 @@ export const routes: Routes = [
             {path: '', component: SignInComponent}
         ]
     },
-    { path: 'info', component: InfoComponent},
-    { path: 'locations', component: LocationsComponent},
-    { path: 'location/:id', component: LocationDetailComponent},
-    { path: 'planning/:id/:locationId', component: PlanningComponent},
-    { path: 'worker-planning/:id', component: WorkerPlanningComponent},
-    { path: 'workers', component: WorkersComponent},
-    //LOCATION PAGE
-    { path: 'index', component: LocationIndexComponent},
-    { path: 'info-location', component: InfoLocationComponent},
-    { path: 'planning-worker-location/:id', component: PlanningWorkerLocationComponent},
-    { path: 'plannings', component: PlanningsComponent},
-    { path: 'worker-disciplinary-reports', component: WorkerDisciplinaryReportsComponent},
-    { path: 'worker-disciplinary-reports/add', component: AddComponent},
-    { path: 'worker-disciplinary-reports/add/:id', component: AddComponent},
-    { path: 'worker-incident-accident-reports', component: WorkerIncidentAccidentReportsComponent},
-    { path: 'worker-incident-accident-reports/add', component: AddInComponent},
-    { path: 'worker-incident-accident-reports/add/:id', component: AddInComponent},
 
+    //ENTITY
+    {
+        path: '',
+        canActivate: [EntityAuthGuard],
+        children: [
+            { path: 'info', component: InfoComponent },
+            { path: 'locations', component: LocationsComponent },
+            { path: 'location/:id', component: LocationDetailComponent },
+            { path: 'planning/:id/:locationId', component: PlanningComponent },
+            { path: 'worker-planning/:id', component: WorkerPlanningComponent },
+            { path: 'workers', component: WorkersComponent },
+            { path: 'entity-incident-accident-report', component: EntityIncidentAccidentReportComponent },
+            { path: 'entity-disciplinary-report', component: EntityDisciplinaryReportComponent }
+        ]
+    },
+    //LOCATION 
+    {
+        path: '',
+        canActivate: [LocationAuthGuard],
+        children: [
+            { path: 'index', component: LocationIndexComponent },
+            { path: 'info-location', component: InfoLocationComponent },
+            { path: 'planning-worker-location/:id', component: PlanningWorkerLocationComponent },
+            { path: 'plannings', component: PlanningsComponent },
+            { path: 'worker-disciplinary-reports', component: WorkerDisciplinaryReportsComponent },
+            { path: 'worker-disciplinary-reports/add', component: AddComponent },
+            { path: 'worker-disciplinary-reports/add/:id', component: AddComponent },
+            { path: 'worker-incident-accident-reports', component: WorkerIncidentAccidentReportsComponent },
+            { path: 'worker-incident-accident-reports/add', component: AddInComponent },
+            { path: 'worker-incident-accident-reports/add/:id', component: AddInComponent }
+        ]
+    },
     { path: '**', component: NotFoundComponent},
 ];

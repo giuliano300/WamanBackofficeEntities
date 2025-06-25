@@ -38,6 +38,18 @@
                             Locations
                         </span>
                     </a>
+                    <a routerLink="/entity-disciplinary-report" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                        <i-feather name="List"></i-feather>
+                        <span class="title">
+                            Disciplinary reports
+                        </span>
+                    </a>
+                    <a routerLink="/entity-incident-accident-report" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                        <i-feather name="Minimize"></i-feather>
+                        <span class="title">
+                            Incident/accident reports
+                        </span>
+                    </a>
                     <a routerLink="/workers" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                         <i-feather name="users"></i-feather>
                         <span class="title">
@@ -46,7 +58,7 @@
                     </a>
 
                     <a class="sidebar-menu-link" (click)="logout()" href="#">
-                        <i-feather name="bar-chart-2"></i-feather>
+                        <i-feather name="Lock"></i-feather>
                         <span class="title">Logout</span>
                     </a>
                 </mat-accordion>
@@ -78,7 +90,7 @@
                             <mat-panel-title>
                                 <i-feather name="List"></i-feather>
                                 <span class="title">
-                                    Disciplinary report
+                                    Disciplinary reports
                                 </span>
                             </mat-panel-title>
                         </mat-expansion-panel-header>
@@ -101,7 +113,7 @@
                             <mat-panel-title>
                                 <i-feather name="Minimize"></i-feather>
                                 <span class="title">
-                                    Incident/accident report
+                                    Incident/accident reports
                                 </span>
                             </mat-panel-title>
                         </mat-expansion-panel-header>
@@ -120,7 +132,7 @@
                     </mat-expansion-panel>
 
                     <a class="sidebar-menu-link" (click)="logout()" href="#">
-                        <i-feather name="bar-chart-2"></i-feather>
+                        <i-feather name="Lock"></i-feather>
                         <span class="title">Logout</span>
                     </a>
                 </mat-accordion>

@@ -73,7 +73,7 @@ export class WorkerIncidentAccidentReportsComponent {
 
     const stored = localStorage.getItem('completeLocation');
       if(!stored)
-        this.router.navigate(['/authentication']);
+        this.router.navigate(['/']);
 
     this.completeLocation = JSON.parse(stored!);
 
@@ -129,18 +129,7 @@ export class WorkerIncidentAccidentReportsComponent {
         }
     });
   }
-
-  downloadAllSheets(): void {
-    const month = this.form.value.month;
-    const year = this.form.value.year;
-    const jobType = this.form.value.jobTypes;
-    this.templatePdfService.createAttendanceSheetZipOfAllWorkers(month, year, this.locationId!, jobType)
-      .subscribe(url => {
-        window.open(API_URL_DOC + url, '_blank');  
-      });
-  }
-
-
+  
   downloadFile(file: { name: string, base64: string }) {
     const byteCharacters = atob(file.base64);
     const byteNumbers = new Array(byteCharacters.length).fill(null).map((_, i) => byteCharacters.charCodeAt(i));

@@ -86,7 +86,7 @@ export class PlanningsComponent {
 
     const stored = localStorage.getItem('completeLocation');
       if(!stored)
-        this.router.navigate(['/authentication']);
+        this.router.navigate(['/']);
 
     this.completeLocation = JSON.parse(stored!);
 

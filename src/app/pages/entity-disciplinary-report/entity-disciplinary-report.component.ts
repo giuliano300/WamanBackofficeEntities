@@ -16,24 +16,26 @@ import { TemplatePdfService } from '../../services/template-pdf.service';
 import { WorkerDisciplinaryReportsService } from '../../services/worker-disciplinary-reports.service';
 import { UtilsService } from '../../utils.service';
 import { CompleteLocation } from '../../interfaces/CompleteLocation';
-import { API_URL_DOC } from '../../../main';
 import { CompleteWorkerDisciplinaryReports } from '../../interfaces/CompleteWorkerDisciplinaryReports';
 import { ConfirmDialogComponent } from '../../confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CompleteWorkerIncidentAccidentReports } from '../../interfaces/CompleteWorkerIncidentAccidentReports';
+import { DisciplinaryDialogComponent } from '../../disciplinary-dialog/disciplinary-dialog.component';
+import { WamEntities } from '../../interfaces/Entities';
 
 @Component({
-  selector: 'app-worker-disciplinary-reports',
+  selector: 'app-entity-disciplinary-report',
   imports: [MatCardModule, MatButtonModule, MatSlideToggleModule, ReactiveFormsModule, MatSelect, MatFormField, MatLabel, FeathericonsModule, NgFor, MatOption,
     MatMenuModule, MatPaginatorModule, MatTableModule, MatCheckboxModule, CommonModule, RouterLink, CustomDateFormatPipe, MatProgressSpinnerModule],
-  templateUrl: './worker-disciplinary-reports.component.html',
-  styleUrl: './worker-disciplinary-reports.component.scss'
+  templateUrl: './entity-disciplinary-report.component.html',
+  styleUrl: './entity-disciplinary-report.component.scss'
 })
-export class WorkerDisciplinaryReportsComponent {
+export class EntityDisciplinaryReportComponent {
   year: number | null = null;
   month: number | null = null;
-  locationId: number | null = null;
-  completeLocation: CompleteLocation | undefined = undefined;
+  entityId: number | null = null;
+  entity: WamEntities | undefined = undefined;
   completeWorkerDisciplinaryReports : CompleteWorkerDisciplinaryReports[] | undefined = undefined;
   months: any[] = [];
   years: any[] = [];
@@ -50,7 +52,6 @@ export class WorkerDisciplinaryReportsComponent {
   constructor(
       private router: Router,
       private workerDisciplinaryReportsService: WorkerDisciplinaryReportsService,
-      private templatePdfService: TemplatePdfService,
       private utilService: UtilsService,
       private fb: FormBuilder,
       private dialog: MatDialog
@@ -70,13 +71,13 @@ export class WorkerDisciplinaryReportsComponent {
     if (!token) 
       this.router.navigate(['/']);
 
-    const stored = localStorage.getItem('completeLocation');
-      if(!stored)
-        this.router.navigate(['/']);
+    const entity = localStorage.getItem('entity');
+    if (!entity)
+      this.router.navigate(['/']);
 
-    this.completeLocation = JSON.parse(stored!);
+    this.entity! = JSON.parse(entity!);
 
-    this.locationId = this.completeLocation?.location.id!;
+    this.entityId = this.entity?.id!;
 
     this.year = new Date().getFullYear();
     this.month = new Date().getMonth() + 1;
@@ -99,7 +100,7 @@ export class WorkerDisciplinaryReportsComponent {
   }
 
   getWorkerDisciplinaryReports(month:number, year: number){
-    this.workerDisciplinaryReportsService.getWorkerDisciplinaryReports(month, year, 0, this.locationId!)
+    this.workerDisciplinaryReportsService.getWorkerDisciplinaryReports(month, year, 0, 0, this.entityId!)
       .subscribe((data: CompleteWorkerDisciplinaryReports[]) => {
         if (!data || data.length === 0) {
           console.log('Nessun dato disponibile');
@@ -118,8 +119,7 @@ export class WorkerDisciplinaryReportsComponent {
                   : c.workerDisciplinaryReport.uploadFiles
               },
               action: {
-                  edit: 'ri-edit-line',
-                  delete: 'ri-delete-bin-line'
+                  view: 'ri-menu-search-line'
               }
           }));;
           this.dataSource = new MatTableDataSource<CompleteWorkerDisciplinaryReports>(this.completeWorkerDisciplinaryReports);
@@ -143,33 +143,12 @@ export class WorkerDisciplinaryReportsComponent {
     URL.revokeObjectURL(url);
   }
 
-
-  UpdateItem(item:CompleteWorkerDisciplinaryReports){
-     this.router.navigate(["/worker-disciplinary-reports/add/" + item.workerDisciplinaryReport.id]);
-  }
-
-
-  DeleteItem(item:CompleteWorkerDisciplinaryReports){
-
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '500px'
-    });
-
-    dialogRef.afterClosed().subscribe((result: any) => {
-      if (result) {
-        this.workerDisciplinaryReportsService.deleteWorkerDisciplinaryReport(item.workerDisciplinaryReport)
-          .subscribe((data: boolean) => {
-            if(data){
-              const month = this.form.value.month;
-              const year = this.form.value.year;
-              this.getWorkerDisciplinaryReports(month, year);
-            }
-          });
-      } 
-      else 
-      {
-        console.log("Close");
-      }
+  openDetail(item:CompleteWorkerIncidentAccidentReports)
+  {
+    const dialogRef = this.dialog.open(DisciplinaryDialogComponent, {
+          data: item,
+          width: '800px',
+          minWidth: '800px'
     });
   }
 

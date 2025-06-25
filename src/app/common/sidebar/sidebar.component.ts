@@ -50,6 +50,7 @@ export class SidebarComponent {
     logout(){
         localStorage.removeItem('authToken');
         localStorage.removeItem('entity');
+        localStorage.removeItem('completeLocation');
         localStorage.removeItem('location');
         localStorage.removeItem('isEntity');
         localStorage.removeItem('isLocation');

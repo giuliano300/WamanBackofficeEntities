@@ -6,5 +6,6 @@ export interface WorkerIncidentAccidentReports {
   date: Date;
   place?: string;
   uploadFiles?: string;
+  description?: string;
   deleted: boolean;
 }

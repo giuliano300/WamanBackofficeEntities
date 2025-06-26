@@ -1,27 +1,26 @@
+import { Component, LOCALE_ID } from '@angular/core';
+import { CommonModule, registerLocaleData } from '@angular/common';
+import localeIt from '@angular/common/locales/it';
+import { ReactiveFormsModule, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { FeathericonsModule } from '../../../icons/feathericons/feathericons.module';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Component, ViewChild } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { CompleteLocation } from '../../../interfaces/CompleteLocation';
-import { NgFor, NgIf } from '@angular/common';
-import { Workers } from '../../../interfaces/Workers';
-import { CompleteWorker } from '../../../interfaces/CompleteWorker';
-import { WorkersService } from '../../../services/workers.service';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { NgxFileDropEntry, NgxFileDropModule } from 'ngx-file-drop';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { DateAdapter, MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
+import { FeathericonsModule } from '../../../icons/feathericons/feathericons.module';
+import { NgxFileDropEntry, NgxFileDropModule } from 'ngx-file-drop';
+import { CompleteLocation } from '../../../interfaces/CompleteLocation';
+import { Workers } from '../../../interfaces/Workers';
+import { ActivatedRoute, Router } from '@angular/router';
+import { WorkersService } from '../../../services/workers.service';
 import { WorkerIncidentAccidentReportsService } from '../../../services/worker-incident-accident-reports.service';
 import { CompleteWorkerIncidentAccidentReports } from '../../../interfaces/CompleteWorkerIncidentAccidentReports';
+import { CompleteWorker } from '../../../interfaces/CompleteWorker';
 import { WorkerIncidentAccidentReports } from '../../../interfaces/WorkerIncidentAccidentReports';
-import { MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
-import { CommonModule, registerLocaleData } from '@angular/common';
-import localeIt from '@angular/common/locales/it';
+import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
 
 registerLocaleData(localeIt);
 
@@ -38,25 +37,27 @@ export const MY_DATE_FORMATS = {
 };
 
 @Component({
-  selector: 'app-add',
-  imports: [MatIconModule,
+  selector: 'appIn-add',
+  standalone: true,
+  templateUrl: './addIn.component.html',
+  styleUrls: ['./addIn.component.scss'],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatCardModule,
+    MatIconModule,
     MatButtonModule,
-    ReactiveFormsModule, 
-    MatCardModule, 
-    MatInputModule, 
-    MatFormFieldModule, 
-    MatSelectModule, 
-    FeathericonsModule, 
-    MatSelectModule, 
-    NgFor, 
-    NgIf,
-    NgxFileDropModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    NgxMatTimepickerModule,
+    FeathericonsModule,
+    NgxFileDropModule
   ],
-  templateUrl: './addIn.component.html',
-  styleUrl: './addIn.component.scss',
   providers: [
+    { provide: LOCALE_ID, useValue: 'it-IT' },
     { provide: MAT_DATE_LOCALE, useValue: 'it-IT' },
     { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }
   ]
@@ -84,8 +85,16 @@ export class AddInComponent {
     this.disciplinaryForm = this.fb.group({
       workerId: [null, Validators.required],
       date: ['', Validators.required],
+      hour: ['14:30', Validators.required],
       place: ['', Validators.required],
       description: ['', Validators.required],
+      observations: ['', Validators.required],
+      cause: ['', Validators.required],
+      compilerName: ['', Validators.required],
+      compilerRole: ['', Validators.required],
+      compilerIdCardNumber: ['', Validators.required],
+      emailCompiler: ['', Validators.required],
+      mobileCompiler: ['', Validators.required],
       uploadControl: [null],
       id: ['0']
     });
@@ -120,6 +129,14 @@ export class AddInComponent {
               date: data.workerIncidentAccidentReport.date,
               place: data.workerIncidentAccidentReport.place,
               description: data.workerIncidentAccidentReport.description,
+              observations: data.workerIncidentAccidentReport.observations,
+              cause: data.workerIncidentAccidentReport.cause,
+              hour: data.workerIncidentAccidentReport.hour,
+              compilerName: data.workerIncidentAccidentReport.compilerName,
+              compilerRole: data.workerIncidentAccidentReport.compilerRole,
+              compilerIdCardNumber: data.workerIncidentAccidentReport.compilerIdCardNumber,
+              emailCompiler: data.workerIncidentAccidentReport.emailCompiler,
+              mobileCompiler: data.workerIncidentAccidentReport.mobileCompiler,
               id: id
             });
 
@@ -176,7 +193,7 @@ export class AddInComponent {
   }
 
   returnBack(){
-    this.router.navigate(["/worker-disciplinary-reports"]);
+    this.router.navigate(["/worker-incident-accident-reports"]);
   }
 
   
@@ -200,7 +217,15 @@ export class AddInComponent {
         place: formData.place,
         uploadFiles: JSON.stringify(formData.uploadFiles),
         description: formData.description,
-        deleted: false
+        deleted: false,
+        hour : formData.hour,
+        observations: formData.observations,
+        cause: formData.cause,
+        compilerName: formData.compilerName,
+        compilerRole: formData.compilerRole,
+        compilerIdCardNumber: formData.compilerIdCardNumber,
+        emailCompiler: formData.emailCompiler,
+        mobileCompiler: formData.mobileCompiler
       };
 
       if(formData.id > 0)

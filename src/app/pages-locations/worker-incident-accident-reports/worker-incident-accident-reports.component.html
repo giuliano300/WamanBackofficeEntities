@@ -55,15 +55,14 @@
             <div class="table-responsive">
                 <table mat-table [dataSource]="dataSource">
 
-                    <!-- Name Column -->
-                    <ng-container matColumnDef="date">
+                     <ng-container matColumnDef="complier">
                         <th mat-header-cell *matHeaderCellDef class="pl-0">
-                            Date
+                            Complier
                         </th>
                         <td mat-cell *matCellDef="let element" class="pl-0">
                             <div class="position-relative">
                                 <h6 class="mt-0 mb-0">
-                                    {{element.workerIncidentAccidentReport.date | customDateFormat}}
+                                    {{element.workerIncidentAccidentReport.compilerName}}
                                 </h6>
                             </div>
                         </td>
@@ -102,6 +101,32 @@
                             <div class="position-relative">
                                 <h6 class="mt-0 mb-0">
                                     {{element.workerIncidentAccidentReport.place}}
+                                </h6>
+                            </div>
+                        </td>
+                    </ng-container>
+                   <!-- Name Column -->
+                    <ng-container matColumnDef="date">
+                        <th mat-header-cell *matHeaderCellDef class="pl-0">
+                            Date
+                        </th>
+                        <td mat-cell *matCellDef="let element" class="pl-0">
+                            <div class="position-relative">
+                                <h6 class="mt-0 mb-0">
+                                    {{element.workerIncidentAccidentReport.date | customDateFormat}}
+                                </h6>
+                            </div>
+                        </td>
+                    </ng-container>
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="hour">
+                        <th mat-header-cell *matHeaderCellDef class="pl-0">
+                            Hours
+                        </th>
+                        <td mat-cell *matCellDef="let element" class="pl-0">
+                            <div class="position-relative">
+                                <h6 class="mt-0 mb-0">
+                                    {{element.workerIncidentAccidentReport.hour }}
                                 </h6>
                             </div>
                         </td>

@@ -42,7 +42,7 @@ export class WorkerIncidentAccidentReportsComponent {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  displayedColumns: string[] = ['date', 'name', 'lastName', 'place', 'uploadFiles','action'];
+  displayedColumns: string[] = ['complier', 'name', 'lastName', 'place', 'date', 'hour', 'uploadFiles','action'];
 
   form: FormGroup;
 

@@ -1,5 +1,48 @@
 <mat-dialog-content class="scrollable-content">
-  <h1 mat-dialog-title>Incident/accident Details </h1>
+  <h1 mat-dialog-title>Complier details </h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        <h6>Name and lastname</h6>
+      </div>
+      <div class="col-lg-9 text-right">
+        <span>{{data.workerIncidentAccidentReport.compilerName}} </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3">
+        <h6>Role</h6>
+      </div>
+      <div class="col-lg-9 text-right">
+        <span>{{data.workerIncidentAccidentReport.compilerRole}} </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3">
+        <h6>Id card number</h6>
+      </div>
+      <div class="col-lg-9 text-right">
+        <span>{{data.workerIncidentAccidentReport.compilerIdCardNumber}} </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3">
+        <h6>Email</h6>
+      </div>
+      <div class="col-lg-9 text-right">
+        <span>{{data.workerIncidentAccidentReport.emailCompiler}} </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3">
+        <h6>Mobile</h6>
+      </div>
+      <div class="col-lg-9 text-right">
+        <span>{{data.workerIncidentAccidentReport.mobileCompiler}} </span>
+      </div>
+    </div>
+  </div>
+  <h1 mat-dialog-title>Worker and incident details </h1>
   <div class="container">
     <div class="row">
       <div class="col-lg-3">
@@ -26,11 +69,11 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-lg-3">
-        <h6>Date of incident</h6>
+      <div class="col-lg-4">
+        <h6>Date and hour of incident</h6>
       </div>
-      <div class="col-lg-9 text-right">
-        <span>{{data.workerIncidentAccidentReport.date | customDateFormat}}</span>
+      <div class="col-lg-8 text-right">
+        <span>{{data.workerIncidentAccidentReport.date | customDateFormat}} - {{data.workerIncidentAccidentReport.hour}}</span>
       </div>
     </div>
     <div class="row">
@@ -45,6 +88,18 @@
       <div class="col-lg-12 text-center">
         <h6 class="bg-top">Description of incident</h6>
         <span class="boxed">{{data.workerIncidentAccidentReport.description}}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h6 class="bg-top">Cause of incident</h6>
+        <span class="boxed">{{data.workerIncidentAccidentReport.cause}}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h6 class="bg-top">Observation of incident</h6>
+        <span class="boxed">{{data.workerIncidentAccidentReport.observations}}</span>
       </div>
     </div>
     <div class="row">

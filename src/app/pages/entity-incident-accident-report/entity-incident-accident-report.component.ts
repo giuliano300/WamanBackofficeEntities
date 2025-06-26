@@ -43,7 +43,7 @@ export class EntityIncidentAccidentReportComponent {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  displayedColumns: string[] = ['date', 'location', 'name', 'lastName', 'place', 'uploadFiles','action'];
+  displayedColumns: string[] = ['compiler', 'location', 'place', 'date', 'hour', 'name', 'lastName', 'uploadFiles','action'];
 
   form: FormGroup;
 

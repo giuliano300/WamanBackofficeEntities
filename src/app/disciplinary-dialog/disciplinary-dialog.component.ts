@@ -1,10 +1,11 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { NgFor } from '@angular/common';
+import { CustomDateFormatPipe } from "../custom-date-format.pipe";
 
 @Component({
   selector: 'app-disciplinary-dialog',
-  imports: [MatDialogModule, NgFor],
+  imports: [MatDialogModule, NgFor, CustomDateFormatPipe],
   templateUrl: './disciplinary-dialog.component.html',
   styleUrl: './disciplinary-dialog.component.scss'
 })

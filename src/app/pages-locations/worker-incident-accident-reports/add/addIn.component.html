@@ -63,9 +63,9 @@
                     <i-feather name="users"></i-feather>
                     <mat-label>Select worker</mat-label>
                     <mat-select formControlName="workerId">
-                    <mat-option *ngFor="let worker of workers" [value]="worker.id">
-                        {{ worker.name }} {{ worker.lastName }} - {{ worker.idCardNumber }}
-                    </mat-option>
+                        <mat-option *ngFor="let worker of workers" [value]="worker.id">
+                            {{ worker.name }} {{ worker.lastName }} - {{ worker.idCardNumber }}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
                 </div>
@@ -130,7 +130,7 @@
         </ol>
     </nav>
     <mat-card class="trinta-card mb-25 bg-white border-none d-block">
-        <mat-card-content >
+        <mat-card-content>
             <div class="row">
                 <div class="col-sm-12">
                     <div class="preview-list mb-10" *ngIf="uploadedFiles.length > 0">

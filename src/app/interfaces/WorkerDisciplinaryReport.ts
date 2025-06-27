@@ -9,4 +9,10 @@ export interface WorkerDisciplinaryReports {
   reason?: string;
   uploadFiles?: string;
   deleted: boolean;
+
+  compilerName: string;
+  compilerRole: string;
+  compilerIdCardNumber: string;
+  emailCompiler: string;
+  mobileCompiler: string;
 }

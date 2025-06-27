@@ -43,7 +43,7 @@ export class EntityDisciplinaryReportComponent {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  displayedColumns: string[] = ['insertDate', 'name', 'lastName', 'disciplinaryAction', 'actionsTaken', 'reason', 'uploadFiles','action'];
+  displayedColumns: string[] = ['compiler', 'location', 'name', 'lastName', 'insertDate', 'reason','disciplinaryAction', 'actionsTaken',  'uploadFiles','action'];
 
   form: FormGroup;
 

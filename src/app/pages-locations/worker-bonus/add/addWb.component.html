@@ -1,0 +1,202 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li aria-current="page" class="breadcrumb-item active">{{title}}</li>
+    </ol>
+</nav>
+<form [formGroup]="bunusForm!" (ngSubmit)="onSubmit()">
+    <mat-card class="trinta-card mb-10 bg-white border-none d-block">
+        <mat-card-content>
+            <div class="row">
+                <div class="col-sm-12">
+                    <mat-form-field class="input">
+                        <i-feather name="user"></i-feather>
+                        <mat-label>Reviewer's Name & lastname </mat-label>
+                        <input matInput formControlName="reviewerName" type="text">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-sm-6">
+                    <mat-form-field class="input">
+                        <i-feather name="activity"></i-feather>
+                        <mat-label>Reviewer's role</mat-label>
+                        <input matInput formControlName="reviewerRole" type="text">
+                    </mat-form-field>
+                </div>
+                <div class="col-sm-6">
+                    <mat-form-field appearance="fill">
+                        <i-feather name="calendar"></i-feather>
+                        <mat-label>Insert Date</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="date">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>                
+                </div>
+
+                <div class="col-sm-6">
+                    <mat-form-field class="input">
+                        <i-feather name="calendar"></i-feather>
+                        <mat-label>Reference year</mat-label>
+                        <mat-select formControlName="year">
+                            <mat-option *ngFor="let y of years" [value]="y">
+                                {{ y }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-sm-6">
+                    <mat-form-field class="input">
+                        <i-feather name="calendar"></i-feather>
+                        <mat-label>Reference quarter</mat-label>
+                        <mat-select formControlName="quarter">
+                            <mat-option *ngFor="let y of quarters" [value]="y.id">
+                                {{ y.name }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+            </div>
+        </mat-card-content>
+    </mat-card>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li aria-current="page" class="breadcrumb-item active mt-10">Evaluation of {{completeWorker?.worker?.name}} {{completeWorker?.worker?.lastName}}</li>
+        </ol>
+    </nav>
+    <mat-card class="trinta-card mb-10 bg-white border-none d-block">
+        <mat-card-content>
+            <div class="row">
+                <div class="col-md-4">
+                    <mat-form-field class="input">
+                        <i-feather name="terminal"></i-feather>
+                        <mat-label>Sensitivity Towards Entity Environment</mat-label>
+                        <mat-select formControlName="sensitivityTowardsEntityEnvironment">
+                            <mat-option *ngFor="let y of ten" [value]="y">
+                                {{ y }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field class="input">
+                        <i-feather name="terminal"></i-feather>
+                        <mat-label>Time Management</mat-label>
+                        <mat-select formControlName="timeManagement">
+                            <mat-option *ngFor="let y of ten" [value]="y">
+                                {{ y }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field class="input">
+                        <i-feather name="terminal"></i-feather>
+                        <mat-label>Respecting administrative procedures</mat-label>
+                        <mat-select formControlName="respectingAdministrativeProcedures">
+                            <mat-option *ngFor="let y of ten" [value]="y">
+                                {{ y }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row mt-10">
+                <div class="col-md-4">
+                    <mat-form-field class="input">
+                        <i-feather name="terminal"></i-feather>
+                        <mat-label>Appropriate good use Equipment and/or machinery/IT Equipment</mat-label>
+                        <mat-select formControlName="appropriateGoodUseEquipmentAndOrMachineryITEquipment">
+                            <mat-option *ngFor="let y of ten" [value]="y">
+                                {{ y }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field class="input">
+                        <i-feather name="terminal"></i-feather>
+                        <mat-label>Team Player</mat-label>
+                        <mat-select formControlName="teamPlayer">
+                            <mat-option *ngFor="let y of ten" [value]="y">
+                                {{ y }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field class="input">
+                        <i-feather name="terminal"></i-feather>
+                        <mat-label>Energy, Determination & Work Rate</mat-label>
+                        <mat-select formControlName="energyDeterminationWorkRate">
+                            <mat-option *ngFor="let y of ten" [value]="y">
+                                {{ y }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row mt-10">
+                <div class="col-md-4">
+                    <mat-form-field class="input">
+                        <i-feather name="terminal"></i-feather>
+                        <mat-label>Respect towards Authority and Integrity</mat-label>
+                        <mat-select formControlName="respectTowardsAuthorityAndIntegrity">
+                            <mat-option *ngFor="let y of ten" [value]="y">
+                                {{ y }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field class="input">
+                        <i-feather name="terminal"></i-feather>
+                        <mat-label>Adaptability, flexibility and mobility</mat-label>
+                        <mat-select formControlName="adaptabilityFlexibilityAndMobility">
+                            <mat-option *ngFor="let y of ten" [value]="y">
+                                {{ y }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field class="input">
+                        <i-feather name="terminal"></i-feather>
+                        <mat-label>Personal Appearance and Image</mat-label>
+                        <mat-select formControlName="personalAppearanceAndImage">
+                            <mat-option *ngFor="let y of ten" [value]="y">
+                                {{ y }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row mt-10">
+                <div class="col-md-4">
+                    <mat-form-field class="input">
+                        <i-feather name="terminal"></i-feather>
+                        <mat-label>Communications Skills</mat-label>
+                        <mat-select formControlName="communicationsSkills">
+                            <mat-option *ngFor="let y of ten" [value]="y">
+                                {{ y }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row mt-10">
+                <div class="col-sm-6 mt-20 text-start">
+                    <button mat-flat-button class="back" type="submit" (click)="returnBack()">
+                        back
+                    </button>
+                </div>
+                <div class="col-sm-6 mt-20 text-end">
+                    <button mat-flat-button color="primary" type="submit" [disabled]="bunusForm!.invalid">
+                        Save
+                    </button>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+    <input formControlName="id" type="hidden" value="0">
+</form>

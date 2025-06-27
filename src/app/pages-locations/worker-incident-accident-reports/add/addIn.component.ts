@@ -85,7 +85,7 @@ export class AddInComponent {
     this.disciplinaryForm = this.fb.group({
       workerId: [null, Validators.required],
       date: ['', Validators.required],
-      hour: ['14:30', Validators.required],
+      hour: ['', Validators.required],
       place: ['', Validators.required],
       description: ['', Validators.required],
       observations: ['', Validators.required],

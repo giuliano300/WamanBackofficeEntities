@@ -1,4 +1,47 @@
 <mat-dialog-content class="scrollable-content">
+  <h1 mat-dialog-title>Complier details </h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        <h6>Name and lastname</h6>
+      </div>
+      <div class="col-lg-9 text-right">
+        <span>{{data.workerDisciplinaryReport.compilerName}} </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3">
+        <h6>Role</h6>
+      </div>
+      <div class="col-lg-9 text-right">
+        <span>{{data.workerDisciplinaryReport.compilerRole}} </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3">
+        <h6>Id card number</h6>
+      </div>
+      <div class="col-lg-9 text-right">
+        <span>{{data.workerDisciplinaryReport.compilerIdCardNumber}} </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3">
+        <h6>Email</h6>
+      </div>
+      <div class="col-lg-9 text-right">
+        <span>{{data.workerDisciplinaryReport.emailCompiler}} </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3">
+        <h6>Mobile</h6>
+      </div>
+      <div class="col-lg-9 text-right">
+        <span>{{data.workerDisciplinaryReport.mobileCompiler}} </span>
+      </div>
+    </div>
+  </div>
   <h1 mat-dialog-title>Disciplinary Details </h1>
   <div class="container">
     <div class="row">
@@ -7,6 +50,14 @@
       </div>
       <div class="col-lg-9 text-right">
         <span>{{data.worker.name}} {{data.worker.lastName}}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3">
+        <h6>Date</h6>
+      </div>
+      <div class="col-lg-9 text-right">
+        <span>{{data.workerDisciplinaryReport.insertDate | customDateFormat}}</span>
       </div>
     </div>
     <div class="row">
@@ -27,6 +78,12 @@
     </div>
     <div class="row">
       <div class="col-lg-12 text-center">
+        <h6 class="bg-top">Reason</h6>
+        <span class="boxed">{{data.workerDisciplinaryReport.reason}}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 text-center">
         <h6 class="bg-top">Disciplinary action</h6>
         <span class="boxed">{{data.workerDisciplinaryReport.disciplinaryAction}}</span>
       </div>
@@ -35,12 +92,6 @@
       <div class="col-lg-12 text-center">
         <h6 class="bg-top">Actions taken</h6>
         <span class="boxed">{{data.workerDisciplinaryReport.actionsTaken}}</span>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-12 text-center">
-        <h6 class="bg-top">Reason</h6>
-        <span class="boxed">{{data.workerDisciplinaryReport.reason}}</span>
       </div>
     </div>
     <div class="row">

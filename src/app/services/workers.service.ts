@@ -22,4 +22,8 @@ export class WorkersService {
     return this.http.get<CompleteWorker[]>(this.apiUrl + "/WorkersFromEntity?entityId=" + entityId);
   }
 
+  getWorkerById(workerId: number): Observable<CompleteWorker> {
+    return this.http.get<CompleteWorker>(this.apiUrl + "/" + workerId);
+  }
+
 }

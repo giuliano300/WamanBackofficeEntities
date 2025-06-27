@@ -20,6 +20,8 @@ import { EntityIncidentAccidentReportComponent } from './pages/entity-incident-a
 import { EntityDisciplinaryReportComponent } from './pages/entity-disciplinary-report/entity-disciplinary-report.component';
 import { EntityAuthGuard } from './authGuard/EntityAuthGuard';
 import { LocationAuthGuard } from './authGuard/LocationAuthGuard';
+import { AddWbComponent } from './pages-locations/worker-bonus/add/addWb.component';
+import { WorkerBonusComponent } from './pages-locations/worker-bonus/worker-bonus.component';
 
 export const routes: Routes = [
     { path: '', redirectTo : '/authentication', pathMatch: 'full' },
@@ -60,7 +62,10 @@ export const routes: Routes = [
             { path: 'worker-disciplinary-reports/add/:id', component: AddComponent },
             { path: 'worker-incident-accident-reports', component: WorkerIncidentAccidentReportsComponent },
             { path: 'worker-incident-accident-reports/add', component: AddInComponent },
-            { path: 'worker-incident-accident-reports/add/:id', component: AddInComponent }
+            { path: 'worker-incident-accident-reports/add/:id', component: AddInComponent },
+            { path: 'worker-bonus/add/:id', component: AddWbComponent },
+            { path: 'worker-bonus/add/:id/:id2', component: AddWbComponent },
+            { path: 'worker-bonus/:id', component: WorkerBonusComponent }
         ]
     },
     { path: '**', component: NotFoundComponent},

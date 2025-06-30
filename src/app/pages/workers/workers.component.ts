@@ -23,7 +23,7 @@ import { Workers } from '../../interfaces/Workers';
 })
 export class WorkersComponent {
 
-  displayedColumns: string[] = ['name', 'lastName', 'mobile', 'email', 'idCardNumber', 'empNumber', 'jobType', 'viewDetails'];
+  displayedColumns: string[] = ['name', 'lastName', 'mobile', 'email', 'idCardNumber', 'empNumber', 'jobType', 'viewDetails', 'viewBonus'];
 
   completeWorker: CompleteWorker[] = [];
 
@@ -65,7 +65,7 @@ export class WorkersComponent {
                 ...c, 
                 action: {
                     viewDetails: 'ri-menu-search-line',
-                    viewWorkers: 'ri-user-search-line'
+                    viewBonus: 'ri-user-search-line'
                 }
             }));;
             this.dataSource = new MatTableDataSource<CompleteWorker>(this.completeWorker);
@@ -76,5 +76,9 @@ export class WorkersComponent {
 
   gotoPlanning(worker: Workers){
       this.router.navigate(['/worker-planning', worker.id]);
+    }
+
+  gotoBonus(worker: Workers){
+      this.router.navigate(['/worker-bonus-general', worker.id]);
     }
 }

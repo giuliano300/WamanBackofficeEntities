@@ -147,7 +147,7 @@ export class AddWbComponent {
                 id: this.workerBonusId
               });
 
-              this.title = "Update bonus of " + this.completeWorker!.worker.name + " " + this.completeWorker!.worker.lastName
+              this.title = "Update bonus of " + data!.worker.name + " " + data!.worker.lastName
 
           });
 

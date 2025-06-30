@@ -12,11 +12,9 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CustomDateFormatPipe } from '../../custom-date-format.pipe';
 import { Router, RouterLink } from '@angular/router';
-import { TemplatePdfService } from '../../services/template-pdf.service';
 import { WorkerDisciplinaryReportsService } from '../../services/worker-disciplinary-reports.service';
 import { UtilsService } from '../../utils.service';
 import { CompleteLocation } from '../../interfaces/CompleteLocation';
-import { API_URL_DOC } from '../../../main';
 import { CompleteWorkerDisciplinaryReports } from '../../interfaces/CompleteWorkerDisciplinaryReports';
 import { ConfirmDialogComponent } from '../../confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -50,7 +48,6 @@ export class WorkerDisciplinaryReportsComponent {
   constructor(
       private router: Router,
       private workerDisciplinaryReportsService: WorkerDisciplinaryReportsService,
-      private templatePdfService: TemplatePdfService,
       private utilService: UtilsService,
       private fb: FormBuilder,
       private dialog: MatDialog

@@ -14,9 +14,10 @@ export class WorkerBonusService {
 
   constructor(private http: HttpClient) { }
   // Metodo per ottenere le location
-  getWorkerBonus(month?: number, year?: number, workerId?: number, locationId?: number, entityId?: number): Observable<CompleteWorkerBonus[]> {
-    return this.http.get<CompleteWorkerBonus[]>(this.apiUrl + "?month=" + month + "&year=" + year + "&workerId=" + workerId + "&locationId=" + locationId + 
-      "&entityId=" + entityId);
+  getWorkerBonus(period?: number, year?: number, workerId?: number, locationId?: number, entityId?: number): Observable<CompleteWorkerBonus[]> {
+    var url = this.apiUrl + "?period=" + period + "&year=" + year + "&workerId=" + workerId + "&locationId=" + locationId + 
+      "&entityId=" + entityId;
+    return this.http.get<CompleteWorkerBonus[]>(url);
   }
 
   getWorkerBonusId(id: string): Observable<CompleteWorkerBonus> {

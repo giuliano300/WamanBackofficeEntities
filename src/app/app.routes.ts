@@ -22,6 +22,7 @@ import { EntityAuthGuard } from './authGuard/EntityAuthGuard';
 import { LocationAuthGuard } from './authGuard/LocationAuthGuard';
 import { AddWbComponent } from './pages-locations/worker-bonus/add/addWb.component';
 import { WorkerBonusComponent } from './pages-locations/worker-bonus/worker-bonus.component';
+import { WorkerBonusGeneralComponent } from './pages/worker-bonus-general/worker-bonus-general.component';
 
 export const routes: Routes = [
     { path: '', redirectTo : '/authentication', pathMatch: 'full' },
@@ -44,6 +45,7 @@ export const routes: Routes = [
             { path: 'planning/:id/:locationId', component: PlanningComponent },
             { path: 'worker-planning/:id', component: WorkerPlanningComponent },
             { path: 'workers', component: WorkersComponent },
+            { path: 'worker-bonus-general/:id', component: WorkerBonusGeneralComponent },
             { path: 'entity-incident-accident-report', component: EntityIncidentAccidentReportComponent },
             { path: 'entity-disciplinary-report', component: EntityDisciplinaryReportComponent }
         ]

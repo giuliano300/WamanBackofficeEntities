@@ -19,15 +19,16 @@ import { WorkerBonusService } from '../../services/worker-bonus.service';
 import { CompleteWorkerBonus } from '../../interfaces/CompleteWorkerBonus';
 import { ConfirmDialogComponent } from '../../confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { BonusDialogComponent } from '../../bonus-dialog/bonus-dialog.component';
 
 @Component({
-  selector: 'app-worker-bonus',
+  selector: 'app-worker-bonus-general',
   imports: [MatCardModule, MatButtonModule, MatSlideToggleModule, ReactiveFormsModule, MatSelect, MatFormField, MatLabel, FeathericonsModule, NgFor, MatOption,
     MatMenuModule, MatPaginatorModule, MatTableModule, MatCheckboxModule, CommonModule, MatProgressSpinnerModule, CustomDateFormatPipe],
-  templateUrl: './worker-bonus.component.html',
-  styleUrl: './worker-bonus.component.scss'
+  templateUrl: './worker-bonus-general.component.html',
+  styleUrl: './worker-bonus-general.component.scss'
 })
-export class WorkerBonusComponent {
+export class WorkerBonusGeneralComponent {
   workerId: number | null = null;
   completeWorker: CompleteWorker | null = null;
   completeWorkerBonus: CompleteWorkerBonus[] = [];
@@ -73,8 +74,8 @@ export class WorkerBonusComponent {
     if (!token) 
       this.router.navigate(['/']);
 
-    const completeLocation = localStorage.getItem('completeLocation');
-    if (!completeLocation)
+    const entity = localStorage.getItem('entity');
+    if (!entity)
       this.router.navigate(['/']);
 
     this.route.paramMap.subscribe(params => {
@@ -105,8 +106,7 @@ export class WorkerBonusComponent {
         this.completeWorkerBonus = data.map(c => ({
           ...c,
           action: {
-              edit: 'ri-edit-line',
-              delete: 'ri-delete-bin-line'
+            view: 'ri-menu-search-line'
           }
         }));
         this.dataSource = new MatTableDataSource<CompleteWorkerBonus>(this.completeWorkerBonus);
@@ -121,39 +121,8 @@ export class WorkerBonusComponent {
     this.getWorkerBonus(this.workerId!, year, period);
   }
 
-  UpdateItem(item: CompleteWorkerBonus){
-     this.router.navigate(["/worker-bonus/add/" + item.worker.id + "/" + item.workerBonus.id]);
-  }
-
-  DeleteItem(item: CompleteWorkerBonus){
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '500px'
-    });
-
-    dialogRef.afterClosed().subscribe((result: any) => {
-      if (result) {
-        this.workerBonusService.deleteWorkerBonus(item.workerBonus)
-          .subscribe((data: boolean) => {
-            if(data){
-              const period = this.form.value.period;
-              const year = this.form.value.year;
-              this.getWorkerBonus(this.workerId!, year, period);
-            }
-          });
-      } 
-      else 
-      {
-        console.log("Close");
-      }
-    });
-  }
-
-  addWorkerBonus(){
-     this.router.navigate(["/worker-bonus/add/" + this.workerId]);
-  }
-
   back(){
-     this.router.navigate(["/index"]);
+     this.router.navigate(["/workers"]);
   }
 
   getFinalEvaluationAverage(): number {
@@ -161,5 +130,14 @@ export class WorkerBonusComponent {
 
     const sum = this.dataSource.data.reduce((acc, item) => acc + (item.workerBonus?.finalEvaluation || 0), 0);
     return sum / this.dataSource.data.length;
+  }
+
+  openDetail(item: CompleteWorkerBonus)
+  {
+    const dialogRef = this.dialog.open(BonusDialogComponent, {
+          data: item,
+          width: '800px',
+          minWidth: '800px'
+    });
   }
 }

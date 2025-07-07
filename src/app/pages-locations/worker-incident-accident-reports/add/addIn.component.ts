@@ -21,6 +21,7 @@ import { CompleteWorkerIncidentAccidentReports } from '../../../interfaces/Compl
 import { CompleteWorker } from '../../../interfaces/CompleteWorker';
 import { WorkerIncidentAccidentReports } from '../../../interfaces/WorkerIncidentAccidentReports';
 import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
+import { exceedsLimit } from '../../../../main';
 
 registerLocaleData(localeIt);
 
@@ -69,7 +70,11 @@ export class AddInComponent {
   workers: Workers[] = [];
 
   uploadedFiles: { name: string, base64: string }[] = [];
-  
+ 
+  rejectedFiles: { name: string; reason: string }[] = [];
+
+  dismissTimeout: any;
+ 
   disciplinaryForm: FormGroup;
 
   constructor(
@@ -156,23 +161,44 @@ export class AddInComponent {
   };
 
   onFileDrop(files: NgxFileDropEntry[]) {
+    this.rejectedFiles = [];
+
     for (const droppedFile of files) {
       if (droppedFile.fileEntry.isFile) {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
+
         fileEntry.file(file => {
-          const reader = new FileReader();
-          reader.onload = () => {
-            const base64 = (reader.result as string).split(',')[1];
-            this.uploadedFiles.push({
+          if (file.size > exceedsLimit * 1024 * 1024) {
+            this.rejectedFiles.push({
               name: file.name,
-              base64: base64
+              reason: 'File exceeds ' + exceedsLimit +' MB limit'
             });
-          };
-          reader.readAsDataURL(file);
+          } else {
+            const reader = new FileReader();
+            reader.onload = () => {
+              const base64 = (reader.result as string).split(',')[1];
+              this.uploadedFiles.push({
+                name: file.name,
+                base64: base64
+              });
+            };
+            reader.readAsDataURL(file);
+          }
         });
       }
     }
+
+    // Nasconde l’alert dopo 5 secondi
+    setTimeout(() => {
+        this.rejectedFiles = [];
+      }, 5000);
+ }
+
+  dismissRejectedFiles() {
+    clearTimeout(this.dismissTimeout);
+    this.rejectedFiles = [];
   }
+
 
   removeFile(index: number): void {
     this.uploadedFiles.splice(index, 1);

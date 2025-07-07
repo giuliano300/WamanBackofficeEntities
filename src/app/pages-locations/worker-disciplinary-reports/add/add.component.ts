@@ -20,6 +20,8 @@ import { CompleteWorkerDisciplinaryReports } from '../../../interfaces/CompleteW
 import localeIt from '@angular/common/locales/it';
 import { Component, LOCALE_ID } from '@angular/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { animate, style, transition, trigger } from '@angular/animations';
+import { exceedsLimit } from '../../../../main';
 
 registerLocaleData(localeIt);
 
@@ -57,6 +59,13 @@ export const MY_DATE_FORMATS = {
     { provide: LOCALE_ID, useValue: 'it-IT' },
     { provide: MAT_DATE_LOCALE, useValue: 'it-IT' },
     { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }
+  ],
+  animations: [
+    trigger('fadeOut', [
+      transition(':leave', [
+        animate('0.5s ease-in', style({ opacity: 0 }))
+      ])
+    ])
   ]
 })
 export class AddComponent {
@@ -67,6 +76,10 @@ export class AddComponent {
 
   uploadedFiles: { name: string, base64: string }[] = [];
   
+  rejectedFiles: { name: string; reason: string }[] = [];
+
+  dismissTimeout: any;
+
   disciplinaryForm: FormGroup;
 
   constructor(
@@ -150,23 +163,43 @@ export class AddComponent {
   };
 
   onFileDrop(files: NgxFileDropEntry[]) {
+    this.rejectedFiles = [];
+
     for (const droppedFile of files) {
       if (droppedFile.fileEntry.isFile) {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
+
         fileEntry.file(file => {
-          const reader = new FileReader();
-          reader.onload = () => {
-            const base64 = (reader.result as string).split(',')[1];
-            this.uploadedFiles.push({
+          if (file.size > exceedsLimit * 1024 * 1024) {
+            this.rejectedFiles.push({
               name: file.name,
-              base64: base64
+              reason: 'File exceeds ' + exceedsLimit +' MB limit'
             });
-          };
-          reader.readAsDataURL(file);
+          } else {
+            const reader = new FileReader();
+            reader.onload = () => {
+              const base64 = (reader.result as string).split(',')[1];
+              this.uploadedFiles.push({
+                name: file.name,
+                base64: base64
+              });
+            };
+            reader.readAsDataURL(file);
+          }
         });
       }
     }
-  }
+
+    // Nasconde l’alert dopo 5 secondi
+    setTimeout(() => {
+        this.rejectedFiles = [];
+      }, 5000);
+    }
+
+    dismissRejectedFiles() {
+      clearTimeout(this.dismissTimeout);
+      this.rejectedFiles = [];
+    }
 
   removeFile(index: number): void {
     this.uploadedFiles.splice(index, 1);

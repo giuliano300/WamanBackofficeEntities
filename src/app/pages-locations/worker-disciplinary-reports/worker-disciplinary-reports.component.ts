@@ -19,11 +19,14 @@ import { CompleteWorkerDisciplinaryReports } from '../../interfaces/CompleteWork
 import { ConfirmDialogComponent } from '../../confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { jsPDF } from 'jspdf';
+import autoTable from 'jspdf-autotable';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-worker-disciplinary-reports',
   imports: [MatCardModule, MatButtonModule, MatSlideToggleModule, ReactiveFormsModule, MatSelect, MatFormField, MatLabel, FeathericonsModule, NgFor, MatOption,
-    MatMenuModule, MatPaginatorModule, MatTableModule, MatCheckboxModule, CommonModule, RouterLink, CustomDateFormatPipe, MatProgressSpinnerModule],
+    MatMenuModule, MatPaginatorModule, MatTableModule, MatCheckboxModule, CommonModule, RouterLink, CustomDateFormatPipe, MatProgressSpinnerModule, MatTooltipModule],
   templateUrl: './worker-disciplinary-reports.component.html',
   styleUrl: './worker-disciplinary-reports.component.scss'
 })
@@ -44,6 +47,8 @@ export class WorkerDisciplinaryReportsComponent {
   form: FormGroup;
 
   isLoading: boolean = true;
+
+  isDisabled: boolean = true;
 
   constructor(
       private router: Router,
@@ -103,6 +108,7 @@ export class WorkerDisciplinaryReportsComponent {
           this.dataSource.data = [];
           this.dataSource.paginator = this.paginator;
           this.isLoading = false;
+          this.isDisabled = true;
         } 
         else 
         {
@@ -122,6 +128,7 @@ export class WorkerDisciplinaryReportsComponent {
           this.dataSource = new MatTableDataSource<CompleteWorkerDisciplinaryReports>(this.completeWorkerDisciplinaryReports);
           this.dataSource.paginator = this.paginator;
           this.isLoading = false;
+          this.isDisabled = false;
         }
     });
   }
@@ -168,6 +175,113 @@ export class WorkerDisciplinaryReportsComponent {
         console.log("Close");
       }
     });
+  }
+
+  async generateDisciplinaryPdf(): Promise<void> {
+    const doc = new jsPDF('landscape');
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
+
+    const month = this.months.find(m => m.id === this.form.get('month')?.value)?.name || '';
+    const year = this.form.get('year')?.value || '';
+    const hasData = this.dataSource.filteredData.length > 0;
+
+    // ✅ Logo centrato
+    const logoData = await this.loadLogoAsBase64('images/logo-icon.png');
+    const logoWidth = 20;
+    const logoHeight = 22;
+    const logoX = (pageWidth - logoWidth) / 2;
+
+    doc.addImage(logoData, 'PNG', logoX, 10, logoWidth, logoHeight);
+
+    // ✅ Titolo
+    doc.setFontSize(12);
+    doc.text('DISCIPLINARY REPORT', pageWidth / 2, 41, { align: 'center' });
+
+    // ✅ Periodo
+    doc.setFontSize(10);
+    doc.text(`Month: ${month}    Year: ${year}`, 14, 45);
+
+    if (hasData) {
+      autoTable(doc, {
+        startY: 48,
+        head: [[
+          'NAME & SURNAME',
+          'ID CARD No.',
+          'DISCIPLINARY ACTION',
+          'ACTIONS TAKEN',
+          'REASON'
+        ]],
+        body: this.dataSource.filteredData.map((el: any) => [
+          `${el.worker.name} ${el.worker.lastName}`,
+          el.worker.idCardNumber || '-',
+          el.workerDisciplinaryReport.disciplinaryAction,
+          el.workerDisciplinaryReport.actionsTaken,
+          el.workerDisciplinaryReport.reason
+        ]),
+        styles: {
+          fontSize: 9,
+          cellPadding: 3,
+          lineWidth: 0.1,
+          lineColor: [200, 200, 200],
+          textColor: [0, 0, 0],
+        },
+        headStyles: {
+          fillColor: [0, 102, 204],
+          textColor: 255,
+          fontStyle: 'bold',
+          halign: 'center',
+          lineWidth: 0.2,
+          lineColor: [200, 200, 200]
+        },
+        bodyStyles: {
+          valign: 'top'
+        },
+        alternateRowStyles: {
+          fillColor: [245, 245, 245]
+        },
+        columnStyles: {
+          0: { cellWidth: 45 }, // NAME & SURNAME
+          1: { cellWidth: 30 }, // ID CARD No.
+          2: { cellWidth: 65 }, // DISCIPLINARY ACTION
+          3: { cellWidth: 65 }, // ACTIONS TAKEN
+          4: { cellWidth: 65 }  // REASON
+        },
+        didDrawPage: () => {
+          doc.setFontSize(9);
+          doc.text('Compiled by HR Department', 14, pageHeight - 15);
+          doc.text(`Page ${doc.getNumberOfPages()}`, pageWidth - 20, pageHeight - 15);
+        }
+      });
+    } else {
+      doc.setFontSize(12);
+      doc.text(`No Disciplinary Reports for ${month} ${year}`, 14, 65);
+    }
+
+    doc.save(`disciplinary-report-${month}-${year}.pdf`);
+  }
+
+  private loadLogoAsBase64(url: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.src = url;
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width;
+        canvas.height = img.height;
+        const ctx = canvas.getContext('2d');
+        ctx?.drawImage(img, 0, 0);
+        const dataURL = canvas.toDataURL('image/png');
+        resolve(dataURL);
+      };
+      img.onerror = (err) => reject(err);
+    });
+  }
+
+  formatDate(dateStr: string): string {
+    const d = new Date(dateStr);
+    return d.toLocaleDateString('it-IT'); 
   }
 
 }

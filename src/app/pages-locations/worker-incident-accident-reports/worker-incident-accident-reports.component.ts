@@ -21,6 +21,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { WorkerIncidentAccidentReportsService } from '../../services/worker-incident-accident-reports.service';
 import { CompleteWorkerIncidentAccidentReports } from '../../interfaces/CompleteWorkerIncidentAccidentReports';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 
 @Component({
@@ -47,6 +49,8 @@ export class WorkerIncidentAccidentReportsComponent {
   form: FormGroup;
 
   isLoading: boolean = true;
+
+  isDisabled: boolean = true;
 
   constructor(
       private router: Router,
@@ -107,6 +111,7 @@ export class WorkerIncidentAccidentReportsComponent {
           this.dataSource.data = [];
           this.dataSource.paginator = this.paginator;
           this.isLoading = false;
+          this.isDisabled = true;
         } 
         else 
         {
@@ -126,6 +131,7 @@ export class WorkerIncidentAccidentReportsComponent {
           this.dataSource = new MatTableDataSource<CompleteWorkerIncidentAccidentReports>(this.completeWorkerIncidentAccidentReports);
           this.dataSource.paginator = this.paginator;
           this.isLoading = false;
+          this.isDisabled = false;
         }
     });
   }
@@ -142,6 +148,120 @@ export class WorkerIncidentAccidentReportsComponent {
     a.download = file.name;
     a.click();
     URL.revokeObjectURL(url);
+  }
+
+
+  async generateIncidentAccidentPdf(): Promise<void> {
+    const doc = new jsPDF('landscape');
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
+
+    const month = this.months.find(m => m.id === this.form.get('month')?.value)?.name || '';
+    const year = this.form.get('year')?.value || '';
+    const hasData = this.dataSource.filteredData.length > 0;
+
+    // ✅ Logo centrato
+    const logoData = await this.loadLogoAsBase64('images/logo-icon.png');
+    const logoWidth = 20;
+    const logoHeight = 22;
+    const logoX = (pageWidth - logoWidth) / 2;
+
+    doc.addImage(logoData, 'PNG', logoX, 10, logoWidth, logoHeight);
+
+    // ✅ Titolo
+    doc.setFontSize(12);
+    doc.text('INCIDENT / ACCIDENT REPORT', pageWidth / 2, 41, { align: 'center' });
+
+    // ✅ Periodo
+    doc.setFontSize(10);
+    doc.text(`Month: ${month}    Year: ${year}`, 14, 45);
+
+    if (hasData) {
+      autoTable(doc, {
+        startY: 48,
+        head: [[
+          'NAME',
+          'SURNAME',
+          'I.D. CARD No.',
+          'ENTITY',
+          'LOCATION',
+          'DATE OF INCINDENT/ACCIDENT',
+          'PLACE OF INCINDENT/ACCIDENT'
+        ]],
+        body: this.dataSource.filteredData.map((el: any) => [
+          el.worker.name,
+          el.worker.lastName,
+          el.worker.idCardNumber || '-',
+          el.entity.name || '-',
+          el.location.name || '-',
+          this.formatDate(el.workerIncidentAccidentReport.date),
+          el.workerIncidentAccidentReport.place || '-'
+        ]),
+        styles: {
+          fontSize: 9,
+          cellPadding: 3,
+          lineWidth: 0.1,
+          lineColor: [200, 200, 200],
+          textColor: [0, 0, 0],
+        },
+        headStyles: {
+          fillColor: [0, 102, 204],
+          textColor: 255,
+          fontStyle: 'bold',
+          halign: 'center',
+          lineWidth: 0.2,
+          lineColor: [200, 200, 200]
+        },
+        bodyStyles: {
+          valign: 'top'
+        },
+        alternateRowStyles: {
+          fillColor: [245, 245, 245]
+        },
+        columnStyles: {
+          0: { cellWidth: 30 }, // NAME
+          1: { cellWidth: 30 }, // SURNAME
+          2: { cellWidth: 32 }, // I.D. CARD No.
+          3: { cellWidth: 40 }, // ENTITY
+          4: { cellWidth: 30 }, // LOCATION
+          5: { cellWidth: 50 }, // DATE
+          6: { cellWidth: 65 }  // PLACE
+        },
+        didDrawPage: () => {
+          doc.setFontSize(9);
+          doc.text('Compiled by HR Department', 14, pageHeight - 15);
+          doc.text(`Page ${doc.getNumberOfPages()}`, pageWidth - 20, pageHeight - 15);
+        }
+      });
+    } else {
+      doc.setFontSize(12);
+      doc.text(`No Disciplinary Reports for ${month} ${year}`, 14, 65);
+    }
+
+    doc.save(`disciplinary-report-${month}-${year}.pdf`);
+  }
+
+  private loadLogoAsBase64(url: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.src = url;
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width;
+        canvas.height = img.height;
+        const ctx = canvas.getContext('2d');
+        ctx?.drawImage(img, 0, 0);
+        const dataURL = canvas.toDataURL('image/png');
+        resolve(dataURL);
+      };
+      img.onerror = (err) => reject(err);
+    });
+  }
+
+  formatDate(dateStr: string): string {
+    const d = new Date(dateStr);
+    return d.toLocaleDateString('it-IT'); 
   }
 
 

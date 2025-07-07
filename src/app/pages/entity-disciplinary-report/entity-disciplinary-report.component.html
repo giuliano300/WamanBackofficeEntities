@@ -3,6 +3,9 @@
         <li class="breadcrumb-item">
             <a routerLink="/index">Disciplinary report of all workers</a>
         </li>
+        <button color="primary" class="btn-download btn btn-primary" [disabled]="isDisabled" [ngClass]="isDisabled ? 'disabled-class' : ''"
+            (click)="generateDisciplinaryPdf()">Download pdf of disciplinary report
+        </button>
     </ol>
 </nav>
 

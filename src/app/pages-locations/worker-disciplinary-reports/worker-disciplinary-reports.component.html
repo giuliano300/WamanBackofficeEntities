@@ -3,6 +3,9 @@
         <li class="breadcrumb-item">
             <a routerLink="/index">Disciplinary report of all workers</a>
         </li>
+         <button color="primary" class="btn-download btn btn-primary" [disabled]="isDisabled" [ngClass]="isDisabled ? 'disabled-class' : ''"
+            (click)="generateDisciplinaryPdf()">Download pdf of disciplinary report
+        </button>
     </ol>
 </nav>
 
@@ -114,7 +117,7 @@
                         </th>
                         <td mat-cell *matCellDef="let element" class="pl-0">
                             <div class="position-relative">
-                                <h6 class="mt-0 mb-0 truncate">
+                                <h6 class="mt-0 mb-0 truncate" matTooltip="{{element.workerDisciplinaryReport.reason}}" matTooltipPosition="right">
                                     {{element.workerDisciplinaryReport.reason}}
                                 </h6>
                             </div>
@@ -127,7 +130,7 @@
                         </th>
                         <td mat-cell *matCellDef="let element" class="pl-0">
                             <div class="position-relative">
-                                <h6 class="mt-0 mb-0 truncate">
+                                <h6 class="mt-0 mb-0 truncate" matTooltip="{{element.workerDisciplinaryReport.disciplinaryAction}}" matTooltipPosition="right">
                                     {{element.workerDisciplinaryReport.disciplinaryAction}}
                                 </h6>
                             </div>
@@ -140,7 +143,7 @@
                         </th>
                         <td mat-cell *matCellDef="let element" class="pl-0">
                             <div class="position-relative">
-                                <h6 class="mt-0 mb-0 truncate">
+                                <h6 class="mt-0 mb-0 truncate" matTooltip="{{element.workerDisciplinaryReport.actionsTaken}}" matTooltipPosition="right">
                                     {{element.workerDisciplinaryReport.actionsTaken}}
                                 </h6>
                             </div>

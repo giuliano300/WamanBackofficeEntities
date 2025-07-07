@@ -130,6 +130,12 @@
 
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    <!-- Riga nessun dato -->
+                    <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell text-center no-data" [attr.colspan]="displayedColumns.length">
+                            No data available
+                        </td>
+                    </tr>
 
                 </table>
             </div>

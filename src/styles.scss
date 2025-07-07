@@ -376,3 +376,35 @@ h5{
     z-index: 999;
     background-color: none;
 }
+
+.radius-0{
+    border-radius: 0!important;
+}
+
+.alert-excedeed{
+    h5{
+        color: var(--danger-text);
+        padding: 0!important;
+        font-weight: 500;
+        margin: 0 0 5px;
+        font-size: 15px!important;
+    }
+
+    .preview-item{
+        font-size: 13px!important;
+    }
+}
+
+.close-excedeed{
+    right: 5px;
+    top: 5px;
+    background: none;
+    border: solid 1px var(--danger-text);
+    color: var(--danger-text)!important;
+}
+
+.disabled-class{
+    opacity: 0.6;
+    cursor: default;
+}
+

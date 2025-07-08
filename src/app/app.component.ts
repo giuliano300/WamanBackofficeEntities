@@ -16,7 +16,7 @@ import { NotificationService } from './services/notification.service';
 export class AppComponent {
   title = 'district-operation-frontend';
 
-  constructor(public router: Router,  public toggleService: ToggleService, private notificationService: NotificationService) {}
+  constructor(public router: Router,  public toggleService: ToggleService) {}
   
     routerSubscription: any;
     location: any;
@@ -39,7 +39,6 @@ export class AppComponent {
      const token = localStorage.getItem('authToken');
      if (!token) 
       this.router.navigate(['/authentication']); 
-
-     this.notificationService.startConnection();
+     
    }
 }

@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
-import { API_URL_DOC } from '../../main';
+import { API_URL, API_URL_DOC } from '../../main';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Notifications } from '../interfaces/Notifications';
 
 declare var $: any;
 
@@ -11,7 +14,7 @@ declare var $: any;
 export class NotificationService {
   private hubConnection: any;
 
-  constructor(private toastr: ToastrService, private router: Router) {}
+  constructor(private toastr: ToastrService, private http: HttpClient) {}
 
   startConnection(): void {
     this.hubConnection = $.hubConnection(API_URL_DOC, {
@@ -29,8 +32,8 @@ export class NotificationService {
           positionClass: 'toast-top-right',
           timeOut: 10000,   
           closeButton: true,
-          tapToDismiss: true,       // permette anche click per chiuderlo
-          progressBar: true         // facoltativo: barra di avanzamento        
+          tapToDismiss: true, 
+          progressBar: true 
         }
     )
    });
@@ -49,7 +52,6 @@ export class NotificationService {
       {
         const locObj = JSON.parse(localStorage.getItem('completeLocation')!);
         locationId = locObj.location.id;
-        entityId = locObj.location.entityId;
       } 
       else if (isEntity) 
       {
@@ -64,5 +66,13 @@ export class NotificationService {
     }).catch((error: any) => {
       console.error('❌ Connection error SignalR:', error);
     });
+  }
+
+  getUnreadNotifications(locationId: number, entityId: number): Observable<Notifications[]> {
+    return this.http.get<Notifications[]>(`${API_URL}notifications/unread?locationId=${locationId}&entityId=${entityId}`);
+  }
+
+  markAsRead(id: number): Observable<any> {
+    return this.http.post(`${API_URL}notifications/mark-as-read/${id}`, null);
   }
 }

@@ -14,6 +14,8 @@ import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { DetailLocationDialogComponent } from '../../detail-location-dialog/detail-location-dialog.component';
+import { NotificationService } from '../../services/notification.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -34,7 +36,9 @@ export class LocationsComponent {
   constructor(
       private dialog: MatDialog, 
       private router: Router,
-      private locationsService: LocationsService
+      private locationsService: LocationsService,
+      private notificationService: NotificationService,
+      private toastr: ToastrService
   ) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -53,8 +57,29 @@ export class LocationsComponent {
 
     this.getlocations();
 
+    this.notificationService.startConnection();
+
+    this.getNotificationsStorage();
+
   }
 
+
+  getNotificationsStorage(){
+    this.notificationService.getUnreadNotifications(0, this.entity?.id!).subscribe(notifs => {
+        for (const notif of notifs) {
+          this.toastr.info(notif.message, '', {
+              enableHtml: true,
+              positionClass: 'toast-top-right',
+              timeOut: 10000,   
+              closeButton: true,
+              tapToDismiss: true, 
+              progressBar: true 
+          });
+
+          this.notificationService.markAsRead(notif.id).subscribe();
+        }
+    })
+  }
 
   getlocations(){
     this.locationsService.getLocations(this.entity!.id!)

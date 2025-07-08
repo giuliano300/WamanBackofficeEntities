@@ -22,6 +22,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { JobTypes } from '../../../interfaces/JobTypes';
 import { JobTypesService } from '../../../services/jobTypes.service';
 import { catchError, finalize, forkJoin, of } from 'rxjs';
+import { NotificationService } from '../../../services/notification.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -65,7 +67,9 @@ export class PlanningsComponent {
       private templatePdfService: TemplatePdfService,
       private utilService: UtilsService,
       private fb: FormBuilder,
-      private jobTypesService: JobTypesService
+      private jobTypesService: JobTypesService,
+      private notificationService: NotificationService,
+      private toastr: ToastrService
   ) 
   {
     this.form = this.fb.group({
@@ -104,6 +108,27 @@ export class PlanningsComponent {
     this.getJobTypes();
 
     this.months = this.utilService.GetMonth();
+
+    this.notificationService.startConnection();
+
+    this.getNotificationsStorage();
+  }
+
+  getNotificationsStorage(){
+    this.notificationService.getUnreadNotifications(this.locationId!, 0).subscribe(notifs => {
+        for (const notif of notifs) {
+          this.toastr.info(notif.message, '', {
+              enableHtml: true,
+              positionClass: 'toast-top-right',
+              timeOut: 10000,   
+              closeButton: true,
+              tapToDismiss: true, 
+              progressBar: true 
+          });
+
+          this.notificationService.markAsRead(notif.id).subscribe();
+        }
+    })
   }
 
 

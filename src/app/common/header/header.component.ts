@@ -16,8 +16,11 @@ import { AuthService } from '../../services/auth.service';
     ]
 })
 export class HeaderComponent {
+  
+    isEntity: boolean | null = null;
+    isLocation: boolean | null = null;
 
-    loginName: string = "";
+    area: string = "";
 
     constructor(
         public toggleService: ToggleService,
@@ -29,9 +32,23 @@ export class HeaderComponent {
         });
         this.formattedDate = this.datePipe.transform(this.currentDate, 'dd MMMM yyyy');
 
-        this.authService.loginName$.subscribe(val => {
-            this.loginName = val || (localStorage.getItem('loginName')?.replace(/^"|"$/g, '')) || '';
+         this.authService.isEntity$.subscribe(val => {
+            console.log('Sidebar: isEntity changed', val);
+            this.isEntity = val;
         });
+
+        this.authService.isLocation$.subscribe(val => {
+            console.log('Sidebar: isLocation changed', val);
+            this.isLocation = val;
+        });
+        this.authService.loginName$.subscribe(val => {
+            this.area = val || (localStorage.getItem('loginName')?.replace(/^"|"$/g, '')) || '';
+        });
+
+        if(this.isEntity)
+            this.area = "Entity area";
+        if(this.isLocation)
+            this.area = "Location area";
     }
 
     // Toggle Service

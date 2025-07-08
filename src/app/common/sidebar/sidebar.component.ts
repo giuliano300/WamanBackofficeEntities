@@ -18,6 +18,8 @@ export class SidebarComponent {
 
     isEntity: boolean | null = null;
     isLocation: boolean | null = null;
+    
+    loginName: string = "";
 
     constructor(
         private router: Router,
@@ -37,7 +39,11 @@ export class SidebarComponent {
             console.log('Sidebar: isLocation changed', val);
             this.isLocation = val;
         });
-    }
+
+         this.authService.loginName$.subscribe(val => {
+            this.loginName = val || (localStorage.getItem('loginName')?.replace(/^"|"$/g, '')) || '';
+        });
+   }
     // Toggle Service
     isToggled = false;
     toggle() {

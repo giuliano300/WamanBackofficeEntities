@@ -164,6 +164,11 @@ input {
     font-size: 16px !important;
 }
 
+.primary-color{
+    color: var(--primaryColor);
+    font-size: 13px;
+    font-weight: 400;
+}
 
 /* Max width 767px */
 @media only screen and (max-width : 767px) {
@@ -246,10 +251,10 @@ h2[mat-dialog-title] {
 
 .logo{
     span{
-        color: var(--darkColor)!important;
-        font-size: 14px!important;
+        color: var(--primaryColor)!important;
+        font-size: 13px!important;
         padding: 0 0 0 10px;
-        font-weight: 600;
+        font-weight: 500;
         float: left!important;
     }
 }

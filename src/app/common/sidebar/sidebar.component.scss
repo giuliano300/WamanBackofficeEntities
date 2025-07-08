@@ -392,7 +392,7 @@
                         transition: var(--transition);
                         color: var(--blackColor);
                         letter-spacing: 0.14px;
-                        margin:20px 0 20px;
+                        margin:20px 0 25px;
                         position: relative;
                         padding-left: 24px;
                         display: block;
@@ -706,6 +706,10 @@
         }
     }
 
+}
+
+.sidebar-shadow{
+    box-shadow: 4px 5px 10px #e7eaf0;
 }
 
 /* Min width 1200px to Max width 1399px */

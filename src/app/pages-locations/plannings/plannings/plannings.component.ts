@@ -120,7 +120,7 @@ export class PlanningsComponent {
           this.toastr.info(notif.message, '', {
               enableHtml: true,
               positionClass: 'toast-top-right',
-              timeOut: 10000,   
+              timeOut: 20000,   
               closeButton: true,
               tapToDismiss: true, 
               progressBar: true 

@@ -8,7 +8,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { CustomDateFormatPipe } from '../../custom-date-format.pipe';
 
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
@@ -70,7 +69,7 @@ export class LocationsComponent {
           this.toastr.info(notif.message, '', {
               enableHtml: true,
               positionClass: 'toast-top-right',
-              timeOut: 10000,   
+              timeOut: 20000,   
               closeButton: true,
               tapToDismiss: true, 
               progressBar: true 

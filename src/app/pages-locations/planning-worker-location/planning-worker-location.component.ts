@@ -10,7 +10,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { WoerkerPlanningService } from '../../services/woerker-planning.service';
+import { WoerkerPlanningService } from '../../services/worker-planning.service';
 import { CompleteWorkerPlanning } from '../../interfaces/CompleteWorkerPlanning';
 import { CompleteWp } from '../../interfaces/CompleteWp';
 import { CustomDateFormatPipe } from "../../custom-date-format.pipe";

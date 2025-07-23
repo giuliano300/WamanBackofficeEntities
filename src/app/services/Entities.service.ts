@@ -22,5 +22,9 @@ export class EntitiesService {
   getCompleteEntity(entityId: number): Observable<CompleteEntity> {
     return this.http.get<CompleteEntity>(this.apiUrl + "/GetCompleteEntity/" + entityId);
   }
+  
+  passwordRecovery(value: any) {
+    return this.http.post<any>(this.apiUrl + "/pwdRecovery", value);
+  }
 
 }

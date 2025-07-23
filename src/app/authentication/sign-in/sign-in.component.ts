@@ -114,4 +114,8 @@ export class SignInComponent {
                  this.router.navigate(['/plannings']);
    }
    
+
+   passwordRecovery(){
+        this.router.navigate(['/authentication/forgot-password']);
+   }
 }

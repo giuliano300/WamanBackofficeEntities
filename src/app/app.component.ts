@@ -5,7 +5,7 @@ import { SidebarComponent } from './common/sidebar/sidebar.component';
 import { HeaderComponent } from './common/header/header.component';
 import { FooterComponent } from './common/footer/footer.component';
 import { ToggleService } from './common/header/toggle.service';
-import { NotificationService } from './services/notification.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +16,7 @@ import { NotificationService } from './services/notification.service';
 export class AppComponent {
   title = 'district-operation-frontend';
 
-  constructor(public router: Router,  public toggleService: ToggleService) {}
+  constructor(public router: Router,  public toggleService: ToggleService, private loc: Location) {}
   
     routerSubscription: any;
     location: any;
@@ -37,8 +37,9 @@ export class AppComponent {
    // ngOnInit
    ngOnInit(){
      const token = localStorage.getItem('authToken');
-     if (!token) 
-      this.router.navigate(['/authentication']); 
+     console.log(this.loc.path());
+     if(!token && this.loc.path().indexOf("/reset-password") < 0)
+        this.router.navigate(['/authentication']);
      
    }
 }

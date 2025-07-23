@@ -6,7 +6,6 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { Router, RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
 import { FeathericonsModule } from '../../icons/feathericons/feathericons.module';
 import { AuthService } from '../../services/auth.service';
-import { BehaviorSubject } from 'rxjs';
 
 @Component({
     selector: 'app-sidebar',

@@ -23,14 +23,18 @@ import { LocationAuthGuard } from './authGuard/LocationAuthGuard';
 import { AddWbComponent } from './pages-locations/worker-bonus/add/addWb.component';
 import { WorkerBonusComponent } from './pages-locations/worker-bonus/worker-bonus.component';
 import { WorkerBonusGeneralComponent } from './pages/worker-bonus-general/worker-bonus-general.component';
+import { PwdRecoveryComponent } from './authentication/pwdRecovery/pwd-recovery.component';
+import { ResetPasswordComponent } from './authentication/reset-password/reset-password.component';
 
 export const routes: Routes = [
     { path: '', redirectTo : '/authentication', pathMatch: 'full' },
+    {path: 'reset-password', component: ResetPasswordComponent},
     {
         path: 'authentication',
         component: AuthenticationComponent,
         children: [
-            {path: '', component: SignInComponent}
+            {path: '', component: SignInComponent},
+            {path: 'forgot-password', component: PwdRecoveryComponent}
         ]
     },
 

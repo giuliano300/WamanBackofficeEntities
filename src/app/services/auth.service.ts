@@ -1,11 +1,15 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { API_URL } from '../../main';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private isEntitySubject = new BehaviorSubject<boolean>(this.getBooleanFromStorage('isEntity'));
   private isLocationSubject = new BehaviorSubject<boolean>(this.getBooleanFromStorage('isLocation'));
   private loginNameSubject = new BehaviorSubject<string>("");
+  
+  constructor(private http: HttpClient) { }
 
   // Osservabili pubblici
   isEntity$ = this.isEntitySubject.asObservable();
@@ -42,4 +46,14 @@ export class AuthService {
   private getBooleanFromStorage(key: string): boolean {
     return localStorage.getItem(key) === 'true';
   }
+
+  
+  passwordRecovery(value: any): Observable<boolean> {
+    return this.http.post<any>(API_URL + "/Automations/ChangePassword", value);
+  }
+
+  passwordChange(value: any): Observable<boolean> {
+    return this.http.post<any>(API_URL + "/Automations/ChangePasswordRequest", value);
+  }
+
 }

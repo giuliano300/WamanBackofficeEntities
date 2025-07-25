@@ -21,7 +21,9 @@ import { CompleteWorkerIncidentAccidentReports } from '../../../interfaces/Compl
 import { CompleteWorker } from '../../../interfaces/CompleteWorker';
 import { WorkerIncidentAccidentReports } from '../../../interfaces/WorkerIncidentAccidentReports';
 import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
-import { exceedsLimit } from '../../../../main';
+import { exceedsLimit, maxLenghtUploadFile } from '../../../../main';
+import { AlertDialogComponent } from '../../../alert-dialog/alert-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 registerLocaleData(localeIt);
 
@@ -67,6 +69,8 @@ export class AddInComponent {
   completeLocation: CompleteLocation | null  = null;
   title: string = "Add Incident/Accident report";
 
+  dropZoneIsDisabled = false;
+
   workers: Workers[] = [];
 
   uploadedFiles: { name: string, base64: string }[] = [];
@@ -83,7 +87,8 @@ export class AddInComponent {
       private workerIncidentAccidentReportsService: WorkerIncidentAccidentReportsService,
       private fb: FormBuilder,
       private route: ActivatedRoute,
-      private adapter: DateAdapter<any>
+      private adapter: DateAdapter<any>,
+      private dialog: MatDialog
   ) 
   {
     this.adapter.setLocale('it-IT');
@@ -163,36 +168,74 @@ export class AddInComponent {
   onFileDrop(files: NgxFileDropEntry[]) {
     this.rejectedFiles = [];
 
+    if(this.uploadedFiles.length >= maxLenghtUploadFile){
+      this.dropZoneIsDisabled = true;
+      this.openAlertDialog();
+      return;
+    }
+
+    let stopProcessing = false;
+
     for (const droppedFile of files) {
+      if (stopProcessing) return;
+
       if (droppedFile.fileEntry.isFile) {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
 
         fileEntry.file(file => {
+          if (stopProcessing) return;
+
           if (file.size > exceedsLimit * 1024 * 1024) {
             this.rejectedFiles.push({
               name: file.name,
-              reason: 'File exceeds ' + exceedsLimit +' MB limit'
+              reason: 'File exceeds ' + exceedsLimit + ' MB limit'
             });
           } else {
             const reader = new FileReader();
             reader.onload = () => {
+              if (stopProcessing) return;
+
+              if (this.uploadedFiles.length >= maxLenghtUploadFile) {
+                this.dropZoneIsDisabled = true;
+                this.openAlertDialog();
+                stopProcessing = true;
+                return;
+              }
+
               const base64 = (reader.result as string).split(',')[1];
               this.uploadedFiles.push({
                 name: file.name,
                 base64: base64
               });
+
+              // Dopo il push, controlliamo ancora
+              if (this.uploadedFiles.length >= maxLenghtUploadFile) {
+                this.dropZoneIsDisabled = true;
+                this.openAlertDialog();
+                stopProcessing = true;
+              }
             };
+
             reader.readAsDataURL(file);
           }
         });
       }
-    }
-
-    // Nasconde l’alert dopo 5 secondi
+    }    
+    
+    
     setTimeout(() => {
         this.rejectedFiles = [];
       }, 5000);
- }
+    }
+
+    openAlertDialog(): void {
+      this.dialog.open(AlertDialogComponent, {
+        data: {
+          title: 'Completed',
+          message: 'You have reached the maximum number of ' + maxLenghtUploadFile + ' files you can upload.'
+        }
+      });
+    }
 
   dismissRejectedFiles() {
     clearTimeout(this.dismissTimeout);
@@ -202,6 +245,8 @@ export class AddInComponent {
 
   removeFile(index: number): void {
     this.uploadedFiles.splice(index, 1);
+    if(this.uploadedFiles.length < maxLenghtUploadFile)
+      this.dropZoneIsDisabled = false;
   }
 
   downloadFile(file: { name: string, base64: string }) {

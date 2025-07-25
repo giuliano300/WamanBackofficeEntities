@@ -8,9 +8,10 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideToastr } from 'ngx-toastr';
 
 // Definisci l'URL globale dell'API
-export const API_URL_DOC = 'http://localhost:5051/';
+export const API_URL_DOC = 'https://backend.waman.app/';
 export const API_URL = API_URL_DOC + 'api/';
 export const exceedsLimit = 3;
+export const maxLenghtUploadFile = 2;
 
 bootstrapApplication(AppComponent, {
   providers: [

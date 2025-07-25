@@ -21,7 +21,9 @@ import localeIt from '@angular/common/locales/it';
 import { Component, LOCALE_ID } from '@angular/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { animate, style, transition, trigger } from '@angular/animations';
-import { exceedsLimit } from '../../../../main';
+import { exceedsLimit, maxLenghtUploadFile } from '../../../../main';
+import { MatDialog } from '@angular/material/dialog';
+import { AlertDialogComponent } from '../../../alert-dialog/alert-dialog.component';
 
 registerLocaleData(localeIt);
 
@@ -72,6 +74,8 @@ export class AddComponent {
   completeLocation: CompleteLocation | null  = null;
   title: string = "Add Disciplinary report";
 
+  dropZoneIsDisabled = false;
+
   workers: Workers[] = [];
 
   uploadedFiles: { name: string, base64: string }[] = [];
@@ -88,7 +92,8 @@ export class AddComponent {
       private workerDisciplinaryReportsService: WorkerDisciplinaryReportsService,
       private fb: FormBuilder,
       private route: ActivatedRoute,
-      private adapter: DateAdapter<any>
+      private adapter: DateAdapter<any>,
+      private dialog: MatDialog
   ) 
   {
     this.adapter.setLocale('it-IT');
@@ -149,6 +154,8 @@ export class AddComponent {
 
             const uploadFilesJson = data.workerDisciplinaryReport.uploadFiles;
             this.uploadedFiles = uploadFilesJson ? JSON.parse(uploadFilesJson) : [];
+            if(this.uploadedFiles.length >= maxLenghtUploadFile)
+              this.dropZoneIsDisabled = true;
           });
       }
     });
@@ -165,35 +172,72 @@ export class AddComponent {
   onFileDrop(files: NgxFileDropEntry[]) {
     this.rejectedFiles = [];
 
+    if(this.uploadedFiles.length >= maxLenghtUploadFile){
+      this.dropZoneIsDisabled = true;
+      this.openAlertDialog();
+      return;
+    }
+
+    let stopProcessing = false;
+
     for (const droppedFile of files) {
+      if (stopProcessing) return;
+
       if (droppedFile.fileEntry.isFile) {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
 
         fileEntry.file(file => {
+          if (stopProcessing) return;
+
           if (file.size > exceedsLimit * 1024 * 1024) {
             this.rejectedFiles.push({
               name: file.name,
-              reason: 'File exceeds ' + exceedsLimit +' MB limit'
+              reason: 'File exceeds ' + exceedsLimit + ' MB limit'
             });
           } else {
             const reader = new FileReader();
             reader.onload = () => {
+              if (stopProcessing) return;
+
+              if (this.uploadedFiles.length >= maxLenghtUploadFile) {
+                this.dropZoneIsDisabled = true;
+                this.openAlertDialog();
+                stopProcessing = true;
+                return;
+              }
+
               const base64 = (reader.result as string).split(',')[1];
               this.uploadedFiles.push({
                 name: file.name,
                 base64: base64
               });
+
+              // Dopo il push, controlliamo ancora
+              if (this.uploadedFiles.length >= maxLenghtUploadFile) {
+                this.dropZoneIsDisabled = true;
+                this.openAlertDialog();
+                stopProcessing = true;
+              }
             };
+
             reader.readAsDataURL(file);
           }
         });
       }
-    }
-
-    // Nasconde l’alert dopo 5 secondi
+    }    
+    
     setTimeout(() => {
         this.rejectedFiles = [];
       }, 5000);
+    }
+
+    openAlertDialog(): void {
+      this.dialog.open(AlertDialogComponent, {
+        data: {
+          title: 'Completed',
+          message: 'You have reached the maximum number of ' + maxLenghtUploadFile + ' files you can upload.'
+        }
+      });
     }
 
     dismissRejectedFiles() {
@@ -203,7 +247,9 @@ export class AddComponent {
 
   removeFile(index: number): void {
     this.uploadedFiles.splice(index, 1);
-  }
+    if(this.uploadedFiles.length < maxLenghtUploadFile)
+      this.dropZoneIsDisabled = false;
+}
 
   downloadFile(file: { name: string, base64: string }) {
     const byteCharacters = atob(file.base64);

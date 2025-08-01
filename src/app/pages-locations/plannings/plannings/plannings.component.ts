@@ -28,7 +28,8 @@ import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-plannings',
-  imports: [MatCardModule, MatButtonModule, MatSlideToggleModule, ReactiveFormsModule, MatSelect, MatFormField, MatLabel, FeathericonsModule, NgFor, MatOption, MatMenuModule, MatPaginatorModule, MatTableModule, MatCheckboxModule, CustomDateFormatPipe, CommonModule, RouterLink],
+  imports: [MatCardModule, MatButtonModule, MatSlideToggleModule, ReactiveFormsModule, MatSelect, MatFormField, MatLabel, FeathericonsModule, 
+    NgFor, MatOption, MatMenuModule, MatPaginatorModule, MatTableModule, MatCheckboxModule, CustomDateFormatPipe, CommonModule, RouterLink],
   templateUrl: './plannings.component.html',
   styleUrl: './plannings.component.scss',
   standalone: true

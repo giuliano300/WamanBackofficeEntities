@@ -106,7 +106,9 @@ export class WorkerBonusGeneralComponent {
         this.completeWorkerBonus = data.map(c => ({
           ...c,
           action: {
-            view: 'ri-menu-search-line'
+            view: 'ri-menu-search-line',              
+            edit: 'ri-edit-line',
+            delete: 'ri-delete-bin-line'
           }
         }));
         this.dataSource = new MatTableDataSource<CompleteWorkerBonus>(this.completeWorkerBonus);
@@ -125,6 +127,10 @@ export class WorkerBonusGeneralComponent {
      this.router.navigate(["/workers"]);
   }
 
+  addWorkerBonus(){
+     this.router.navigate(["/worker-bonus-general/add/" + this.workerId]);
+  }
+
   getFinalEvaluationAverage(): number {
     if (!this.dataSource?.data?.length) return 0;
 
@@ -140,4 +146,32 @@ export class WorkerBonusGeneralComponent {
           minWidth: '800px'
     });
   }
+
+  UpdateItem(item: CompleteWorkerBonus){
+     this.router.navigate(["/worker-bonus-general/add/" + item.worker.id + "/" + item.workerBonus.id]);
+  }
+
+  DeleteItem(item: CompleteWorkerBonus){
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '500px'
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result) {
+        this.workerBonusService.deleteWorkerBonus(item.workerBonus)
+          .subscribe((data: boolean) => {
+            if(data){
+              const period = this.form.value.period;
+              const year = this.form.value.year;
+              this.getWorkerBonus(this.workerId!, year, period);
+            }
+          });
+      } 
+      else 
+      {
+        console.log("Close");
+      }
+    });
+  }
+
 }

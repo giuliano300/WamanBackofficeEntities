@@ -124,7 +124,10 @@ export class EntityDisciplinaryReportComponent {
                   : c.workerDisciplinaryReport.uploadFiles
               },
               action: {
-                  view: 'ri-menu-search-line'
+                  view: 'ri-menu-search-line',
+                  edit: 'ri-edit-line',
+                  delete: 'ri-delete-bin-line'
+
               }
           }));;
           this.dataSource = new MatTableDataSource<CompleteWorkerDisciplinaryReports>(this.completeWorkerDisciplinaryReports);
@@ -261,4 +264,34 @@ export class EntityDisciplinaryReportComponent {
       });
     }
   
+  UpdateItem(item:CompleteWorkerDisciplinaryReports){
+     this.router.navigate(["/entity-disciplinary-reports/add/" + item.workerDisciplinaryReport.id]);
+  }
+
+
+  DeleteItem(item:CompleteWorkerDisciplinaryReports){
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '500px'
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result) {
+        this.workerDisciplinaryReportsService.deleteWorkerDisciplinaryReport(item.workerDisciplinaryReport)
+          .subscribe((data: boolean) => {
+            if(data){
+              const month = this.form.value.month;
+              const year = this.form.value.year;
+              this.getWorkerDisciplinaryReports(month, year);
+            }
+          });
+      } 
+      else 
+      {
+        console.log("Close");
+      }
+    });
+  }
+
+
 }

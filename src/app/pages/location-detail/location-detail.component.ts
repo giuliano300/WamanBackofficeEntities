@@ -25,7 +25,7 @@ import { Workers } from '../../interfaces/Workers';
 })
 export class LocationDetailComponent {
 
-  displayedColumns: string[] = ['name', 'lastName', 'mobile', 'email', 'idCardNumber', 'empNumber', 'jobType', 'viewDetails'];
+  displayedColumns: string[] = ['name', 'lastName', 'mobile', 'email', 'idCardNumber', 'empNumber', 'jobType', 'viewDetails', 'viewBonus'];
 
   id: string | null = null;
 
@@ -77,7 +77,7 @@ export class LocationDetailComponent {
                 ...c, 
                 action: {
                     viewDetails: 'ri-menu-search-line',
-                    viewWorkers: 'ri-user-search-line'
+                    viewBonus: 'ri-user-search-line'
                 }
             }));;
             this.dataSource = new MatTableDataSource<CompleteWorker>(this.completeWorker);
@@ -90,4 +90,8 @@ export class LocationDetailComponent {
       this.router.navigate(['/planning', worker.id, this.id]);
   }
   
+  gotoBonus(worker: Workers){
+    this.router.navigate(['/worker-bonus-general', worker.id]);
+  }
+
 }

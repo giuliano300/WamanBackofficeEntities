@@ -1,0 +1,185 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li aria-current="page" class="breadcrumb-item active">{{title}}</li>
+    </ol>
+</nav>
+<form [formGroup]="disciplinaryForm" (ngSubmit)="onSubmit()">
+    <mat-card class="trinta-card mb-10 bg-white border-none d-block">
+        <mat-card-content>
+            <div class="row">
+                <div class="col-sm-12">
+                    <mat-form-field class="input">
+                        <i-feather name="user"></i-feather>
+                        <mat-label>Compiler's Name & lastname </mat-label>
+                        <input matInput formControlName="compilerName" type="text">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-sm-6">
+                    <mat-form-field class="input">
+                        <i-feather name="activity"></i-feather>
+                        <mat-label>Compiler's role</mat-label>
+                        <input matInput formControlName="compilerRole" type="text">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-sm-6">
+                    <mat-form-field class="input">
+                        <i-feather name="credit-card"></i-feather>
+                        <mat-label>Compiler's id card number</mat-label>
+                        <input matInput formControlName="compilerIdCardNumber" type="text">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-sm-6">
+                    <mat-form-field class="input">
+                        <i-feather name="mail"></i-feather>
+                        <mat-label>Compiler's email</mat-label>
+                        <input matInput formControlName="emailCompiler" type="text">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-sm-6">
+                    <mat-form-field class="input">
+                        <i-feather name="phone"></i-feather>
+                        <mat-label>Compiler's mobile</mat-label>
+                        <input matInput formControlName="mobileCompiler" type="text">
+                    </mat-form-field>
+                </div>
+
+            </div>
+        </mat-card-content>
+    </mat-card>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li aria-current="page" class="breadcrumb-item active mt-10">Worker and disciplinary data</li>
+        </ol>
+    </nav>
+    <mat-card class="trinta-card mb-10 bg-white border-none d-block" style="padding-bottom: 10px;">
+        <mat-card-content>
+            <div class="row">
+                <div class="col-md-12">
+                    <mat-form-field class="input">
+                        <i-feather name="terminal"></i-feather>
+                        <mat-label>Select Location</mat-label>
+                        <mat-select formControlName="locationId" (selectionChange)="workersFromLocation($event.value)">
+                            <mat-option *ngFor="let y of completeLocations" [value]="y.location.id" >
+                                {{ y.location.name }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+    <mat-card class="trinta-card mb-10 bg-white border-none d-block">
+        <mat-card-content>
+            <div class="row">
+                <div class="col-sm-12">
+                <mat-form-field>
+                    <i-feather name="users"></i-feather>
+                    <mat-label>Select worker</mat-label>
+                    <mat-select formControlName="workerId">
+                    <mat-option *ngFor="let worker of workers" [value]="worker.id">
+                        {{ worker.name }} {{ worker.lastName }} - {{ worker.idCardNumber }}
+                    </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                </div>
+                <div class="col-sm-12">
+                    <mat-form-field appearance="fill">
+                        <i-feather name="calendar"></i-feather>
+                        <mat-label>Date of disciplinary event</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="date">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>                
+                </div>
+                <div class="col-sm-12">
+                    <mat-form-field class="textarea">
+                        <i-feather name="Code"></i-feather>
+                        <mat-label>Reason</mat-label>
+                        <textarea matInput formControlName="reason"></textarea>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-sm-6 relative">
+                    <div class="hover-textarea"></div>
+                    <mat-form-field class="textarea">
+                        <i-feather name="Code"></i-feather>
+                        <mat-label>Disciplinary action</mat-label>
+                        <textarea matInput formControlName="disciplinaryAction" [disabled]="true" readonly="readonly"></textarea>
+                    </mat-form-field>
+                    <h6 class="legend">Field used only by the administration</h6>
+                </div>
+
+                <div class="col-sm-6 relative">
+                    <div class="hover-textarea"></div>
+                    <mat-form-field class="textarea">
+                        <i-feather name="Code"></i-feather>
+                        <mat-label>Actions taken</mat-label>
+                        <textarea matInput formControlName="actionsTaken" [disabled]="true" readonly="readonly"></textarea>
+                    </mat-form-field>
+                    <h6 class="legend">Field used only by the administration</h6>
+                </div>
+
+            </div>
+        </mat-card-content>
+    </mat-card>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li aria-current="page" class="breadcrumb-item active mt-10">File to upload</li>
+        </ol>
+    </nav>
+    <mat-card class="trinta-card mb-25 bg-white border-none d-block">
+        <mat-card-content>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="preview-list mb-10" *ngIf="uploadedFiles.length > 0">
+                        <h4>Uploaded Files</h4>
+                        <div *ngFor="let file of uploadedFiles; let i = index" class="preview-item mb-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span (click) = "downloadFile(file)" class="files-uploaded">{{ file.name }}</span>
+                                <button mat-icon-button color="warn" (click)="removeFile(i)" aria-label="Elimina file">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                  <div *ngIf="rejectedFiles.length > 0" class="alert alert-danger position-relative radius-0 alert-excedeed" [@fadeOut]>
+                    <button class="btn-close position-absolute m-2 close-excedeed" (click)="dismissRejectedFiles()">x</button>
+                    <h5>These files were rejected:</h5>
+                    <div *ngFor="let file of rejectedFiles; let i = index" class="preview-item mb-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            - {{ file.name }} – {{ file.reason }}
+                        </div>
+                    </div>
+                  </div>
+               </div>
+                <div class="col-sm-12" [class.dropzone-disabled]="dropZoneIsDisabled">
+                    <ngx-file-drop (onFileDrop)="onFileDrop($event)" [disabled]="dropZoneIsDisabled">
+                        <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                            <div class="drop-zone" (click)="!dropZoneIsDisabled && openFileSelector()">
+                                Add files to uploads (Max 3 MB)
+                            </div>
+                        </ng-template>
+                    </ngx-file-drop>   
+                    
+                </div>
+                <div class="col-sm-6 mt-20 text-start">
+                    <button mat-flat-button class="back" type="submit" (click)="returnBack()">
+                        back
+                    </button>
+                </div>
+                <div class="col-sm-6 mt-20 text-end">
+                    <button mat-flat-button color="primary" type="submit" [disabled]="disciplinaryForm.invalid">
+                        Save
+                    </button>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+    <input formControlName="id" type="hidden" value="0">
+</form>

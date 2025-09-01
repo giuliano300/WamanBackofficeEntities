@@ -25,6 +25,9 @@ import { WorkerBonusComponent } from './pages-locations/worker-bonus/worker-bonu
 import { WorkerBonusGeneralComponent } from './pages/worker-bonus-general/worker-bonus-general.component';
 import { PwdRecoveryComponent } from './authentication/pwdRecovery/pwd-recovery.component';
 import { ResetPasswordComponent } from './authentication/reset-password/reset-password.component';
+import { AddWbGeneralComponent } from './pages/worker-bonus-general/add/addWbGeneral.component';
+import { AddDiscplinaryReportComponent } from './pages/entity-disciplinary-report/add/add-discplinary-report.component';
+import { addInAccRepComponent } from './pages/entity-incident-accident-report/add/addInAccRep.component';
 
 export const routes: Routes = [
     { path: '', redirectTo : '/authentication', pathMatch: 'full' },
@@ -50,8 +53,14 @@ export const routes: Routes = [
             { path: 'worker-planning/:id', component: WorkerPlanningComponent },
             { path: 'workers', component: WorkersComponent },
             { path: 'worker-bonus-general/:id', component: WorkerBonusGeneralComponent },
+            { path: 'worker-bonus-general/add/:id', component: AddWbGeneralComponent },
+            { path: 'worker-bonus-general/add/:id/:id2', component: AddWbGeneralComponent },
             { path: 'entity-incident-accident-report', component: EntityIncidentAccidentReportComponent },
-            { path: 'entity-disciplinary-report', component: EntityDisciplinaryReportComponent }
+            { path: 'entity-incident-accident-reports/add', component: addInAccRepComponent },
+            { path: 'entity-incident-accident-reports/add/:id', component: addInAccRepComponent },
+            { path: 'entity-disciplinary-report', component: EntityDisciplinaryReportComponent },
+            { path: 'entity-disciplinary-reports/add', component: AddDiscplinaryReportComponent },
+            { path: 'entity-disciplinary-reports/add/:id', component: AddDiscplinaryReportComponent },
         ]
     },
     //LOCATION 

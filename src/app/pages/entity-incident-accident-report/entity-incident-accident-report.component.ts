@@ -124,7 +124,9 @@ export class EntityIncidentAccidentReportComponent {
                   : c.workerIncidentAccidentReport.uploadFiles
               },
               action: {
-                  view: 'ri-menu-search-line'
+                  view: 'ri-menu-search-line',
+                  edit: 'ri-edit-line',
+                  delete: 'ri-delete-bin-line'
               }
           }));;
           this.dataSource = new MatTableDataSource<CompleteWorkerIncidentAccidentReports>(this.completeWorkerIncidentAccidentReports);
@@ -272,4 +274,33 @@ export class EntityIncidentAccidentReportComponent {
     return d.toLocaleDateString('it-IT'); 
   }
 
+
+    UpdateItem(item:CompleteWorkerIncidentAccidentReports){
+     this.router.navigate(["/entity-incident-accident-reports/add/" + item.workerIncidentAccidentReport.id]);
+  }
+
+
+  DeleteItem(item:CompleteWorkerIncidentAccidentReports){
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '500px'
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result) {
+        this.workerIncidentAccidentReportsService.deleteWorkerIncidentAccidentReport(item.workerIncidentAccidentReport)
+          .subscribe((data: boolean) => {
+            if(data){
+              const month = this.form.value.month;
+              const year = this.form.value.year;
+              this.getWorkerIncidentAccidentReports(month, year);
+            }
+          });
+      } 
+      else 
+      {
+        console.log("Close");
+      }
+    });
+  }
 }

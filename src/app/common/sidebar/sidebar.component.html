@@ -38,18 +38,56 @@
                             Locations
                         </span>
                     </a>
-                    <a routerLink="/entity-disciplinary-report" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                        <i-feather name="List"></i-feather>
-                        <span class="title">
-                            Disciplinary reports
-                        </span>
-                    </a>
-                    <a routerLink="/entity-incident-accident-report" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                        <i-feather name="Minimize"></i-feather>
-                        <span class="title">
-                            Incident/accident reports
-                        </span>
-                    </a>
+
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <i-feather name="List"></i-feather>
+                                <span class="title">
+                                    Disciplinary reports
+                                </span>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <ul class="sidebar-sub-menu">
+                            <li class="sidemenu-item">
+                                <a routerLink="/entity-disciplinary-report" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    View all
+                                </a>
+                            </li>
+                            <li class="sidemenu-item">
+                                <a routerLink="/entity-disciplinary-reports/add" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    Add new
+                                </a>
+                            </li>
+                        </ul>
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <i-feather name="Minimize"></i-feather>
+                                <span class="title">
+                                    Incident/accident reports
+                                </span>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <ul class="sidebar-sub-menu">
+                            <li class="sidemenu-item">
+                                <a routerLink="/entity-incident-accident-report" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    View all
+                                </a>
+                            </li>
+                            <li class="sidemenu-item">
+                                <a routerLink="/entity-incident-accident-reports/add" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    Add new
+                                </a>
+                            </li>
+                        </ul>
+                    </mat-expansion-panel>
+
+
+
+
                     <a routerLink="/workers" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                         <i-feather name="users"></i-feather>
                         <span class="title">

@@ -29,7 +29,7 @@ import autoTable from 'jspdf-autotable';
 @Component({
   selector: 'app-entity-disciplinary-report',
   imports: [MatCardModule, MatButtonModule, MatSlideToggleModule, ReactiveFormsModule, MatSelect, MatFormField, MatLabel, FeathericonsModule, NgFor, MatOption,
-    MatMenuModule, MatPaginatorModule, MatTableModule, MatCheckboxModule, CommonModule, RouterLink, CustomDateFormatPipe, MatProgressSpinnerModule],
+    MatMenuModule, MatPaginatorModule, MatTableModule, MatCheckboxModule, CommonModule, CustomDateFormatPipe, MatProgressSpinnerModule],
   templateUrl: './entity-disciplinary-report.component.html',
   styleUrl: './entity-disciplinary-report.component.scss'
 })

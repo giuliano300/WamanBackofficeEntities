@@ -29,7 +29,7 @@ import jsPDF from 'jspdf';
 @Component({
   selector: 'app-entity-incident-accident-reports',
   imports: [MatCardModule, MatButtonModule, MatSlideToggleModule, ReactiveFormsModule, MatSelect, MatFormField, MatLabel, FeathericonsModule, NgFor, MatOption,
-    MatMenuModule, MatPaginatorModule, MatTableModule, MatCheckboxModule, CommonModule, RouterLink, CustomDateFormatPipe, MatProgressSpinnerModule],
+    MatMenuModule, MatPaginatorModule, MatTableModule, MatCheckboxModule, CommonModule, CustomDateFormatPipe, MatProgressSpinnerModule],
   templateUrl: './entity-incident-accident-report.component.html',
   styleUrl: './entity-incident-accident-report.component.scss'
 })

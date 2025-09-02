@@ -24,7 +24,7 @@ import { BonusDialogComponent } from '../../bonus-dialog/bonus-dialog.component'
 @Component({
   selector: 'app-worker-bonus-general',
   imports: [MatCardModule, MatButtonModule, MatSlideToggleModule, ReactiveFormsModule, MatSelect, MatFormField, MatLabel, FeathericonsModule, NgFor, MatOption,
-    MatMenuModule, MatPaginatorModule, MatTableModule, MatCheckboxModule, CommonModule, MatProgressSpinnerModule, CustomDateFormatPipe],
+    MatMenuModule, MatPaginatorModule, MatTableModule, MatCheckboxModule, CommonModule, MatProgressSpinnerModule, CustomDateFormatPipe, RouterLink],
   templateUrl: './worker-bonus-general.component.html',
   styleUrl: './worker-bonus-general.component.scss'
 })

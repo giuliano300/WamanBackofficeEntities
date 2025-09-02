@@ -315,7 +315,49 @@
 /* Min width 1600px */
 @media only screen and (min-width: 1600px) {}
 
-.mini-layer{ 
-    width: 18px;
-    height: 18px;
+.ri-file-download-line{
+    font-size: 20px;
+    font-weight: 300!important;
+    color: #ccc;
+}
+
+a.aDown{
+    i{
+        color: var(--primaryColor);
+    }
+}
+
+.generate{
+    color: var(--primaryColor);
+    font-size: 20px;
+}
+
+
+.mat-mdc-card.trinta-card {
+    box-shadow: unset;
+    border-radius: 6px;
+    padding: 25px 25px 5px;
+}
+
+.mat-mdc-button {
+    width: 100%;
+    height: auto;
+    display: block;
+    min-width: auto;
+    margin-top: 0px;
+    border-radius: 6px;
+    padding: 18px 25px;
+    color: var(--whiteColor)!important;
+    background-color: var(--primaryColor);
+    font-size: 14px;
+    font-weight: 400;
+    font-family: var(--headingFontFamily);
+}
+
+.generateAllFiles{
+    background:var(--successColor)!important;
+}
+
+.generateAllFiles:disabled{
+    background: #a6e2d9 !important;
 }

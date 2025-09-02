@@ -28,6 +28,7 @@ import { ResetPasswordComponent } from './authentication/reset-password/reset-pa
 import { AddWbGeneralComponent } from './pages/worker-bonus-general/add/addWbGeneral.component';
 import { AddDiscplinaryReportComponent } from './pages/entity-disciplinary-report/add/add-discplinary-report.component';
 import { addInAccRepComponent } from './pages/entity-incident-accident-report/add/addInAccRep.component';
+import { LocationPlanningsComponent } from './pages/location-plannings/location-plannings.component';
 
 export const routes: Routes = [
     { path: '', redirectTo : '/authentication', pathMatch: 'full' },
@@ -49,6 +50,7 @@ export const routes: Routes = [
             { path: 'info', component: InfoComponent },
             { path: 'locations', component: LocationsComponent },
             { path: 'location/:id', component: LocationDetailComponent },
+            { path: 'location-plannings/:id', component: LocationPlanningsComponent },
             { path: 'planning/:id/:locationId', component: PlanningComponent },
             { path: 'worker-planning/:id', component: WorkerPlanningComponent },
             { path: 'workers', component: WorkersComponent },

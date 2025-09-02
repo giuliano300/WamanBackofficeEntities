@@ -121,15 +121,15 @@ export class AddDiscplinaryReportComponent {
   }
 
   getlocations(){
-      this.locationsService.getLocations(this.entity!.id!)
-          .subscribe((data: CompleteLocation[]) => {
-            if (!data || data.length === 0) {
-              console.log('Nessun dato disponibile');
-            } else {
-              this.completeLocations = data;
-          }
-      });
-    }
+    this.locationsService.getLocations(this.entity!.id!)
+        .subscribe((data: CompleteLocation[]) => {
+          if (!data || data.length === 0) {
+            console.log('Nessun dato disponibile');
+          } else {
+            this.completeLocations = data;
+        }
+    });
+  }
 
   selectedWorkerId: number | null = null;
 

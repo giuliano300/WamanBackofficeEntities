@@ -15,17 +15,18 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { DetailLocationDialogComponent } from '../../detail-location-dialog/detail-location-dialog.component';
 import { NotificationService } from '../../services/notification.service';
 import { ToastrService } from 'ngx-toastr';
+import { FeathericonsModule } from "../../icons/feathericons/feathericons.module";
 
 
 @Component({
   selector: 'app-locations',
-  imports: [MatCardModule, MatButtonModule, MatSlideToggleModule, MatMenuModule, MatPaginatorModule, MatTableModule, MatCheckboxModule],
+  imports: [MatCardModule, MatButtonModule, MatSlideToggleModule, MatMenuModule, MatPaginatorModule, MatTableModule, MatCheckboxModule, FeathericonsModule],
   templateUrl: './locations.component.html',
   styleUrl: './locations.component.scss'
 })
 export class LocationsComponent {
 
-  displayedColumns: string[] = ['name', 'locality', 'address', 'email','viewDetails', 'viewWorkers'];
+  displayedColumns: string[] = ['name', 'locality', 'address', 'email','viewDetails', 'viewWorkers', 'viewPlannings'];
 
   completeLocations: CompleteLocation[] = [];
 
@@ -90,7 +91,8 @@ export class LocationsComponent {
                 ...c, 
                 action: {
                     viewDetails: 'ri-menu-search-line',
-                    viewWorkers: 'ri-user-search-line'
+                    viewWorkers: 'ri-user-search-line',                    
+                    viewPlannings: 'ri-user-search-line'
                 }
             }));;
             this.dataSource = new MatTableDataSource<CompleteLocation>(this.completeLocations);
@@ -109,6 +111,10 @@ export class LocationsComponent {
 
   gotoLocationDetail(location: CompleteLocation){
     this.router.navigate(['/location', location.location.id]);
+  }
+
+  gotoLocationPlannings(location: CompleteLocation){
+    this.router.navigate(['/location-plannings', location.location.id]);
   }
 
 }

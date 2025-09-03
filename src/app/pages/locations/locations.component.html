@@ -1,6 +1,11 @@
 <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
+    <ol class="breadcrumb" style="justify-content: space-between;">
         <li aria-current="page" class="breadcrumb-item active">Locations</li>
+        <li>
+            <button (click)="exportAll()" class="btn btn-export">
+                <i class="ri-file-excel-2-fill"></i> Export to Excel
+            </button>
+        </li>
     </ol>
 </nav>
 <mat-card

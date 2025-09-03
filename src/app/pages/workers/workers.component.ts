@@ -13,6 +13,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CompleteWorker } from '../../interfaces/CompleteWorker';
 import { WorkersService } from '../../services/workers.service';
 import { Workers } from '../../interfaces/Workers';
+import { UtilsService } from '../../utils.service';
 
 
 @Component({
@@ -33,7 +34,8 @@ export class WorkersComponent {
   constructor(
       private dialog: MatDialog, 
       private router: Router,
-      private workersService: WorkersService
+      private workersService: WorkersService,
+      private utils: UtilsService
   ) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -75,10 +77,28 @@ export class WorkersComponent {
   }
 
   gotoPlanning(worker: Workers){
-      this.router.navigate(['/worker-planning', worker.id]);
-    }
+    this.router.navigate(['/worker-planning', worker.id]);
+  }
 
   gotoBonus(worker: Workers){
-      this.router.navigate(['/worker-bonus-general', worker.id]);
-    }
+    this.router.navigate(['/worker-bonus-general', worker.id]);
+  }
+
+  exportAll() {
+    this.utils.exportRowsToXlsx(
+      this.completeWorker, 
+      'Workers', 
+      [ 'worker.name', 'worker.lastName', 'worker.mobile', 'worker.email', 'worker.idCardNumber', 'worker.empNumber', 'jobType.name'],  
+      { 
+        'worker.name': 'name', 
+        'worker.lastName': 'last name', 
+        'worker.mobile': 'mobile', 
+        'worker.email': 'email', 
+        'worker.idCardNumber': 'id card number', 
+        'worker.empNumber': 'empoloye number', 
+        'jobType.name': 'job type'
+      }
+    );
+  }
+
 }

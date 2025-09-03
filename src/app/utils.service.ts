@@ -1,4 +1,8 @@
 import { Injectable } from '@angular/core';
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
+
+export type Row = Record<string, any>;
 
 @Injectable({
   providedIn: 'root'
@@ -55,4 +59,42 @@ export class UtilsService {
     return m;
 };
 
+  getNestedValue(obj: any, path: string): any {
+    return path.split('.').reduce((acc, key) => (acc ? acc[key] : undefined), obj);
+  }
+
+  exportRowsToXlsx(
+    rows: any[],
+    fileName: string,
+    fields: string[],
+    labels?: Record<string, string>
+  ) {
+    if (!rows || rows.length === 0 || !fields || fields.length === 0) return;
+
+    const shaped = rows.map(r => {
+      const obj: any = {};
+      fields.forEach(f => {
+        obj[labels?.[f] ?? f] = this.getNestedValue(r, f);
+      });
+      return obj;
+    });
+
+    const ws = XLSX.utils.json_to_sheet(shaped);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Data');
+
+    const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+    const blob = new Blob([wbout], {
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8',
+    });
+
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${fileName}.xlsx`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
 }

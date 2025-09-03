@@ -170,6 +170,20 @@ input {
     font-weight: 400;
 }
 
+.btn-export{
+    margin-bottom: 0!important;
+    font-size: 13px!important;
+    opacity: 0.9;
+
+    i{
+        font-size: 16px;
+    }
+
+    &:hover{
+        opacity: 1;
+    }
+}
+
 /* Max width 767px */
 @media only screen and (max-width : 767px) {
 

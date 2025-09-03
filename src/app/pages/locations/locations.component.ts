@@ -16,7 +16,7 @@ import { DetailLocationDialogComponent } from '../../detail-location-dialog/deta
 import { NotificationService } from '../../services/notification.service';
 import { ToastrService } from 'ngx-toastr';
 import { FeathericonsModule } from "../../icons/feathericons/feathericons.module";
-
+import { UtilsService } from '../../utils.service';
 
 @Component({
   selector: 'app-locations',
@@ -38,7 +38,8 @@ export class LocationsComponent {
       private router: Router,
       private locationsService: LocationsService,
       private notificationService: NotificationService,
-      private toastr: ToastrService
+      private toastr: ToastrService,
+      private utils: UtilsService
   ) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -116,5 +117,21 @@ export class LocationsComponent {
   gotoLocationPlannings(location: CompleteLocation){
     this.router.navigate(['/location-plannings', location.location.id]);
   }
+
+
+  exportAll() {
+    this.utils.exportRowsToXlsx(
+      this.completeLocations, 
+      'Locations', 
+      [ 'location.name', 'city.name', 'location.address', 'location.email'],  
+      { 
+        'location.name': 'name', 
+        'city.name': 'city',
+        'location.address': 'address', 
+        'location.email': 'email'
+      }
+    );
+  }
+
 
 }

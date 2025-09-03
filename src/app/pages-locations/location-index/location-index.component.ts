@@ -15,6 +15,7 @@ import { WorkersService } from '../../services/workers.service';
 import { LocationsService } from '../../services/locations.service';
 import { CompleteLocation } from '../../interfaces/CompleteLocation';
 import { Workers } from '../../interfaces/Workers';
+import { UtilsService } from '../../utils.service';
 
 
 @Component({
@@ -39,7 +40,8 @@ export class LocationIndexComponent {
       private router: Router,
       private workersService: WorkersService,
       private route: ActivatedRoute,
-      private locationsService: LocationsService
+      private locationsService: LocationsService,
+      private utils: UtilsService
   ) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -90,4 +92,22 @@ export class LocationIndexComponent {
   gotoDisciplinaryReport(worker: Workers){
       this.router.navigate(['/worker-disciplinary-reports-details', worker.id]);
   }
+
+    exportAll() {
+    this.utils.exportRowsToXlsx(
+      this.completeWorker, 
+      'Workers', 
+      [ 'worker.name', 'worker.lastName', 'worker.mobile', 'worker.email', 'worker.idCardNumber', 'worker.empNumber', 'jobType.name'],  
+      { 
+        'worker.name': 'name', 
+        'worker.lastName': 'last name', 
+        'worker.mobile': 'mobile', 
+        'worker.email': 'email', 
+        'worker.idCardNumber': 'id card number', 
+        'worker.empNumber': 'empoloye number', 
+        'jobType.name': 'job type'
+      }
+    );
+  }
+
 }

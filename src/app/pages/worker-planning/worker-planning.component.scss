@@ -331,3 +331,35 @@ a.aDown{
     color: var(--primaryColor);
     font-size: 20px;
 }
+.re-generate{
+    color: var(--successColor);
+    font-size: 20px;
+}
+
+/* Icona generica */
+i.ri-restart-fill {
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+/* Rotazione al passaggio del mouse */
+i.ri-restart-fill:hover {
+  transform: rotate(360deg);
+}
+
+/* Rotazione continua quando è in caricamento */
+i.rotate-icon {
+  animation: spin 1s linear infinite;
+}
+
+/* Animazione spin */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Icona disabilitata */
+i.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}

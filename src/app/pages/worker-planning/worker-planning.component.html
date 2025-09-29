@@ -122,12 +122,14 @@
                         <td mat-cell *matCellDef="let element" class="pl-0">
                             <div class="position-relative text-center">
                                 <h6 class="mt-0 mb-0">
-                                    <a *ngIf="!element.planning.planning.pathFile">
-                                        <i class="ri-restart-fill generate"
-                                        [class.rotate-icon]="generatingMap[element.planning.planning.id + '_' + element.planning.planning.workerId]"
-                                        [class.disabled]="generatingMap[element.planning.planning.id + '_' + element.planning.planning.workerId]"
-                                        title="generate attendance sheet file" 
-                                        (click)="generateAs(element.planning.planning.id, element.planning.planning.workerId)"></i>                                    
+                                   <a>
+                                        <i class="ri-restart-fill"
+                                            [ngClass]="element.planning.planning.pathFile ? 're-generate' : 'generate'"
+                                            [class.rotate-icon]="generatingMap[element.planning.planning.id + '_' + element.planning.planning.workerId]"
+                                            [class.disabled]="generatingMap[element.planning.planning.id + '_' + element.planning.planning.workerId]"
+                                            [title]="element.planning.planning.pathFile ? 're-generate attendance sheet file' : 'generate attendance sheet file'"
+                                            (click)="generateAs(element.planning.planning.id, element.planning.planning.workerId)">
+                                        </i>
                                     </a>
                                 </h6>
                             </div>

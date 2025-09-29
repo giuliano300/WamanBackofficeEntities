@@ -39,7 +39,21 @@
                         </span>
                     </a>
 
-                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = true">
+                    <a routerLink="/entity-disciplinary-report" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                        <i-feather name="List"></i-feather>
+                        <span class="title">
+                            Disciplinary reports
+                        </span>
+                    </a>
+
+                    <a routerLink="/entity-incident-accident-report" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                        <i-feather name="Minimize"></i-feather>
+                        <span class="title">
+                            Incident/accident reports
+                        </span>
+                    </a>
+
+                    <!--<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = true">
                         <mat-expansion-panel-header>
                             <mat-panel-title>
                                 <i-feather name="List"></i-feather>
@@ -83,7 +97,7 @@
                                 </a>
                             </li>
                         </ul>
-                    </mat-expansion-panel>
+                    </mat-expansion-panel>-->
 
 
 
@@ -175,7 +189,6 @@
                             </li>
                         </ul>
                     </mat-expansion-panel>
-
                     <a href="/shared-files/location_guide.pdf" target="_blank" class="sidebar-menu-link">
                         <i-feather name="book-open"></i-feather>
                         <span class="title">

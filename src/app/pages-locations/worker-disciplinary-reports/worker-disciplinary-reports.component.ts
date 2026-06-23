@@ -283,5 +283,6 @@ export class WorkerDisciplinaryReportsComponent {
     const d = new Date(dateStr);
     return d.toLocaleDateString('it-IT'); 
   }
+  
 
 }

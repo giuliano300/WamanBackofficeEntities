@@ -24,6 +24,7 @@ import { JobTypesService } from '../../../services/jobTypes.service';
 import { catchError, finalize, forkJoin, of } from 'rxjs';
 import { NotificationService } from '../../../services/notification.service';
 import { ToastrService } from 'ngx-toastr';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -70,7 +71,8 @@ export class PlanningsComponent {
       private fb: FormBuilder,
       private jobTypesService: JobTypesService,
       private notificationService: NotificationService,
-      private toastr: ToastrService
+      private toastr: ToastrService,
+      private http: HttpClient  
   ) 
   {
     this.form = this.fb.group({
@@ -132,6 +134,16 @@ export class PlanningsComponent {
     })
   }
 
+  getSecureUrl(id: number) {
+
+    const expire = Date.now() + (10 * 60 * 1000);
+
+    this.http.get<any>(
+    `${this.api_url}/api/Files/GetSecureUrl/${id}?e=${expire}&type=att`
+    ).subscribe(r => {
+      window.open(r.url, '_blank');
+    });
+  }
 
   getJobTypes(){
     this.jobTypesService.getJobTypes()

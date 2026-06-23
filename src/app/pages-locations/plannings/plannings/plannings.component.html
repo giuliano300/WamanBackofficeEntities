@@ -145,7 +145,8 @@
                             <div class="position-relative text-center">
                                 <h6 class="mt-0 mb-0">
                                     <a *ngIf="element.planning.pathFile" 
-                                        [href]="api_url + element.planning.pathFile" 
+                                        href="javascript:void(0)"
+                                        (click)="getSecureUrl(element.planning.id); $event.preventDefault()"
                                         target="_blank" class="aDown">
                                             <i class="ri-file-download-line" title="download attendance sheet file"></i>
                                     </a>

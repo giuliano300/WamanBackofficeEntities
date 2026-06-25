@@ -10,12 +10,12 @@ import { NgFor, NgIf } from '@angular/common';
 import { Login } from '../../interfaces/Login';
 import { WamEntities } from '../../interfaces/Entities';
 import { EntitiesService } from '../../services/Entities.service';
-import { UtilsService } from '../../utils.service';
 import { MatOption, MatSelectModule } from '@angular/material/select';
 import { LoginType } from '../../interfaces/EnumType';
 import { LocationsService } from '../../services/locations.service';
 import { CompleteLocation } from '../../interfaces/CompleteLocation';
 import { AuthService } from '../../services/auth.service';
+import { UtilsService } from '../../utils.service';
 
 @Component({
     selector: 'app-sign-in',
@@ -34,9 +34,9 @@ export class SignInComponent {
         private entityService: EntitiesService, 
         private fb: FormBuilder,
         private router: Router,
-        private utilsService: UtilsService,
         private locationService: LocationsService,
-        private authService: AuthService
+        private authService: AuthService,
+        private utilsService: UtilsService
     ) {
         this.authForm = this.fb.group({
             email: ['', [Validators.required, Validators.email]],

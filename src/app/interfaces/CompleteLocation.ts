@@ -6,4 +6,5 @@ export interface CompleteLocation {
   location: Locations;
   timeIn: string;
   timeOut: string;
+  authToken: string;
 }

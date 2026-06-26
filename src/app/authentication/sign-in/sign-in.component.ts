@@ -15,7 +15,6 @@ import { LoginType } from '../../interfaces/EnumType';
 import { LocationsService } from '../../services/locations.service';
 import { CompleteLocation } from '../../interfaces/CompleteLocation';
 import { AuthService } from '../../services/auth.service';
-import { UtilsService } from '../../utils.service';
 
 @Component({
     selector: 'app-sign-in',
@@ -35,8 +34,7 @@ export class SignInComponent {
         private fb: FormBuilder,
         private router: Router,
         private locationService: LocationsService,
-        private authService: AuthService,
-        private utilsService: UtilsService
+        private authService: AuthService
     ) {
         this.authForm = this.fb.group({
             email: ['', [Validators.required, Validators.email]],
@@ -73,7 +71,7 @@ export class SignInComponent {
                         this.authService.setIsLocation(false);
                         this.authService.setIsEntity(true);
                         this.authService.setLoginName(this.entity.name);
-                        localStorage.setItem('authToken', this.utilsService.generateToken());
+                        localStorage.setItem('authToken', this.entity.authToken);
                         localStorage.setItem('entity', JSON.stringify(this.entity!));
                         this.router.navigate(['/locations']);
                     }
@@ -92,7 +90,7 @@ export class SignInComponent {
                         this.authService.setIsLocation(true);
                         this.authService.setIsEntity(false);
                         this.authService.setLoginName(this.completeLocation.location!.name);
-                        localStorage.setItem('authToken', this.utilsService.generateToken());
+                        localStorage.setItem('authToken', this.completeLocation.authToken);
                         localStorage.setItem('completeLocation', JSON.stringify(this.completeLocation!));
                         this.router.navigate(['/plannings']);
                     }

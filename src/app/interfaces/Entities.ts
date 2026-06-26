@@ -11,4 +11,5 @@ export interface WamEntities {
   headOfEntityMobile: string;
   pwd: string;
   deleted: boolean;
+  authToken: string;
 }

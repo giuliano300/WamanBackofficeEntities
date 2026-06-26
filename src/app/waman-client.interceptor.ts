@@ -6,9 +6,14 @@ export const wamanClientInterceptor: HttpInterceptorFn = (req, next) => {
     return next(req);
   }
 
+  const token = localStorage.getItem('authToken');
+  if (!token) {
+    return next(req);
+  }
+
   return next(req.clone({
     setHeaders: {
-      'X-Waman-Client': 'waman-frontend'
+      Authorization: `Bearer ${token}`
     }
   }));
 };

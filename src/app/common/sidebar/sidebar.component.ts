@@ -6,6 +6,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { Router, RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
 import { FeathericonsModule } from '../../icons/feathericons/feathericons.module';
 import { AuthService } from '../../services/auth.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
     selector: 'app-sidebar',
@@ -23,7 +24,8 @@ export class SidebarComponent {
     constructor(
         private router: Router,
         private toggleService: ToggleService,
-        private authService: AuthService
+        private authService: AuthService,
+        private notificationService: NotificationService
     ) {
         this.toggleService.isToggled$.subscribe(isToggled => {
             this.isToggled = isToggled;
@@ -53,6 +55,9 @@ export class SidebarComponent {
     panelOpenState = false;
 
     logout(){
+        this.notificationService.stopConnection();
+        // Subscribe before clearing storage so the interceptor captures the current token.
+        this.authService.revokeSession().subscribe({ error: () => {} });
         localStorage.removeItem('authToken');
         localStorage.removeItem('entity');
         localStorage.removeItem('completeLocation');

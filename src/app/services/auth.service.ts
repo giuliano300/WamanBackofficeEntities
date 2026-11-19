@@ -33,6 +33,10 @@ export class AuthService {
   }
 
   // Pulisce i ruoli
+  revokeSession(): Observable<void> {
+    return this.http.post<void>(API_URL + 'Authentication/Logout', {});
+  }
+
   clearRoles() {
     localStorage.removeItem('isEntity');
     localStorage.removeItem('isLocation');

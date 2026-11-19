@@ -121,7 +121,7 @@ export class PlanningsComponent {
     this.notificationService.getUnreadNotifications(this.locationId!, 0).subscribe(notifs => {
         for (const notif of notifs) {
           this.toastr.info(notif.message, '', {
-              enableHtml: true,
+              enableHtml: false,
               positionClass: 'toast-top-right',
               timeOut: 20000,   
               closeButton: true,

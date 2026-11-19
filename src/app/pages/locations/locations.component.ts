@@ -69,7 +69,7 @@ export class LocationsComponent {
     this.notificationService.getUnreadNotifications(0, this.entity?.id!).subscribe(notifs => {
         for (const notif of notifs) {
           this.toastr.info(notif.message, '', {
-              enableHtml: true,
+              enableHtml: false,
               positionClass: 'toast-top-right',
               timeOut: 20000,   
               closeButton: true,

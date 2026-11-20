@@ -104,7 +104,7 @@
                             <div class="position-relative text-center">
                                 <h6 class="mt-0 mb-0">
                                     <a *ngIf="element.planning.planning.pathFile" 
-                                        [href]="api_url + element.planning.planning.pathFile" 
+                                        href="#" (click)="$event.preventDefault(); openAttendanceSheet(element.planning.planning.id)"
                                         target="_blank" class="aDown">
                                             <i class="ri-file-download-line" title="download attendance sheet file"></i>
                                     </a>

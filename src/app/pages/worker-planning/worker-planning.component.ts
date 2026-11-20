@@ -28,6 +28,9 @@ import { TemplatePdfService } from '../../services/template-pdf.service';
   styleUrl: './worker-planning.component.scss'
 })
 export class WorkerPlanningComponent {
+  openAttendanceSheet(planningId: number): void {
+    this.templatePdfService.openAttendanceSheet(planningId);
+  }
 
   displayedColumns: string[] = ['month', 'location', 'entityType', 'startWork', 'endWork', 'totalHours','as', 'generate'];
 

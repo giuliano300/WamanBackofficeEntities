@@ -37,6 +37,9 @@ import { LocationsService } from '../../services/locations.service';
   standalone: true
 })
 export class LocationPlanningsComponent {
+  openAttendanceSheet(planningId: number): void {
+    this.templatePdfService.openAttendanceSheet(planningId);
+  }
 
   displayedColumns: string[] = ['name', 'lastName', 'job', 'startWork', 'endWork','as', 'generate'];
 

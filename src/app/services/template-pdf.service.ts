@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { API_URL } from '../../main';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,12 @@ export class TemplatePdfService {
 
   private apiUrl = API_URL + "TemplatePdf";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private snackBar: MatSnackBar) { }
+
+  openAttendanceSheet(planningId: number): void {
+    this.http.get<{url: string}>(API_URL + 'Files/GetSecureUrl/' + planningId, {params: {type: 'att'}})
+      .subscribe({next: result => window.open(result.url, '_blank', 'noopener'), error: () => this.snackBar.open('The document is unavailable or your session has expired.', 'Close', {duration: 6000})});
+  }
 
   createAttendanceSheet(planningId: number, workerId: number): Observable<boolean> {
     return this.http.get<boolean>(this.apiUrl + "/CreateAs?id=" + planningId + "&id2=" + workerId);

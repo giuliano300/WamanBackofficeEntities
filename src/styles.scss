@@ -1565,3 +1565,115 @@ nav[aria-label="breadcrumb"][data-subtitle] {
         }
     }
 }
+
+/* Global visual refinement — calm, consistent, and intentionally subtle. */
+html { background: #f4f7fb; }
+
+body {
+    color: #536077;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+    color: #17306f;
+    background: #dbe5ff;
+}
+
+.main-content { padding-bottom: 24px; }
+
+.page-header,
+.page-heading {
+    min-height: 120px;
+    margin-bottom: 20px !important;
+    border-color: #e7ebf2;
+    border-radius: 16px;
+    box-shadow: 0 8px 26px rgba(31, 45, 77, .04);
+}
+
+.mat-mdc-card.trinta-card {
+    border-color: #e7ebf2 !important;
+    border-radius: 16px !important;
+    box-shadow: 0 8px 24px rgba(31, 45, 77, .04) !important;
+}
+
+.mat-mdc-card.trinta-card .mat-mdc-card-content:last-child { padding-bottom: 0; }
+
+.profile-summary {
+    width: 100%;
+    max-width: none;
+}
+
+.profile-summary .profile-hero { padding: 25px 28px; }
+.profile-summary .profile-section { padding: 22px 4px; }
+
+.profile-summary .profile-item {
+    min-height: 70px;
+    border-color: #e6eaf1;
+    background: #f8faff;
+    transform: none;
+}
+
+.profile-summary .profile-item:hover {
+    border-color: #d8e0f4;
+    background: #fbfcff;
+    transform: none;
+}
+
+.main-content .mat-mdc-form-field:not(.mat-mdc-paginator-page-size-select) .mat-mdc-text-field-wrapper {
+    transition: border-color .18s ease, background-color .18s ease, box-shadow .18s ease;
+}
+
+.main-content .mat-mdc-form-field.mat-focused:not(.mat-mdc-paginator-page-size-select) .mat-mdc-text-field-wrapper {
+    box-shadow: 0 0 0 3px rgba(49, 87, 213, .075);
+}
+
+body .mat-mdc-card.trinta-card .to-do-list-table .table-responsive {
+    border-color: #e8ebf1 !important;
+    border-radius: 11px !important;
+}
+
+body .mat-mdc-card.trinta-card .to-do-list-table .mat-mdc-table .mat-mdc-header-row {
+    background: #f7f9fc !important;
+}
+
+body .mat-mdc-card.trinta-card .to-do-list-table .mat-mdc-table .mat-mdc-row:hover {
+    background: #f8faff !important;
+}
+
+.mat-mdc-dialog-container .mat-mdc-dialog-surface {
+    border: 1px solid #e5e9f1;
+    border-radius: 18px !important;
+    box-shadow: 0 24px 70px rgba(24, 38, 72, .18) !important;
+}
+
+.mat-mdc-menu-panel,
+.mat-mdc-select-panel {
+    border: 1px solid #e5e9f1;
+    border-radius: 12px !important;
+    box-shadow: 0 16px 40px rgba(24, 38, 72, .14) !important;
+}
+
+.mat-mdc-option {
+    min-height: 42px !important;
+    font-size: 13px !important;
+}
+
+.mat-mdc-option.mdc-list-item--selected:not(.mat-mdc-option-multiple),
+.mat-mdc-option:hover:not(.mdc-list-item--disabled) {
+    background: #eef3ff !important;
+}
+
+@media only screen and (max-width: 767px) {
+    .main-content { padding-bottom: 16px; }
+
+    .page-header,
+    .page-heading {
+        min-height: 112px;
+        margin-bottom: 16px !important;
+        border-radius: 14px;
+    }
+
+    .profile-summary .profile-hero { padding: 21px 18px; }
+    .profile-summary .profile-section { padding: 20px 2px; }
+}

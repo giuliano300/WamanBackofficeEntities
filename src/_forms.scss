@@ -8,7 +8,7 @@
     display: flex;
     align-items: center;
     gap: 13px;
-    margin: 24px 4px 12px;
+    margin: 20px 4px 10px;
 }
 
 .report-form__section-heading > span {
@@ -41,11 +41,11 @@
 }
 
 .mat-mdc-card.trinta-card.report-form__card {
-    padding: 24px 24px 8px !important;
+    padding: 22px 22px 12px !important;
     border: 1px solid #e6eaf1 !important;
     border-radius: 16px !important;
     background: rgba(255, 255, 255, .88) !important;
-    box-shadow: 0 10px 28px rgba(31, 45, 77, .055) !important;
+    box-shadow: 0 8px 24px rgba(31, 45, 77, .045) !important;
 }
 
 .report-form__card .row {
@@ -59,13 +59,17 @@
 }
 
 .report-form__card .mat-mdc-form-field {
-    margin-bottom: 8px;
+    margin-bottom: 12px;
 }
 
 .report-form__card .mat-mdc-text-field-wrapper {
-    min-height: 58px;
+    min-height: 54px;
     border-radius: 12px !important;
     background: #f8f9fc !important;
+}
+
+.report-form__card .mat-mdc-form-field-subscript-wrapper {
+    display: none;
 }
 
 .report-form__card .textarea .mat-mdc-text-field-wrapper {

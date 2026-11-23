@@ -66,6 +66,7 @@
 
 .filter-panel__body .mat-mdc-card.trinta-card {
     padding: 0 !important;
+    border: 0 !important;
     border-radius: 0 !important;
     background: transparent !important;
     box-shadow: none !important;
@@ -145,6 +146,10 @@
 .filter-panel__body .mat-mdc-select-value,
 .filter-panel__body .mat-mdc-floating-label {
     font-size: 13px !important;
+}
+
+.filter-panel__body .mat-mdc-floating-label {
+    top: 17px !important;
 }
 
 .filter-panel__body .mat-mdc-floating-label.mdc-floating-label--float-above {

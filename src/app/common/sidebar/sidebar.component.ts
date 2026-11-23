@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { NgClass } from '@angular/common';
-import { NgScrollbarModule } from 'ngx-scrollbar';
 import { ToggleService } from '../header/toggle.service';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { Router, RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
@@ -10,7 +9,7 @@ import { NotificationService } from '../../services/notification.service';
 
 @Component({
     selector: 'app-sidebar',
-    imports: [NgScrollbarModule, MatExpansionModule, RouterLinkActive, RouterModule, RouterLink, NgClass, FeathericonsModule],
+    imports: [MatExpansionModule, RouterLinkActive, RouterModule, RouterLink, NgClass, FeathericonsModule],
     templateUrl: './sidebar.component.html',
     styleUrl: './sidebar.component.scss'
 })
@@ -20,15 +19,19 @@ export class SidebarComponent {
     isLocation: boolean | null = null;
     
     loginName: string = "";
+    openCompactGroup: 'operations' | 'reporting' | null = null;
 
     constructor(
-        private router: Router,
+        public router: Router,
         private toggleService: ToggleService,
         private authService: AuthService,
         private notificationService: NotificationService
     ) {
         this.toggleService.isToggled$.subscribe(isToggled => {
             this.isToggled = isToggled;
+            if (!isToggled) {
+                this.openCompactGroup = null;
+            }
         });
         // SUBSCRIBE SEMPRE ATTIVO
         this.authService.isEntity$.subscribe(val => {
@@ -49,6 +52,21 @@ export class SidebarComponent {
     isToggled = false;
     toggle() {
         this.toggleService.toggle();
+    }
+
+    toggleCompactGroup(group: 'operations' | 'reporting', event: Event) {
+        if (!this.isToggled || window.innerWidth < 1200) {
+            return;
+        }
+
+        event.preventDefault();
+        event.stopPropagation();
+        this.openCompactGroup = this.openCompactGroup === group ? null : group;
+    }
+
+    @HostListener('document:click')
+    closeCompactGroup() {
+        this.openCompactGroup = null;
     }
 
     // Mat Expansion

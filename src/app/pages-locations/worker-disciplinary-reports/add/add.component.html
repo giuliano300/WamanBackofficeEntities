@@ -1,16 +1,17 @@
-<nav aria-label="breadcrumb">
+<nav aria-label="breadcrumb" class="page-header" data-kicker="COMPLIANCE" data-subtitle="Create or update a disciplinary report.">
     <ol class="breadcrumb">
         <li aria-current="page" class="breadcrumb-item active">{{title}}</li>
     </ol>
 </nav>
-<form [formGroup]="disciplinaryForm" (ngSubmit)="onSubmit()">
-    <mat-card class="trinta-card mb-10 bg-white border-none d-block">
+<form class="report-form" [formGroup]="disciplinaryForm" (ngSubmit)="onSubmit()">
+    <div class="report-form__section-heading"><span>01</span><div><h2>Compiler details</h2><p>Information about the person completing this report.</p></div></div>
+    <mat-card class="trinta-card report-form__card mb-10 bg-white border-none d-block">
         <mat-card-content>
             <div class="row">
                 <div class="col-sm-12">
                     <mat-form-field class="input">
                         <i-feather name="user"></i-feather>
-                        <mat-label>Compiler's Name & lastname </mat-label>
+                        <mat-label>Compiler's name and last name</mat-label>
                         <input matInput formControlName="compilerName" type="text">
                     </mat-form-field>
                 </div>
@@ -50,12 +51,8 @@
             </div>
         </mat-card-content>
     </mat-card>
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li aria-current="page" class="breadcrumb-item active mt-10">Worker and disciplinary data</li>
-        </ol>
-    </nav>
-    <mat-card class="trinta-card mb-10 bg-white border-none d-block">
+    <div class="report-form__section-heading"><span>02</span><div><h2>Worker and disciplinary details</h2><p>Identify the worker and record the disciplinary event.</p></div></div>
+    <mat-card class="trinta-card report-form__card mb-10 bg-white border-none d-block">
         <mat-card-content>
             <div class="row">
                 <div class="col-sm-12">
@@ -109,12 +106,8 @@
             </div>
         </mat-card-content>
     </mat-card>
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li aria-current="page" class="breadcrumb-item active mt-10">File to upload</li>
-        </ol>
-    </nav>
-    <mat-card class="trinta-card mb-25 bg-white border-none d-block">
+    <div class="report-form__section-heading"><span>03</span><div><h2>Attachments</h2><p>Add supporting documents, up to 3 MB per file.</p></div></div>
+    <mat-card class="trinta-card report-form__card report-form__attachments mb-25 bg-white border-none d-block">
         <mat-card-content>
             <div class="row">
                 <div class="col-sm-12">
@@ -151,12 +144,10 @@
                     </ngx-file-drop>   
                     
                 </div>
-                <div class="col-sm-6 mt-20 text-start">
-                    <button mat-flat-button class="back" type="submit" (click)="returnBack()">
-                        back
+                <div class="col-sm-12 report-form__actions">
+                    <button mat-flat-button class="back" type="button" (click)="returnBack()">
+                        Back
                     </button>
-                </div>
-                <div class="col-sm-6 mt-20 text-end">
                     <button mat-flat-button color="primary" type="submit" [disabled]="disciplinaryForm.invalid">
                         Save
                     </button>

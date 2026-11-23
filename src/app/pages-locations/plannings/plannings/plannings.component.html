@@ -1,4 +1,4 @@
-<nav aria-label="breadcrumb" class="position-relative">
+<nav aria-label="breadcrumb" class="page-header" data-kicker="PLANNING" data-subtitle="Review monthly schedules and attendance for all workers.">
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
             <a routerLink="/index">Plannings of all workers</a>
@@ -9,7 +9,9 @@
 
 </nav>
 
-<mat-card class="trinta-card to-do-list-card mb-10 bg-white border-none d-block">
+<details class="filter-panel mb-10">
+<summary><span class="filter-panel__icon"><i class="ri-filter-3-line"></i></span><span><strong>Filters</strong><small>Refine planning results</small></span><i class="ri-arrow-down-s-line filter-panel__chevron"></i></summary>
+<div class="filter-panel__body"><mat-card class="trinta-card to-do-list-card bg-white border-none d-block">
     <mat-card-content>
         <form [formGroup]="form">
             <div class="container">
@@ -62,7 +64,7 @@
             </div>
         </form>
     </mat-card-content>
-</mat-card>
+</mat-card></div></details>
 
 <mat-card
     class="trinta-card to-do-list-card mb-25 bg-white border-none d-block"
@@ -163,15 +165,14 @@
                         <td mat-cell *matCellDef="let element" class="pl-0">
                             <div class="position-relative text-center">
                                 <h6 class="mt-0 mb-0">
-                                    <a>
-                                        <i class="ri-restart-fill"
-                                            [ngClass]="element.planning.pathFile ? 're-generate' : 'generate'"
-                                            [class.rotate-icon]="generatingMap[element.planning.id + '_' + element.planning.workerId]"
-                                            [class.disabled]="generatingMap[element.planning.id + '_' + element.planning.workerId]"
-                                            [title]="element.planning.pathFile ? 're-generate attendance sheet file' : 'generate attendance sheet file'"
-                                            (click)="generateAs(element.planning.id, element.planning.workerId)">
-                                        </i>
-                                    </a>
+                                    <button type="button" class="generation-action"
+                                        [class.is-regenerate]="element.planning.pathFile"
+                                        [disabled]="generatingMap[element.planning.id + '_' + element.planning.workerId]"
+                                        [title]="element.planning.pathFile ? 'Regenerate attendance sheet' : 'Generate attendance sheet'"
+                                        (click)="generateAs(element.planning.id, element.planning.workerId)">
+                                        <i class="ri-restart-line" [class.rotate-icon]="generatingMap[element.planning.id + '_' + element.planning.workerId]"></i>
+                                        <span>{{ element.planning.pathFile ? 'Regenerate' : 'Generate' }}</span>
+                                    </button>
                                 </h6>
                             </div>
                         </td>

@@ -7,11 +7,10 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideToastr } from 'ngx-toastr';
 import { wamanClientInterceptor } from './app/waman-client.interceptor';
+import { environment } from './environments/environment';
 
 // Definisci l'URL globale dell'API
-export const API_URL_DOC = ['localhost', '127.0.0.1'].includes(window.location.hostname)
-  ? 'http://localhost:5051/'
-  : 'https://auth.waman.app/';
+export const API_URL_DOC = environment.apiOrigin;
 export const API_URL = API_URL_DOC + 'api/';
 export const exceedsLimit = 3;
 export const maxLenghtUploadFile = 2;

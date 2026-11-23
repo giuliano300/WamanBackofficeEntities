@@ -1,206 +1,101 @@
-<div
-    class="sidebar-area bg-white transition sidebar-shadow"
-    [ngClass]="{'active': isToggled}"
->
+<aside class="sidebar-area transition" [ngClass]="{'active': isToggled}">
     <div class="logo">
-        <a routerLink="/" class="d-flex align-items-center">
-            <img src="images/logo-icon.png" alt="logo-icon" width="33px">
-            <span>
-               {{loginName}}
+        <a routerLink="/" class="brand-link">
+            <span class="brand-mark"><img src="images/logo-icon.png" alt="WAMAN"></span>
+            <span class="logo-copy">
+                <strong>WAMAN</strong>
+                <small>{{ loginName || 'Operations' }}</small>
             </span>
         </a>
     </div>
-    <div
-        class="burger-menu transition cursor-pointer"
-        [ngClass]="{'active': isToggled}"
-        (click)="toggle()"
-    >
-        <span class="top-bar transition bg-dark d-block"></span>
-        <span class="middle-bar transition bg-dark d-block"></span>
-        <span class="bottom-bar transition bg-dark d-block"></span>
+
+    <div class="menu-scroll">
+        <nav class="sidebar-inner" aria-label="Main navigation">
+            <mat-accordion class="sidebar-menu" [hidden]="!isEntity">
+                <a routerLink="/info" class="sidebar-menu-link primary-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    <span class="nav-icon"><i-feather name="home"></i-feather></span>
+                    <span class="title">Entity overview</span>
+                </a>
+
+                <section class="menu-group" [class.compact-open]="openCompactGroup === 'operations'">
+                    <div class="menu-group__title" tabindex="0" role="button" [attr.aria-expanded]="openCompactGroup === 'operations'" (click)="toggleCompactGroup('operations', $event)" (keydown.enter)="toggleCompactGroup('operations', $event)" (keydown.space)="toggleCompactGroup('operations', $event)">
+                        <span class="nav-icon"><i-feather name="briefcase"></i-feather></span>
+                        <span>Operations</span><i class="group-caret"></i>
+                    </div>
+                    <div class="menu-group__items" data-menu-label="Operations">
+                        <a routerLink="/locations" class="sidebar-menu-link child-link" routerLinkActive="active" [class.active]="router.url.startsWith('/location') || router.url.startsWith('/planning/')" [routerLinkActiveOptions]="{exact: true}">
+                            <span class="title">Locations</span>
+                        </a>
+                        <a routerLink="/workers" class="sidebar-menu-link child-link" routerLinkActive="active" [class.active]="router.url.startsWith('/worker-planning') || router.url.startsWith('/worker-bonus-general')" [routerLinkActiveOptions]="{exact: true}">
+                            <span class="title">Workers</span>
+                        </a>
+                    </div>
+                </section>
+
+                <section class="menu-group" [class.compact-open]="openCompactGroup === 'reporting'">
+                    <div class="menu-group__title" tabindex="0" role="button" [attr.aria-expanded]="openCompactGroup === 'reporting'" (click)="toggleCompactGroup('reporting', $event)" (keydown.enter)="toggleCompactGroup('reporting', $event)" (keydown.space)="toggleCompactGroup('reporting', $event)">
+                        <span class="nav-icon"><i-feather name="bar-chart-2"></i-feather></span>
+                        <span>Reporting</span><i class="group-caret"></i>
+                    </div>
+                    <div class="menu-group__items" data-menu-label="Reporting">
+                        <div class="nav-row">
+                            <a routerLink="/entity-disciplinary-report" class="sidebar-menu-link child-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><span class="title">Disciplinary</span></a>
+                            <a routerLink="/entity-disciplinary-reports/add" class="nav-create" title="Add disciplinary report" aria-label="Add disciplinary report"><i-feather name="plus"></i-feather></a>
+                        </div>
+                        <div class="nav-row">
+                            <a routerLink="/entity-incident-accident-report" class="sidebar-menu-link child-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><span class="title">Incidents</span></a>
+                            <a routerLink="/entity-incident-accident-reports/add" class="nav-create" title="Add incident report" aria-label="Add incident report"><i-feather name="plus"></i-feather></a>
+                        </div>
+                    </div>
+                </section>
+            </mat-accordion>
+
+            <mat-accordion class="sidebar-menu" [hidden]="!isLocation">
+                <a routerLink="/info-location" class="sidebar-menu-link primary-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    <span class="nav-icon"><i-feather name="home"></i-feather></span>
+                    <span class="title">Location overview</span>
+                </a>
+
+                <section class="menu-group" [class.compact-open]="openCompactGroup === 'operations'">
+                    <div class="menu-group__title" tabindex="0" role="button" [attr.aria-expanded]="openCompactGroup === 'operations'" (click)="toggleCompactGroup('operations', $event)" (keydown.enter)="toggleCompactGroup('operations', $event)" (keydown.space)="toggleCompactGroup('operations', $event)">
+                        <span class="nav-icon"><i-feather name="briefcase"></i-feather></span>
+                        <span>Operations</span><i class="group-caret"></i>
+                    </div>
+                    <div class="menu-group__items" data-menu-label="Operations">
+                        <a routerLink="/plannings" class="sidebar-menu-link child-link" routerLinkActive="active" [class.active]="router.url.startsWith('/planning-worker-location') || router.url === '/plannings'" [routerLinkActiveOptions]="{exact: true}"><span class="title">Planning</span></a>
+                        <a routerLink="/index" class="sidebar-menu-link child-link" routerLinkActive="active" [class.active]="router.url.startsWith('/worker-bonus/')" [routerLinkActiveOptions]="{exact: true}"><span class="title">Workers</span></a>
+                    </div>
+                </section>
+
+                <section class="menu-group" [class.compact-open]="openCompactGroup === 'reporting'">
+                    <div class="menu-group__title" tabindex="0" role="button" [attr.aria-expanded]="openCompactGroup === 'reporting'" (click)="toggleCompactGroup('reporting', $event)" (keydown.enter)="toggleCompactGroup('reporting', $event)" (keydown.space)="toggleCompactGroup('reporting', $event)">
+                        <span class="nav-icon"><i-feather name="bar-chart-2"></i-feather></span>
+                        <span>Reporting</span><i class="group-caret"></i>
+                    </div>
+                    <div class="menu-group__items" data-menu-label="Reporting">
+                        <div class="nav-row">
+                            <a routerLink="/worker-disciplinary-reports" class="sidebar-menu-link child-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><span class="title">Disciplinary</span></a>
+                            <a routerLink="/worker-disciplinary-reports/add" class="nav-create" title="Add disciplinary report" aria-label="Add disciplinary report"><i-feather name="plus"></i-feather></a>
+                        </div>
+                        <div class="nav-row">
+                            <a routerLink="/worker-incident-accident-reports" class="sidebar-menu-link child-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><span class="title">Incidents</span></a>
+                            <a routerLink="/worker-incident-accident-reports/add" class="nav-create" title="Add incident report" aria-label="Add incident report"><i-feather name="plus"></i-feather></a>
+                        </div>
+                    </div>
+                </section>
+            </mat-accordion>
+        </nav>
     </div>
-    <ng-scrollbar visibility="hover">
-        <div class="sidebar-inner">
-            <div class="sidebar-menu">
-                <mat-accordion [hidden]="!isEntity">
-                    <span class="sub-title text-body">
-                        MAIN
-                    </span>
-                    <a routerLink="/info" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                        <i-feather name="info"></i-feather>
-                        <span class="title">
-                            Entity informations
-                        </span>
-                    </a>
-                    <a routerLink="/locations" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                        <i-feather name="home"></i-feather>
-                        <span class="title">
-                            Locations
-                        </span>
-                    </a>
 
-                    <a routerLink="/entity-disciplinary-report" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                        <i-feather name="List"></i-feather>
-                        <span class="title">
-                            Disciplinary reports
-                        </span>
-                    </a>
-
-                    <a routerLink="/entity-incident-accident-report" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                        <i-feather name="Minimize"></i-feather>
-                        <span class="title">
-                            Incident/accident reports
-                        </span>
-                    </a>
-
-                    <!--<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = true">
-                        <mat-expansion-panel-header>
-                            <mat-panel-title>
-                                <i-feather name="List"></i-feather>
-                                <span class="title">
-                                    Disciplinary reports
-                                </span>
-                            </mat-panel-title>
-                        </mat-expansion-panel-header>
-                        <ul class="sidebar-sub-menu">
-                            <li class="sidemenu-item">
-                                <a routerLink="/entity-disciplinary-report" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
-                                    View all
-                                </a>
-                            </li>
-                            <li class="sidemenu-item">
-                                <a routerLink="/entity-disciplinary-reports/add" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
-                                    Add new
-                                </a>
-                            </li>
-                        </ul>
-                    </mat-expansion-panel>
-
-                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = true">
-                        <mat-expansion-panel-header>
-                            <mat-panel-title>
-                                <i-feather name="Minimize"></i-feather>
-                                <span class="title">
-                                    Incident/accident reports
-                                </span>
-                            </mat-panel-title>
-                        </mat-expansion-panel-header>
-                        <ul class="sidebar-sub-menu">
-                            <li class="sidemenu-item">
-                                <a routerLink="/entity-incident-accident-report" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
-                                    View all
-                                </a>
-                            </li>
-                            <li class="sidemenu-item">
-                                <a routerLink="/entity-incident-accident-reports/add" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
-                                    Add new
-                                </a>
-                            </li>
-                        </ul>
-                    </mat-expansion-panel>-->
-
-
-
-
-                    <a routerLink="/workers" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                        <i-feather name="users"></i-feather>
-                        <span class="title">
-                            Workers
-                        </span>
-                    </a>
-
-                    <a href="/shared-files/entity_guide.pdf" target="_blank" class="sidebar-menu-link">
-                        <i-feather name="book-open"></i-feather>
-                        <span class="title">
-                            Guide
-                        </span>
-                    </a>
-
-                    <a class="sidebar-menu-link" (click)="logout()" href="#">
-                        <i-feather name="Lock"></i-feather>
-                        <span class="title">Logout</span>
-                    </a>
-                </mat-accordion>
-                <mat-accordion [hidden]="!isLocation">
-                    <span class="sub-title text-body">
-                        MAIN
-                    </span>
-                    <a routerLink="/info-location" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                        <i-feather name="info"></i-feather>
-                        <span class="title">
-                            Location informations
-                        </span>
-                    </a>
-                    <a routerLink="/plannings" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                        <i-feather name="Layers"></i-feather>
-                        <span class="title">
-                            Plannings
-                        </span>
-                    </a>
-                    <a routerLink="/index" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                        <i-feather name="users"></i-feather>
-                        <span class="title">
-                            Workers
-                        </span>
-                    </a>
-
-                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = true">
-                        <mat-expansion-panel-header>
-                            <mat-panel-title>
-                                <i-feather name="List"></i-feather>
-                                <span class="title">
-                                    Disciplinary reports
-                                </span>
-                            </mat-panel-title>
-                        </mat-expansion-panel-header>
-                        <ul class="sidebar-sub-menu">
-                            <li class="sidemenu-item">
-                                <a routerLink="/worker-disciplinary-reports" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
-                                    View all
-                                </a>
-                            </li>
-                            <li class="sidemenu-item">
-                                <a routerLink="/worker-disciplinary-reports/add" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
-                                    Add new
-                                </a>
-                            </li>
-                        </ul>
-                    </mat-expansion-panel>
-
-                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = true">
-                        <mat-expansion-panel-header>
-                            <mat-panel-title>
-                                <i-feather name="Minimize"></i-feather>
-                                <span class="title">
-                                    Incident/accident reports
-                                </span>
-                            </mat-panel-title>
-                        </mat-expansion-panel-header>
-                        <ul class="sidebar-sub-menu">
-                            <li class="sidemenu-item">
-                                <a routerLink="/worker-incident-accident-reports" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
-                                    View all
-                                </a>
-                            </li>
-                            <li class="sidemenu-item">
-                                <a routerLink="/worker-incident-accident-reports/add" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
-                                    Add new
-                                </a>
-                            </li>
-                        </ul>
-                    </mat-expansion-panel>
-                    <a href="/shared-files/location_guide.pdf" target="_blank" class="sidebar-menu-link">
-                        <i-feather name="book-open"></i-feather>
-                        <span class="title">
-                            Guide
-                        </span>
-                    </a>
-                    <a class="sidebar-menu-link" (click)="logout()" href="#">
-                        <i-feather name="Lock"></i-feather>
-                        <span class="title">Logout</span>
-                    </a>
-                </mat-accordion>
-            </div>
-        </div>
-    </ng-scrollbar>
-</div>
+    <div class="sidebar-footer">
+        <a [hidden]="!isEntity" href="/shared-files/entity_guide.pdf" target="_blank" class="footer-action">
+            <i-feather name="help-circle"></i-feather><span>Help &amp; guide</span>
+        </a>
+        <a [hidden]="!isLocation" href="/shared-files/location_guide.pdf" target="_blank" class="footer-action">
+            <i-feather name="help-circle"></i-feather><span>Help &amp; guide</span>
+        </a>
+        <button type="button" class="footer-action logout-action" (click)="logout()">
+            <i-feather name="log-out"></i-feather><span>Sign out</span>
+        </button>
+    </div>
+</aside>

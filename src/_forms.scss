@@ -1,0 +1,147 @@
+.report-form {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+}
+
+.report-form__section-heading {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin: 24px 4px 12px;
+}
+
+.report-form__section-heading > span {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+    place-items: center;
+    border: 1px solid #d4defb;
+    border-radius: 10px;
+    color: #3157d5;
+    background: #eaf0ff;
+    font-size: 11px;
+    font-weight: 750;
+}
+
+.report-form__section-heading h2 {
+    margin: 0 0 3px;
+    color: var(--darkColor);
+    font-size: 16px;
+    font-weight: 720;
+    letter-spacing: -.01em;
+}
+
+.report-form__section-heading p {
+    margin: 0;
+    color: #8a93a8;
+    font-size: 11px;
+    line-height: 1.45;
+}
+
+.mat-mdc-card.trinta-card.report-form__card {
+    padding: 24px 24px 8px !important;
+    border: 1px solid #e6eaf1 !important;
+    border-radius: 16px !important;
+    background: rgba(255, 255, 255, .88) !important;
+    box-shadow: 0 10px 28px rgba(31, 45, 77, .055) !important;
+}
+
+.report-form__card .row {
+    margin-right: -8px;
+    margin-left: -8px;
+}
+
+.report-form__card [class*="col-"] {
+    padding-right: 8px;
+    padding-left: 8px;
+}
+
+.report-form__card .mat-mdc-form-field {
+    margin-bottom: 8px;
+}
+
+.report-form__card .mat-mdc-text-field-wrapper {
+    min-height: 58px;
+    border-radius: 12px !important;
+    background: #f8f9fc !important;
+}
+
+.report-form__card .textarea .mat-mdc-text-field-wrapper {
+    min-height: 126px;
+    align-items: flex-start;
+}
+
+.report-form__card textarea[matInput] {
+    min-height: 78px;
+    resize: vertical;
+}
+
+.report-form__card i-feather {
+    color: #7d89a3 !important;
+}
+
+.report-form__card .mat-mdc-form-field.mat-focused i-feather {
+    color: #3157d5 !important;
+}
+
+.report-form__attachments .ngx-file-drop__drop-zone {
+    min-height: 132px !important;
+    border: 1px dashed #bdc9e7 !important;
+    border-radius: 14px !important;
+    background: #f7f9ff !important;
+}
+
+.report-form__attachments .ngx-file-drop__content {
+    min-height: 130px !important;
+}
+
+.report-form__attachments .drop-zone {
+    display: grid;
+    width: 100%;
+    min-height: 130px;
+    place-items: center;
+    color: #52617c !important;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.report-form__attachments .preview-list {
+    padding: 14px;
+    border: 1px solid #e1e7f0;
+    border-radius: 12px;
+    background: #fafbfe;
+}
+
+.report-form__attachments .preview-item {
+    padding: 8px 10px;
+    border-radius: 9px;
+    background: #fff;
+}
+
+.report-form__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 18px;
+    padding-top: 18px !important;
+    padding-bottom: 14px;
+    border-top: 1px solid #edf0f5;
+}
+
+@media only screen and (max-width: 767px) {
+    .report-form__section-heading { margin-top: 20px; }
+
+    .mat-mdc-card.trinta-card.report-form__card {
+        padding: 18px 16px 4px !important;
+        border-radius: 14px !important;
+    }
+
+    .report-form__actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .report-form__actions button { width: 100%; }
+}

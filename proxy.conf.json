@@ -1,0 +1,21 @@
+{
+  "/api": {
+    "target": "http://localhost:5051",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "info"
+  },
+  "/signalr": {
+    "target": "http://localhost:5051",
+    "secure": false,
+    "changeOrigin": true,
+    "ws": true,
+    "logLevel": "info"
+  },
+  "/Public": {
+    "target": "http://localhost:5051",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "info"
+  }
+}

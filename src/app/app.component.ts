@@ -1,6 +1,6 @@
-import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { Component } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { CommonModule, DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { Component, Inject } from '@angular/core';
+import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { SidebarComponent } from './common/sidebar/sidebar.component';
 import { HeaderComponent } from './common/header/header.component';
 import { FooterComponent } from './common/footer/footer.component';
@@ -15,8 +15,43 @@ import { Location } from '@angular/common';
 })
 export class AppComponent {
   title = 'district-operation-frontend';
+  isRouteLoading = false;
+  isRouteFinishing = false;
+  private routeLoadingTimer?: ReturnType<typeof setTimeout>;
+  constructor(
+    public router: Router,
+    public toggleService: ToggleService,
+    private loc: Location,
+    @Inject(DOCUMENT) private document: Document
+  ) {
+    this.toggleService.isToggled$.subscribe(isToggled => {
+      this.isToggled = isToggled;
+    });
 
-  constructor(public router: Router,  public toggleService: ToggleService, private loc: Location) {}
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
+        clearTimeout(this.routeLoadingTimer);
+        this.isRouteFinishing = false;
+        this.isRouteLoading = true;
+      }
+
+      if (event instanceof NavigationEnd || event instanceof NavigationCancel || event instanceof NavigationError) {
+        if (event instanceof NavigationEnd) {
+          setTimeout(() => {
+            this.document.querySelectorAll<HTMLDetailsElement>('.filter-panel[open]')
+              .forEach(panel => panel.open = false);
+          });
+        }
+
+        this.isRouteFinishing = true;
+        this.routeLoadingTimer = setTimeout(() => {
+          this.isRouteLoading = false;
+          this.isRouteFinishing = false;
+        }, 220);
+      }
+    });
+
+  }
   
     routerSubscription: any;
     location: any;

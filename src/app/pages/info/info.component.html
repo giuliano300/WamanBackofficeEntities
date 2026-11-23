@@ -1,77 +1,68 @@
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li aria-current="page" class="breadcrumb-item active">Entity informations</li>
-    </ol>
-</nav>
-<mat-card class="trinta-card mb-25 bg-white border-none d-block">
-    <mat-card-content>
-        <form>
-            <div class="row">
-                <div class="col-sm-6">
-                    <mat-form-field>
-                        <i-feather name="user"></i-feather>
-                        <mat-label>Entity name</mat-label>
-                        <input matInput value="{{completeEntity?.entity?.name}}" readonly>
-                    </mat-form-field>
-                </div>
-                <div class="col-sm-6">
-                    <mat-form-field>
-                        <i-feather name="code"></i-feather>
-                        <mat-label>Entity type</mat-label>
-                        <input matInput value="{{completeEntity?.entityType?.name}}" readonly>
-                    </mat-form-field>
-                </div>
-                <div class="col-sm-6">
-                    <mat-form-field>
-                        <i-feather name="mail"></i-feather>
-                        <mat-label>Email address</mat-label>
-                        <input matInput value="{{completeEntity?.entity?.email}}" readonly>
-                    </mat-form-field>
-                </div>
-                <div class="col-sm-6">
-                    <mat-form-field>
-                        <i-feather name="phone"></i-feather>
-                        <mat-label>Phone</mat-label>
-                        <input matInput value="{{completeEntity?.entity?.mobile}}" readonly>
-                    </mat-form-field>
-                </div>
-                <div class="col-sm-6">
-                    <mat-form-field>
-                        <i-feather name="map-pin"></i-feather>
-                        <mat-label>Address</mat-label>
-                        <input matInput value="{{completeEntity?.entity?.address}}" readonly>
-                    </mat-form-field>
-                </div>
-                <div class="col-sm-6">
-                    <mat-form-field>
-                        <i-feather name="map"></i-feather>
-                        <mat-label>City</mat-label>
-                        <input matInput value="{{completeEntity?.city?.name}}" readonly>
-                    </mat-form-field>
-                </div>
-                <div class="col-sm-6">
-                    <mat-form-field>
-                        <i-feather name="user"></i-feather>
-                        <mat-label>Head of entity</mat-label>
-                        <input matInput value="{{completeEntity?.entity?.headOfEntity}}" readonly>
-                    </mat-form-field>
-                </div>
-                <div class="col-sm-6">
-                    <mat-form-field>
-                        <i-feather name="phone"></i-feather>
-                        <mat-label>Head of entity phone</mat-label>
-                        <input matInput value="{{completeEntity?.entity?.headOfEntityMobile}}" readonly>
-                    </mat-form-field>
-                </div>
-                <div class="col-sm-12">
-                    <mat-form-field class="textarea">
-                        <i-feather name="file-text"></i-feather>
-                        <mat-label>Note</mat-label>
-                        <textarea matInput readonly>If you want change one of this values, you can write email to info@waman.app</textarea>
-                    </mat-form-field>
-                </div>
+<div class="page-header">
+    <div>
+        <span class="page-eyebrow">ORGANISATION</span>
+        <h1>Entity information</h1>
+        <p>Your organisation’s contact and administrative details.</p>
+    </div>
+</div>
 
+<mat-card class="trinta-card profile-summary mb-25 bg-white border-none d-block">
+    <mat-card-content>
+        <div class="content-preloader" *ngIf="isLoading" role="status" aria-live="polite">
+            <div class="content-spinner" aria-hidden="true"></div>
+            <span>Loading entity information…</span>
+        </div>
+
+        <div *ngIf="!isLoading">
+            <div class="profile-hero">
+                <div class="profile-avatar"><i-feather name="briefcase"></i-feather></div>
+                <div class="profile-identity">
+                    <span class="profile-label">Entity</span>
+                    <h2>{{ completeEntity?.entity?.name || '—' }}</h2>
+                    <span class="profile-badge">{{ completeEntity?.entityType?.name || 'Organisation' }}</span>
+                </div>
             </div>
-        </form>
+
+            <div class="profile-section">
+                <div class="section-heading"><span>Contact details</span><small>Primary organisation contacts</small></div>
+                <div class="profile-grid">
+                    <div class="profile-item">
+                        <span class="item-icon"><i-feather name="mail"></i-feather></span>
+                        <div><span>Email address</span><strong>{{ completeEntity?.entity?.email || '—' }}</strong></div>
+                    </div>
+                    <div class="profile-item">
+                        <span class="item-icon"><i-feather name="phone"></i-feather></span>
+                        <div><span>Phone</span><strong>{{ completeEntity?.entity?.mobile || '—' }}</strong></div>
+                    </div>
+                    <div class="profile-item">
+                        <span class="item-icon"><i-feather name="map-pin"></i-feather></span>
+                        <div><span>Address</span><strong>{{ completeEntity?.entity?.address || '—' }}</strong></div>
+                    </div>
+                    <div class="profile-item">
+                        <span class="item-icon"><i-feather name="map"></i-feather></span>
+                        <div><span>City</span><strong>{{ completeEntity?.city?.name || '—' }}</strong></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-section">
+                <div class="section-heading"><span>Responsible person</span><small>Entity representative</small></div>
+                <div class="profile-grid profile-grid--compact">
+                    <div class="profile-item">
+                        <span class="item-icon"><i-feather name="user"></i-feather></span>
+                        <div><span>Head of entity</span><strong>{{ completeEntity?.entity?.headOfEntity || '—' }}</strong></div>
+                    </div>
+                    <div class="profile-item">
+                        <span class="item-icon"><i-feather name="smartphone"></i-feather></span>
+                        <div><span>Direct phone</span><strong>{{ completeEntity?.entity?.headOfEntityMobile || '—' }}</strong></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-support">
+                <i-feather name="info"></i-feather>
+                <div><strong>Need to update these details?</strong><span>Contact us at <a href="mailto:info&#64;waman.app">info&#64;waman.app</a>.</span></div>
+            </div>
+        </div>
     </mat-card-content>
 </mat-card>

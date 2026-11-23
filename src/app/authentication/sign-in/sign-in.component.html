@@ -1,13 +1,36 @@
 <div class="sign-in-area">
+    <div class="auth-brand">
+        <div class="brand-mark">
+            <img src="images/logo-icon.png" alt="WAMAN">
+        </div>
+        <span>WAMAN</span>
+    </div>
+    <div class="auth-intro">
+        <span class="eyebrow">ENTITY OPERATIONS</span>
+        <h1>Every location.<br>One clear view.</h1>
+        <p>Access the operational workspace for locations, workers, planning and safety reports.</p>
+        <div class="auth-points">
+            <span><i class="ri-checkbox-circle-fill"></i> Secure access</span>
+            <span><i class="ri-checkbox-circle-fill"></i> Centralised operations</span>
+        </div>
+    </div>
     <div class="d-table">
         <div class="d-table-cell">
             <div
                 class="trinta-form ml-auto mr-auto bg-white border-radius"
+                [attr.aria-busy]="isLoading"
             >
+                <div class="login-preloader" *ngIf="isLoading" role="status" aria-live="polite">
+                    <div class="login-spinner" aria-hidden="true"></div>
+                    <strong>Signing you in</strong>
+                    <span>Please wait a moment…</span>
+                </div>
                 <div class="title text-center mb-10">
+                    <span class="form-eyebrow">WELCOME BACK</span>
                     <h3 >
-                       District Operations - Backoffice
+                       Sign in to Entity Operations
                     </h3>
+                    <p>Enter your credentials to continue.</p>
                 </div>
                 <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
                     <div class="form-group mt-10">
@@ -51,7 +74,7 @@
                             <i-feather name="lock"></i-feather>
                             <mat-label>Insert password</mat-label>
                             <input matInput [type]="hide ? 'password' : 'text'" id="password" formControlName="password">
-                            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                                 <span class="material-symbols-outlined">
                                     {{hide ? 'visibility_off' : 'visibility'}}
                                 </span>
@@ -67,8 +90,8 @@
                             Wrong Username or password 
                         </div>
                     </div>
-                    <button mat-button type="submit" [disabled]="authForm.invalid" class="mb-15">
-                        Log In
+                    <button mat-button type="submit" [disabled]="authForm.invalid || isLoading" class="mb-15">
+                        {{ isLoading ? 'Signing in…' : 'Log In' }}
                     </button>
                     <a (click)="passwordRecovery()" class="recovery">
                        Lost your password? Click here to recovery

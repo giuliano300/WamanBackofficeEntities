@@ -24,6 +24,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class SignInComponent {
     isError: boolean = false;
+    isLoading: boolean = false;
     wamEntity: WamEntities  | null = null;
     entity: WamEntities | null = null;
     completeLocation: CompleteLocation | null = null;
@@ -50,7 +51,10 @@ export class SignInComponent {
     // Form
     authForm: FormGroup;
     onSubmit() {
-        if (this.authForm.valid) {
+        if (this.authForm.valid && !this.isLoading) {
+            this.isError = false;
+            this.isLoading = true;
+
             let login:Login = {
                 "email": this.authForm.value["email"],
                 "pwd" : this.authForm.value["password"]
@@ -59,9 +63,11 @@ export class SignInComponent {
             localStorage.setItem('type', this.authForm.value["type"].toString());
 
             if(this.authForm.value["type"] == LoginType.Entity)
-                this.entityService.login(login).subscribe((data: WamEntities) => {
-                    if(data == null)
-                        this.isError = true;
+                this.entityService.login(login).subscribe({
+                  next: (data: WamEntities) => {
+                    if(data == null) {
+                        this.loginFailed();
+                    }
                     else
                     {
                         this.entity! = data;
@@ -73,14 +79,19 @@ export class SignInComponent {
                         this.authService.setLoginName(this.entity.name);
                         localStorage.setItem('authToken', this.entity.authToken);
                         localStorage.setItem('entity', JSON.stringify(this.entity!));
-                        this.router.navigate(['/locations']);
+                        this.router.navigate(['/locations'])
+                            .finally(() => this.isLoading = false);
                     }
+                  },
+                  error: () => this.loginFailed()
                 });
             
             if( this.authForm.value["type"] == LoginType.Location)
-                this.locationService.login(login).subscribe((data: CompleteLocation) => {
-                    if(data == null)
-                        this.isError = true;
+                this.locationService.login(login).subscribe({
+                  next: (data: CompleteLocation) => {
+                    if(data == null) {
+                        this.loginFailed();
+                    }
                     else
                     {
                         this.completeLocation! = data;
@@ -92,13 +103,21 @@ export class SignInComponent {
                         this.authService.setLoginName(this.completeLocation.location!.name);
                         localStorage.setItem('authToken', this.completeLocation.authToken);
                         localStorage.setItem('completeLocation', JSON.stringify(this.completeLocation!));
-                        this.router.navigate(['/plannings']);
+                        this.router.navigate(['/plannings'])
+                            .finally(() => this.isLoading = false);
                     }
+                  },
+                  error: () => this.loginFailed()
                 });
             
         } else {
             console.log('Form is invalid. Please check the fields.');
         }
+    }
+
+    private loginFailed(): void {
+        this.isLoading = false;
+        this.isError = true;
     }
 
     ngOnInit(): void {

@@ -8,16 +8,18 @@ import { Router } from '@angular/router';
 import { EntitiesService } from '../../services/Entities.service';
 import { CompleteEntity } from '../../interfaces/CompleteEntity';
 import { WamEntities } from '../../interfaces/Entities';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-info',
-  imports: [MatCardModule, MatInputModule, MatFormFieldModule, MatSelectModule, FeathericonsModule],
+  imports: [MatCardModule, MatInputModule, MatFormFieldModule, MatSelectModule, FeathericonsModule, NgIf],
   templateUrl: './info.component.html',
   styleUrl: './info.component.scss'
 })
 export class InfoComponent {
   completeEntity: CompleteEntity | null  = null;
   entity: WamEntities | null  = null;
+  isLoading = true;
 
   constructor(
       private router: Router,
@@ -39,12 +41,16 @@ export class InfoComponent {
   }
 
     getInfo(id: number){
-      this.entityService.getCompleteEntity(id)
-          .subscribe((data: CompleteEntity) => {
-            if (!data)
-              console.log('Nessun dato disponibile');
-            else 
-              this.completeEntity = data;
-            })
+      this.entityService.getCompleteEntity(id).subscribe({
+        next: (data: CompleteEntity) => {
+          if (!data) {
+            console.log('Nessun dato disponibile');
+          } else {
+            this.completeEntity = data;
+          }
+          this.isLoading = false;
+        },
+        error: () => this.isLoading = false
+      });
     }
 }

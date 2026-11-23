@@ -2,16 +2,31 @@
     class="header-area bg-white box-shadow transition"
     [ngClass]="{'active': isToggled}"
 >
-    <div class="d-md-flex align-items-center justify-content-between">
-        <div class="header-left-side d-flex align-items-center">
-            <div
-                class="burger-menu position-relative transition lh-1"
+    <div class="header-shell">
+        <div class="header-left-side">
+            <button
+                type="button"
+                class="burger-menu nav-toggle transition"
                 [ngClass]="{'active': isToggled}"
                 (click)="toggle()"
+                aria-label="Toggle navigation"
+                [attr.aria-expanded]="isToggled"
             >
-                <i-feather name="align-left"></i-feather>
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="header-context">
+                <span>WAMAN</span>
+                <strong>Operations portal</strong>
             </div>
         </div>
-        <div class="primary-color">{{area}}</div>
+        <div class="account-summary">
+            <div class="account-copy">
+                <strong>{{ area || 'Workspace' }}</strong>
+                <span>{{ roleLabel }}</span>
+            </div>
+            <div class="account-avatar">{{ accountInitial }}</div>
+        </div>
     </div>
 </div>

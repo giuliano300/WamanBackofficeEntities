@@ -1,15 +1,65 @@
 // Main Content
 .main-content {
+  position: relative;
   overflow: hidden;
   min-height: 100vh;
   padding: {
-      top: 95px;
-      left: 312px;
-      right: 25px;
+      top: 92px;
+      left: 346px;
+      right: 28px;
   };
   &.active, &.hide-sidebar {
-      padding-left: 85px;
+      padding-left: 118px;
   }
+}
+
+.route-stage {
+  min-width: 0;
+}
+
+.route-loading-bar {
+  position: fixed;
+  z-index: 5999;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 3px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s linear;
+
+  span {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: #3157d5;
+      box-shadow: 0 0 10px rgba(49, 87, 213, .45);
+      transform: scaleX(.04);
+      transform-origin: left center;
+  }
+
+  &.visible {
+      opacity: 1;
+      transition: none;
+
+      span {
+          animation: route-progress 1.2s cubic-bezier(.4, 0, .2, 1) forwards;
+      }
+  }
+
+  &.finishing span {
+      animation: none;
+      transform: scaleX(1);
+      transition: transform .2s linear;
+  }
+}
+
+@keyframes route-progress {
+  0% { transform: scaleX(.04); }
+  35% { transform: scaleX(.42); }
+  70% { transform: scaleX(.66); }
+  100% { transform: scaleX(.82); }
 }
 
 // Blank Page
@@ -20,6 +70,7 @@
   .main-content {
       padding: 0 !important;
   }
+  .route-loading-bar { display: none; }
 }
 
 /* Max width 767px */
@@ -80,3 +131,33 @@
 
 /* Min width 1600px */
 @media only screen and (min-width: 1600px) {}
+
+.sidebar-backdrop {
+  display: none;
+}
+
+@media only screen and (max-width: 1199px) {
+  .sidebar-backdrop {
+      position: fixed;
+      z-index: 200;
+      inset: 0;
+      display: block;
+      padding: 0;
+      border: 0;
+      opacity: 0;
+      visibility: hidden;
+      background: rgba(12, 20, 40, .46);
+      backdrop-filter: blur(2px);
+      transition: opacity .25s ease, visibility .25s ease;
+
+      &.visible {
+          opacity: 1;
+          visibility: visible;
+      }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route-loading-bar,
+  .route-loading-bar span { transition: none !important; animation: none !important; }
+}

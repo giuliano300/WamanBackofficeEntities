@@ -66,4 +66,15 @@ export class HeaderComponent {
     currentDate: Date = new Date();
     formattedDate: any;
 
+    get accountInitial(): string {
+        return (this.area || 'W').trim().charAt(0).toUpperCase();
+    }
+
+    get roleLabel(): string {
+        if (this.isLocation || localStorage.getItem('isLocation') === 'true') {
+            return 'Location workspace';
+        }
+        return 'Entity workspace';
+    }
+
 }

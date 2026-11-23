@@ -1,7 +1,11 @@
 .footer-area {
-    padding: 15.5px 20px;
+    margin-top: 4px;
+    padding: 18px 4px 20px;
+    border-top: 1px solid rgba(229, 234, 242, .8);
+    background: transparent !important;
 
     p {
+        font-size: 12px;
         a {
             &:hover {
                 text-decoration: underline;

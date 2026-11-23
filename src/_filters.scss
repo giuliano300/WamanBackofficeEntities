@@ -1,0 +1,176 @@
+.filter-panel {
+    border: 1px solid #e5e9f0;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, .92);
+    box-shadow: 0 8px 24px rgba(31, 45, 77, .045);
+    overflow: hidden;
+}
+
+.filter-panel > summary {
+    display: flex;
+    min-height: 76px;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+
+.filter-panel > summary::-webkit-details-marker { display: none; }
+
+.filter-panel__icon {
+    display: grid;
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+    place-items: center;
+    border-radius: 11px;
+    color: #3157d5;
+    background: #eaf0ff;
+    font-size: 17px;
+}
+
+.filter-panel > summary strong {
+    display: block;
+    color: #20283b;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.filter-panel > summary small {
+    display: block;
+    margin-top: 2px;
+    color: #929bad;
+    font-size: 10px;
+    font-weight: 500;
+}
+
+.filter-panel__chevron {
+    margin-left: auto;
+    color: #8d97aa;
+    font-size: 20px;
+    transition: transform .22s ease;
+}
+
+.filter-panel[open] .filter-panel__chevron { transform: rotate(180deg); }
+
+.filter-panel[open] > summary {
+    border-bottom: 1px solid #edf0f5;
+    background: #fcfdff;
+}
+
+.filter-panel__body {
+    padding: 14px 18px 16px;
+}
+
+.filter-panel__body .mat-mdc-card.trinta-card {
+    padding: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.filter-panel__body .mat-mdc-card-content { padding: 0 !important; }
+
+.filter-panel__body .container {
+    width: 100%;
+    max-width: none;
+    padding: 0;
+    border: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+}
+
+.filter-panel__body .row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 260px));
+    align-items: center;
+    justify-content: start;
+    gap: 12px;
+    margin: 0;
+    border: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+}
+
+.filter-panel__body [class*="col-lg-"] {
+    width: 100%;
+    max-width: none;
+    padding: 0;
+}
+
+.filter-panel__body [class*="col-lg-"]:empty { display: none; }
+
+.filter-panel__body .mat-mdc-form-field {
+    width: 100%;
+    margin: 0;
+}
+
+.filter-panel__body .mat-mdc-text-field-wrapper {
+    height: 48px !important;
+    min-height: 48px !important;
+    border: 1px solid #e3e8f1;
+    border-radius: 10px !important;
+    background: #f8faff !important;
+    transition: border-color .18s ease, box-shadow .18s ease, background-color .18s ease;
+}
+
+.filter-panel__body .mat-mdc-text-field-wrapper:hover {
+    border-color: #cfd8e9;
+    background: #fff !important;
+}
+
+.filter-panel__body .mat-mdc-form-field.mat-focused .mat-mdc-text-field-wrapper {
+    border-color: #9db2ef;
+    background: #fff !important;
+    box-shadow: 0 0 0 3px rgba(49, 87, 213, .08);
+}
+
+.filter-panel__body .mat-mdc-form-field-flex {
+    height: 48px;
+    align-items: center;
+}
+
+.filter-panel__body .mat-mdc-form-field-infix {
+    min-height: 48px !important;
+    padding-top: 18px !important;
+    padding-bottom: 4px !important;
+}
+
+.filter-panel__body .mat-mdc-form-field-subscript-wrapper { display: none; }
+
+.filter-panel__body .mat-mdc-select-value,
+.filter-panel__body .mat-mdc-floating-label {
+    font-size: 13px !important;
+}
+
+.filter-panel__body .mat-mdc-floating-label.mdc-floating-label--float-above {
+    font-size: 11px !important;
+}
+
+.filter-panel__body i-feather {
+    width: 17px !important;
+    height: 17px !important;
+    margin-right: 9px !important;
+    color: #64708a;
+}
+
+.filter-panel__body button:not([mat-icon-button]) {
+    width: 100%;
+    min-width: 150px !important;
+}
+
+@media only screen and (max-width: 991px) {
+    .filter-panel__body .row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media only screen and (max-width: 575px) {
+    .filter-panel > summary { min-height: 68px; padding: 12px 14px; }
+    .filter-panel__body { padding: 12px 14px 14px; }
+    .filter-panel__body .row { grid-template-columns: 1fr; }
+}

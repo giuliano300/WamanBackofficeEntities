@@ -1,4 +1,4 @@
-<nav aria-label="breadcrumb" class="position-relative">
+<nav aria-label="breadcrumb" class="page-header" data-kicker="COMPLIANCE" data-subtitle="Review and export disciplinary records for this location.">
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
             <a routerLink="/index">Disciplinary report of all workers</a>
@@ -9,7 +9,9 @@
     </ol>
 </nav>
 
-<mat-card class="trinta-card to-do-list-card mb-10 bg-white border-none d-block">
+<details class="filter-panel mb-10">
+<summary><span class="filter-panel__icon"><i class="ri-filter-3-line"></i></span><span><strong>Filters</strong><small>Refine the displayed reports</small></span><i class="ri-arrow-down-s-line filter-panel__chevron"></i></summary>
+<div class="filter-panel__body"><mat-card class="trinta-card to-do-list-card bg-white border-none d-block">
     <mat-card-content>
         <form [formGroup]="form">
             <div class="container">
@@ -45,7 +47,7 @@
             </div>
         </form>
     </mat-card-content>
-</mat-card>
+</mat-card></div></details>
 <mat-card
     class="trinta-card to-do-list-card mb-25 bg-white border-none d-block"
 >

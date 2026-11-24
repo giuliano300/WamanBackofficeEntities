@@ -1,30 +1,35 @@
 .sign-in-area {
+    position: relative;
     width: 100%;
     height: 100dvh;
     min-height: 100dvh;
-    box-sizing: border-box;
     overflow: hidden;
-    position: relative;
+    padding: 30px 13px;
     background:
-        radial-gradient(circle at 18% 22%, rgba(109, 139, 255, .25), transparent 22rem),
-        linear-gradient(135deg, #14264f 0%, #254bb6 52%, #eef3ff 52%, #f7f9fc 100%);
-    padding: {
-        top: 30px;
-        bottom: 30px;
-        left: 12.5px;
-        right: 12.5px;
-    };
+        radial-gradient(circle at 13% 17%, rgba(255, 255, 255, .15), transparent 22rem),
+        linear-gradient(112deg, #0879bd 0%, #20a2df 54.8%, #edf8fe 55%, #f7fbfd 100%);
 
     &::before {
         position: absolute;
-        width: 380px;
-        height: 380px;
-        left: -110px;
-        bottom: -170px;
-        content: '';
-        border: 1px solid rgba(255, 255, 255, .14);
+        left: -160px;
+        bottom: -220px;
+        width: 460px;
+        height: 460px;
+        border: 1px solid rgba(255, 255, 255, .18);
         border-radius: 50%;
-        box-shadow: 0 0 0 70px rgba(255, 255, 255, .025), 0 0 0 140px rgba(255, 255, 255, .02);
+        box-shadow: 0 0 0 78px rgba(255, 255, 255, .035), 0 0 0 156px rgba(255, 255, 255, .018);
+        content: '';
+    }
+
+    &::after {
+        position: absolute;
+        right: 39%;
+        bottom: -205px;
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        background: rgba(239, 176, 113, .16);
+        content: '';
     }
 
     .auth-brand {
@@ -45,9 +50,10 @@
             width: 42px;
             height: 42px;
             place-items: center;
-            border: 1px solid rgba(255, 255, 255, .2);
+            border: 1px solid rgba(255, 255, 255, .3);
             border-radius: 13px;
-            background: rgba(255, 255, 255, .12);
+            background: rgba(255, 255, 255, .18);
+            box-shadow: 0 10px 28px rgba(4, 67, 105, .16);
             backdrop-filter: blur(10px);
 
             img { width: 26px; }
@@ -60,58 +66,70 @@
         top: 50%;
         left: 8%;
         width: 36%;
-        max-width: 520px;
+        max-width: 540px;
         transform: translateY(-50%);
 
         .eyebrow {
-            color: #b9c8ff;
+            color: #f3d2b2;
             font-size: 11px;
-            font-weight: 700;
+            font-weight: 750;
             letter-spacing: .16em;
         }
 
         h1 {
+            max-width: 570px;
             margin: 18px 0;
             color: #fff;
-            font-size: clamp(38px, 4vw, 62px);
-            font-weight: 750;
+            font-size: clamp(42px, 4.4vw, 68px);
+            font-weight: 800;
             line-height: 1.03;
-            letter-spacing: -.055em;
+            letter-spacing: -.06em;
         }
 
         p {
             max-width: 460px;
-            color: rgba(255, 255, 255, .7);
+            color: rgba(255, 255, 255, .78);
             font-size: 15px;
             line-height: 1.7;
         }
 
         .auth-points {
             display: flex;
-            gap: 22px;
+            gap: 12px;
             margin-top: 26px;
-            color: rgba(255, 255, 255, .86);
+            color: rgba(255, 255, 255, .88);
             font-size: 12px;
             font-weight: 600;
 
-            i { margin-right: 6px; color: #77e1b9; }
+            span {
+                padding: 9px 12px;
+                border: 1px solid rgba(255, 255, 255, .16);
+                border-radius: 999px;
+                background: rgba(255, 255, 255, .09);
+            }
+
+            i { margin-right: 6px; color: #f3d2b2; }
         }
     }
 
     .d-table {
         position: relative;
         z-index: 1;
+        height: 100%;
     }
 
     .trinta-form {
-        width: min(440px, calc(100vw - 40px));
-        max-width: 440px;
-        margin-right: 7% !important;
+        position: relative;
+        width: min(480px, calc(100vw - 40px));
+        max-width: 480px;
+        margin-right: 6% !important;
         margin-left: auto !important;
-        padding: 40px 38px;
-        border: 1px solid rgba(255, 255, 255, .8);
-        border-radius: 20px !important;
-        box-shadow: 0 28px 70px rgba(22, 39, 82, .18);
+        padding: 40px;
+        border: 1px solid #d8ebf5;
+        border-top: 5px solid #edbd8f;
+        border-radius: 24px !important;
+        background: rgba(255, 255, 255, .98) !important;
+        box-shadow: 0 34px 90px rgba(7, 69, 105, .19);
 
         .title {
             text-align: left !important;
@@ -119,210 +137,157 @@
             .form-eyebrow {
                 display: block;
                 margin-bottom: 9px;
-                color: var(--primaryColor);
+                color: #a9784b;
                 font-size: 10px;
                 font-weight: 800;
                 letter-spacing: .15em;
             }
 
             h3 {
-                font-size: 24px;
-                margin-bottom: 7px;
-                letter-spacing: -.03em;
+                margin-bottom: 8px;
+                color: #173b58;
+                font-size: 25px;
+                font-weight: 800;
+                letter-spacing: -.035em;
             }
 
-            p { color: var(--bodyColor) !important; line-height: 1.5; }
             p {
-                a {
-                    letter-spacing: 0.16px;
-                }
-            }
-        }
-        .signin-with-socials {
-            margin: {
-                top: 25px;
-                bottom: 25px;
-            };
-            .mat-mdc-button {
-                width: 100%;
-                height: auto;
-                display: block;
-                min-width: auto;
-                padding: 17px 25px;
-                border-radius: 6px;
-                border: 1px solid #e3eaef;
-            }
-            .or {
-                margin-top: 30px;
-                
-                span {
-                    padding: {
-                        left: 8px;
-                        right: 8px;
-                    };
-                }
-                &::before {
-                    left: 0;
-                    right: 0;
-                    top: 50%;
-                    height: 1px;
-                    content: '';
-                    z-index: -1;
-                    margin-top: -1px;
-                    position: absolute;
-                    background: #f5f4f6;
-                    transform: translateY(-50%);
-                }
-            }
-        }
-    }
-}
-::ng-deep {
-    .sign-in-area {
-        .trinta-form {
-            .signin-with-socials {
-                .mat-mdc-button {
-                    .mdc-button__label {
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        color: var(--blackColor);
-                        font: {
-                            size: 16px;
-                            weight: 500;
-                            family: var(--headingFontFamily);
-                        };
-                        img {
-                            margin-right: 12px;
-                        }
-                    }
-                }
-            }
-            form {
-                .form-group {
-                    margin-bottom: 20px;
-
-                    .label {
-                        margin-bottom: 10px;
-                    }
-                    .mat-mdc-form-field {
-                        display: block;
-            
-                        .mat-mdc-form-field-focus-overlay {
-                            display: none;
-                        }
-                    }
-                    .mdc-text-field--filled {
-                        &:not(.mdc-text-field--disabled) {
-                            background-color: #f5f7fa;
-                        }
-                    }
-                    .mdc-text-field--focused {
-                        &:not(.mdc-text-field--disabled) {
-                            .mdc-floating-label {
-                                color: var(--primaryColor) !important;
-                            }
-                        }
-                    }
-                    .mat-mdc-text-field-wrapper {
-                        border-radius: 10px;
-                        padding: 0 15px 0 60px;
-                        border: 1px solid #f5f7fa;
-                    }
-                    .mat-mdc-icon-button {
-                        &.mat-mdc-button-base {
-                            padding: 12px 0 12px 0;
-                            margin-right: -15px;
-                        }
-                    }
-                    .mdc-line-ripple {
-                        display: none;
-                    }
-                    .mdc-text-field {
-                        &:not(.mdc-text-field--disabled) {
-                            .mdc-floating-label {
-                                color: #a9a9c8;
-                            }
-                        }
-                    }
-                    i-feather {
-                        top: 15.5px;
-                        left: -40px;
-                        width: 25px;
-                        line-height: 1;
-                        position: absolute;
-                        color: var(--blackColor);
-                    }
-                    .mat-mdc-form-field-bottom-align {
-                        &::before {
-                            display: none;
-                        }
-                    }
-                }
-                .info {
-                    margin-top: 25px;
-
-                    .mdc-checkbox {
-                        padding: 0;
-                        margin: 0;
-
-                        .mdc-checkbox__native-control {
-                            top: 0;
-                            left: 0;
-                            right: 0;
-                            bottom: 0;
-                            width: 100%;
-                            height: 100%;
-                        }
-                        .mdc-checkbox__background {
-                            top: 0;
-                            left: 0;
-                            border-radius: 5px;
-                        }
-                        .mat-mdc-checkbox-ripple, .mdc-checkbox__ripple {
-                            border-radius: 5px;
-                        }
-                        .mat-mdc-checkbox-touch-target {
-                            width: 100%;
-                            height: 100%;
-                        }
-                    }
-                    .mdc-label {
-                        color: var(--bodyColor);
-                        position: relative;
-                        margin-left: 5px;
-                        top: 2px;
-                    }
-                }
-                .mat-mdc-button {
-                    width: 100%;
-                    height: auto;
-                    display: block;
-                    min-width: auto;
-                    margin-top: 25px;
-                    border-radius: 6px;
-                    padding: 18px 25px;
-                    color: var(--whiteColor);
-                    background-color: var(--primaryColor);
-                    font: {
-                        size: 16px;
-                        weight: 500;
-                        family: var(--headingFontFamily);
-                    };
-                    &[disabled] {
-                        background-color: #eff3f9;
-                    }
-                }
+                max-width: 390px;
+                margin: 0;
+                color: #71879a !important;
+                font-size: 12px !important;
+                line-height: 1.6;
             }
         }
     }
 }
 
-/* Max width 767px */
-@media only screen and (max-width : 767px) {
+::ng-deep .sign-in-area .trinta-form form {
+    .form-group {
+        margin-bottom: 18px;
 
+        .label {
+            margin-bottom: 9px !important;
+            color: #36566e;
+            font-family: var(--fontFamily);
+            font-size: 12px;
+            font-weight: 650 !important;
+        }
+
+        .mat-mdc-form-field {
+            display: block;
+            font-family: var(--fontFamily);
+        }
+
+        .mat-mdc-form-field-focus-overlay,
+        .mdc-line-ripple,
+        .mat-mdc-form-field-subscript-wrapper { display: none; }
+
+        .mat-mdc-text-field-wrapper {
+            min-height: 58px;
+            padding: 0 15px 0 58px;
+            border: 1px solid #d9e9f2 !important;
+            border-radius: 14px !important;
+            background: #f6fbfe !important;
+            transition: border-color .18s ease, box-shadow .18s ease, background-color .18s ease;
+
+            &:hover {
+                border-color: #9fd7f1 !important;
+                background: #fff !important;
+            }
+        }
+
+        .mat-mdc-form-field.mat-focused .mat-mdc-text-field-wrapper {
+            border-color: #4bb4e6 !important;
+            background: #fff !important;
+            box-shadow: 0 0 0 4px rgba(22, 139, 210, .1);
+        }
+
+        .mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label { color: #8ca0b0; }
+        .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label { color: #168bd2 !important; }
+
+        i-feather {
+            position: absolute;
+            top: 16px;
+            left: -38px;
+            width: 23px;
+            color: #168bd2 !important;
+            line-height: 1;
+        }
+    }
+
+    .mat-mdc-button[type='submit'] {
+        display: block;
+        width: 100%;
+        min-height: 50px !important;
+        margin-top: 22px;
+        padding: 14px 24px !important;
+        border: 1px solid #0f82c4 !important;
+        border-radius: 14px !important;
+        color: #fff !important;
+        background: linear-gradient(135deg, #0879bd, #20a2df) !important;
+        box-shadow: 0 12px 26px rgba(22, 139, 210, .22) !important;
+        font-family: var(--fontFamily) !important;
+        font-size: 13px !important;
+        font-weight: 750 !important;
+
+        &:hover:not(:disabled) {
+            transform: translateY(-1px);
+            box-shadow: 0 15px 30px rgba(22, 139, 210, .28) !important;
+        }
+
+        &:disabled {
+            border-color: #dfebf1 !important;
+            color: #9bb0c0 !important;
+            background: #edf4f7 !important;
+            box-shadow: none !important;
+        }
+    }
+}
+
+.error,
+.success {
+    padding: 10px 12px;
+    border-radius: 10px;
+    font-family: var(--fontFamily);
+    font-size: 11px;
+    font-weight: 650;
+}
+
+.error {
+    color: #b74f65 !important;
+    background: #fff1f4;
+}
+
+.success {
+    color: #247da9 !important;
+    background: #e7f6fd;
+}
+
+a.recovery {
+    display: inline-block;
+    margin-top: 14px;
+    color: #0879bd;
+    cursor: pointer;
+    font-family: var(--fontFamily);
+    font-size: 12px;
+    font-weight: 600;
+
+    &:hover { color: #9d7048; }
+}
+
+@media only screen and (max-width: 767px) {
     .sign-in-area {
-        background: linear-gradient(160deg, #14264f 0%, #3157d5 30%, #f4f7fb 30%);
+        padding: 22px 13px;
+        background:
+            radial-gradient(circle at 86% 7%, rgba(255, 255, 255, .24), transparent 11rem),
+            linear-gradient(165deg, #0879bd 0%, #20a2df 29.8%, #edf8fe 30%, #f8fbfd 100%);
+
+        &::after {
+            right: -150px;
+            bottom: -190px;
+            opacity: .12;
+        }
 
         .auth-brand {
             top: 22px;
@@ -332,101 +297,40 @@
         .auth-intro { display: none; }
 
         .trinta-form {
-            max-width: 100%;
-            margin: 58px auto 0 !important;
-            padding: 30px 20px;
-        
+            width: min(440px, calc(100vw - 26px));
+            max-width: 440px;
+            margin: 62px auto 0 !important;
+            padding: 30px 22px;
+            border-top-width: 4px;
+            border-radius: 22px !important;
+            box-shadow: 0 28px 65px rgba(7, 69, 105, .17);
+
             .title {
-                h3 {
-                    font-size: 17px;
-                    margin-bottom: 10px;
-                }
-            }
-            .signin-with-socials {
-                margin: {
-                    top: 17px;
-                    bottom: 20px;
-                };
-                .mat-mdc-button {
-                    padding: 14px 25px;
-                }
-                .or {
-                    margin-top: 20px;
-                }
-            }
-        }
-    }
-    ::ng-deep {
-        .sign-in-area {
-            .trinta-form {
-                .signin-with-socials {
-                    .mat-mdc-button {
-                        .mdc-button__label {
-                            font-size: 13px;
-
-                            img {
-                                margin-right: 10px;
-                            }
-                        }
-                    }
-                }
-                form {
-                    .form-group {
-                        margin-bottom: 18px;
-        
-                        .mat-mdc-form-field-infix {
-                            width: 100%;
-                        }
-                        i-feather {
-                            left: -35px;
-                            width: 23px;
-                        }
-                        .mat-mdc-text-field-wrapper {
-                            padding: 0 15px 0 52px;
-                        }
-                    }
-                    .info {
-                        margin-top: 20px;
-                    }
-                    .mat-mdc-button {
-                        padding: 15px 25px;
-                        margin-top: 20px;
-                        font-size: 13px;
-                    }
-                }
+                h3 { font-size: 20px; }
+                p { font-size: 11px !important; }
             }
         }
     }
 
-}
+    ::ng-deep .sign-in-area .trinta-form form {
+        .form-group {
+            margin-bottom: 15px;
 
-/* Min width 576px to Max width 767px */
-@media only screen and (min-width : 576px) and (max-width : 767px) {
-    
-    .sign-in-area {
-        .trinta-form {
-            max-width: 540px;
+            .mat-mdc-text-field-wrapper {
+                min-height: 54px;
+                padding-left: 52px;
+            }
+
+            i-feather {
+                top: 15px;
+                left: -34px;
+                width: 21px;
+            }
+        }
+
+        .mat-mdc-button[type='submit'] {
+            min-height: 46px !important;
+            margin-top: 18px;
         }
     }
-
-}
-
-/* Min width 768px to Max width 991px */
-@media only screen and (min-width : 768px) and (max-width : 991px) {}
-
-/* Min width 992px to Max width 1199px */
-@media only screen and (min-width : 992px) and (max-width : 1199px) {}
-
-/* Min width 1200px to Max width 1399px */
-@media only screen and (min-width: 1200px) and (max-width: 1399px) {}
-
-/* Min width 1600px */
-@media only screen and (min-width: 1600px) {}
-
-
-a.recovery{
-    display: inline-block;
-    margin-top: 14px;
-    cursor: pointer;
-    color: var(--primaryColor);
 }

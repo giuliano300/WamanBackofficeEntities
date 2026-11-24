@@ -72,8 +72,13 @@ export class AppComponent {
    // ngOnInit
    ngOnInit(){
      const token = localStorage.getItem('authToken');
-     console.log(this.loc.path());
-     if(!token && this.loc.path().indexOf("/reset-password") < 0)
+     const currentPath = this.loc.path();
+     const isPublicAuthenticationPath =
+       currentPath === '/authentication' ||
+       currentPath.startsWith('/authentication/forgot-password') ||
+       currentPath.startsWith('/reset-password');
+
+     if(!token && !isPublicAuthenticationPath)
         this.router.navigate(['/authentication']);
      
    }

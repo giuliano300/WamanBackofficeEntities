@@ -179,3 +179,50 @@
     .filter-panel__body { padding: 12px 14px 14px; }
     .filter-panel__body .row { grid-template-columns: 1fr; }
 }
+
+/* Sky & orange filter panels */
+.filter-panel {
+    border-color: #d9eaf3;
+    border-radius: 18px;
+    box-shadow: 0 14px 34px rgba(28, 88, 123, .055);
+}
+
+.filter-panel > summary {
+    min-height: 82px;
+    padding: 16px 22px;
+    background: linear-gradient(90deg, #eef9ff, #ffffff);
+}
+
+.filter-panel__icon {
+    width: 42px;
+    height: 42px;
+    flex-basis: 42px;
+    border: 1px solid #bfe5f8;
+    border-radius: 13px;
+    color: #0871b5;
+    background: #ddf3ff;
+}
+
+.filter-panel > summary strong { color: #173b58; font-weight: 750; }
+.filter-panel > summary small { color: #7c8fa1; }
+.filter-panel__chevron { color: #d9761e; }
+
+.filter-panel[open] > summary {
+    border-bottom-color: #dfedf4;
+    background: linear-gradient(90deg, #e8f7ff, #ffffff);
+}
+
+.filter-panel__body { padding: 18px 20px 20px; }
+
+.filter-panel__body .mat-mdc-text-field-wrapper {
+    height: 50px !important;
+    min-height: 50px !important;
+    border-color: #d8e9f2;
+    border-radius: 12px !important;
+    background: #f7fbfd !important;
+}
+
+.filter-panel__body .mat-mdc-form-field.mat-focused .mat-mdc-text-field-wrapper {
+    border-color: #55b7e9;
+    box-shadow: 0 0 0 4px rgba(22, 139, 210, .10);
+}

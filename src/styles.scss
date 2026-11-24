@@ -55,11 +55,14 @@ $trinta-theme: mat.define-theme((
 
 /* You can add global styles to this file, and also import other style files */
 :root {
-    --fontFamily: "Inter", sans-serif;
-    --headingFontFamily: "Inter", sans-serif;
-    --primaryColor: #3157d5;
-    --primaryDark: #1f3da5;
-    --primarySoft: #eef3ff;
+    --fontFamily: "Plus Jakarta Sans", "Inter", sans-serif;
+    --headingFontFamily: "Plus Jakarta Sans", "Inter", sans-serif;
+    --primaryColor: #168bd2;
+    --primaryDark: #0871b5;
+    --primarySoft: #e8f6ff;
+    --accentColor: #efb071;
+    --accentDark: #b97536;
+    --accentSoft: #fff6ed;
     --surfaceColor: #ffffff;
     --surfaceMuted: #f7f9fc;
     --borderColor: #e5eaf2;
@@ -71,11 +74,11 @@ $trinta-theme: mat.define-theme((
     --dangerColor: #EE368C;
     --infoColor: #2DB6F5;
     --warningColor: #ffb264;
-    --successColor: #2ed47e;
-    --darkColor: #17213a;
-    --blackColor: #46506a;
+    --successColor: #67bde4;
+    --darkColor: #17324d;
+    --blackColor: #43566b;
     --whiteColor: #ffffff;
-    --bodyColor: #7b849d;
+    --bodyColor: #718399;
     --transition: .25s;
     --fontSize: 14px;
 }
@@ -331,7 +334,7 @@ h5{
 .no-data{
     padding: 20px 0;
     font-weight: 400!important;
-    font-family: 'Poppins';
+    font-family: var(--fontFamily) !important;
     font-size: 15px;
     background-color: #f5f7fa;
 }
@@ -600,6 +603,15 @@ button, a, input, textarea, select {
     border-radius: 12px;
     background: var(--surfaceMuted);
     text-align: center;
+    font-family: var(--fontFamily) !important;
+    font-size: 13px;
+    font-weight: 600 !important;
+    letter-spacing: 0;
+}
+
+body .main-content .mat-mdc-table .no-data,
+body .main-content td.no-data {
+    font-family: var(--fontFamily) !important;
 }
 
 .loader {
@@ -716,18 +728,18 @@ body .mat-mdc-card.trinta-card .to-do-list-table .mat-mdc-cell h6 > .ri-file-dow
     width: 32px;
     height: 32px;
     place-items: center;
-    border: 1px solid #cde8dd;
+    border: 1px solid #c9e5f2;
     border-radius: 9px;
-    color: #318466;
-    background: #eaf8f2;
+    color: #247da9;
+    background: #eaf7fd;
     font-size: 16px;
     transition: border-color .18s ease, color .18s ease, background-color .18s ease;
 }
 
 body .mat-mdc-card.trinta-card .to-do-list-table .mat-mdc-cell .aDown:hover .ri-file-download-line {
-    border-color: #a9d8c7;
-    color: #236c52;
-    background: #dcf3ea;
+    border-color: #a9d5e9;
+    color: #176b94;
+    background: #dff3fc;
 }
 
 body .mat-mdc-card.trinta-card .to-do-list-table .mat-mdc-cell h6 > .ri-file-download-line:not(.aDown *) {
@@ -1760,4 +1772,300 @@ body .mat-mdc-card.trinta-card .to-do-list-table .mat-mdc-table .mat-mdc-row:hov
 
     .profile-summary .profile-hero { padding: 21px 18px; }
     .profile-summary .profile-section { padding: 20px 2px; }
+}
+
+/* WAMAN 2026 — sky & orange visual system */
+html { background: #f3f9fd; }
+
+body {
+    color: #51677e;
+    background:
+        radial-gradient(circle at 96% 0, rgba(64, 183, 235, .13), transparent 28rem),
+        #f3f8fc;
+}
+
+::selection { color: #0d456c; background: #cdeeff; }
+
+.main-content { background: transparent; }
+
+.page-header,
+.page-heading {
+    min-height: 128px;
+    border: 1px solid rgba(22, 139, 210, .12) !important;
+    border-radius: 22px;
+    background:
+        radial-gradient(circle at 92% 12%, rgba(64, 183, 235, .12), transparent 12rem),
+        linear-gradient(125deg, #ffffff 0%, #eef9ff 72%, #ffffff 100%) !important;
+    box-shadow: 0 18px 46px rgba(23, 88, 128, .075);
+}
+
+.page-header::before,
+.page-heading::before {
+    color: var(--accentDark) !important;
+}
+
+.page-header h1,
+.page-heading h1,
+.page-header .breadcrumb-item,
+.page-heading .breadcrumb-item {
+    color: #163b59 !important;
+    font-weight: 800 !important;
+    letter-spacing: -.04em !important;
+}
+
+.page-eyebrow { color: var(--accentDark) !important; }
+
+.mat-mdc-card.trinta-card {
+    border: 1px solid #dcecf5 !important;
+    border-radius: 20px !important;
+    background: rgba(255, 255, 255, .98) !important;
+    box-shadow: 0 14px 38px rgba(30, 91, 127, .065) !important;
+}
+
+.mat-mdc-card.trinta-card .mat-mdc-card-header {
+    border-bottom: 1px solid #e7f1f7 !important;
+    background: linear-gradient(90deg, rgba(232, 246, 255, .55), transparent 55%);
+}
+
+.mat-mdc-card.trinta-card .mat-mdc-card-title,
+.mat-mdc-card.trinta-card h2,
+.mat-mdc-card.trinta-card h3 { color: #173b58; }
+
+.main-content .mat-mdc-form-field:not(.mat-mdc-paginator-page-size-select) .mat-mdc-text-field-wrapper {
+    border-color: #d9e8f1 !important;
+    border-radius: 13px !important;
+    background: #f7fbfd !important;
+}
+
+.main-content .mat-mdc-form-field:not(.mat-mdc-paginator-page-size-select) .mat-mdc-text-field-wrapper:hover {
+    border-color: #9dd5f2 !important;
+    background: #fff !important;
+}
+
+.main-content .mat-mdc-form-field.mat-focused:not(.mat-mdc-paginator-page-size-select) .mat-mdc-text-field-wrapper {
+    border-color: #55b7e9 !important;
+    background: #fff !important;
+    box-shadow: 0 0 0 4px rgba(22, 139, 210, .10);
+}
+
+body .mat-mdc-card.trinta-card .to-do-list-table .table-responsive {
+    border: 1px solid #dcebf3 !important;
+    border-radius: 15px !important;
+    box-shadow: 0 8px 24px rgba(32, 91, 126, .035);
+}
+
+body .mat-mdc-card.trinta-card .to-do-list-table .mat-mdc-table .mat-mdc-header-row {
+    background: linear-gradient(90deg, #e8f6ff, #f2faff) !important;
+}
+
+body .mat-mdc-card.trinta-card .to-do-list-table .mat-mdc-header-cell {
+    color: #367697 !important;
+    font-size: 10px !important;
+    font-weight: 800 !important;
+    letter-spacing: .09em !important;
+}
+
+body .mat-mdc-card.trinta-card .to-do-list-table .mat-mdc-row:nth-child(even) {
+    background: #fbfdff;
+}
+
+body .mat-mdc-card.trinta-card .to-do-list-table .mat-mdc-row:hover {
+    background: #eef9ff !important;
+}
+
+body .mat-mdc-card.trinta-card .to-do-list-table .mat-mdc-cell {
+    color: #4c6277;
+    border-bottom-color: #e8f1f6 !important;
+}
+
+.mat-mdc-paginator {
+    border-color: #d8eaf3;
+    border-radius: 15px;
+    color: #587187;
+    background: linear-gradient(90deg, #f1faff, #ffffff) !important;
+}
+
+.mat-mdc-paginator .mat-mdc-icon-button {
+    border-color: #d6eaf5 !important;
+    color: #168bd2 !important;
+    background: #fff !important;
+}
+
+.mat-mdc-paginator .mat-mdc-icon-button:hover:not(:disabled) {
+    border-color: #ffc985 !important;
+    color: #d9761e !important;
+    background: #fff2e3 !important;
+}
+
+.mat-mdc-dialog-container .mat-mdc-dialog-surface,
+.mat-mdc-menu-panel,
+.mat-mdc-select-panel {
+    border-color: #d8e9f2 !important;
+    border-radius: 18px !important;
+    box-shadow: 0 24px 70px rgba(18, 74, 109, .17) !important;
+}
+
+.mat-mdc-option.mdc-list-item--selected:not(.mat-mdc-option-multiple),
+.mat-mdc-option:hover:not(.mdc-list-item--disabled) {
+    color: #0871b5 !important;
+    background: #e8f6ff !important;
+}
+
+.profile-summary .profile-hero {
+    border-bottom-color: #dcebf3 !important;
+    background:
+        radial-gradient(circle at 94% 12%, rgba(103, 189, 228, .12), transparent 11rem),
+        linear-gradient(125deg, #ffffff 0%, #edf8fd 68%, #ffffff 100%) !important;
+}
+
+.profile-avatar--location,
+.profile-avatar--entity {
+    border: 1px solid #bcddeb !important;
+    background: linear-gradient(145deg, #4ca8d1, #81c9e5) !important;
+    box-shadow: 0 8px 20px rgba(32, 122, 164, .16) !important;
+}
+
+.profile-summary .profile-identity .profile-label { color: #a9784b !important; }
+.profile-summary .profile-identity h2 { color: #173b58 !important; }
+.profile-summary .profile-identity .profile-badge {
+    color: #557286 !important;
+    background: #eef7fb !important;
+}
+
+* { scrollbar-color: #afd8ec transparent; }
+*::-webkit-scrollbar-thumb { background: #afd8ec; background-clip: padding-box; }
+*::-webkit-scrollbar-thumb:hover { background-color: #79bddd; }
+
+@media only screen and (max-width: 767px) {
+    .page-header,
+    .page-heading { min-height: 116px; border-radius: 18px; }
+}
+
+/* Tables v2 — intentionally different from the legacy flat grid */
+body .main-content .mat-mdc-card.trinta-card .to-do-list-table {
+    .table-responsive {
+        padding: 8px 10px 2px !important;
+        border: 1px solid #d7eaf4 !important;
+        border-radius: 18px !important;
+        background: #f1f8fc !important;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.8) !important;
+    }
+
+    .mat-mdc-table {
+        border-collapse: separate !important;
+        border-spacing: 0 8px !important;
+        background: transparent !important;
+
+        .mat-mdc-header-row {
+            height: 48px !important;
+            background: transparent !important;
+        }
+
+        .mat-mdc-header-cell {
+            height: 48px !important;
+            padding: 0 16px !important;
+            border: 0 !important;
+            color: #397a9e !important;
+            background: #def2fc !important;
+            font-size: 10px !important;
+            font-weight: 800 !important;
+            letter-spacing: .085em !important;
+            text-transform: uppercase !important;
+
+            &:first-child { border-radius: 12px 0 0 12px; }
+            &:last-child { border-radius: 0 12px 12px 0; }
+        }
+
+        .mat-mdc-row,
+        .mat-mdc-row:nth-child(even) {
+            height: 62px !important;
+            background: transparent !important;
+            box-shadow: none !important;
+        }
+
+        .mat-mdc-cell {
+            height: 62px !important;
+            padding: 0 16px !important;
+            border-top: 1px solid #deebf2 !important;
+            border-bottom: 1px solid #deebf2 !important;
+            color: #496277 !important;
+            background: #fff !important;
+            transition: border-color .18s ease, background-color .18s ease !important;
+
+            &:first-child {
+                border-left: 1px solid #deebf2 !important;
+                border-radius: 13px 0 0 13px;
+            }
+
+            &:last-child {
+                border-right: 1px solid #deebf2 !important;
+                border-radius: 0 13px 13px 0;
+            }
+
+            h6 { color: #294b63 !important; font-size: 12px !important; font-weight: 650 !important; }
+        }
+
+        .mat-mdc-row:hover .mat-mdc-cell {
+            border-color: #acd9ee !important;
+            background: #f3fbff !important;
+        }
+
+        .mat-mdc-row:hover .mat-mdc-cell:first-child { box-shadow: inset 3px 0 0 #4aaedc; }
+    }
+
+    .mat-mdc-paginator {
+        margin-top: 10px !important;
+        border: 0 !important;
+        border-radius: 15px !important;
+        background: #fff !important;
+        box-shadow: 0 8px 24px rgba(31,89,122,.055) !important;
+    }
+
+    .action .mat-mdc-button {
+        border-color: #cfe6f2 !important;
+        color: #247da9 !important;
+        background: #eef9fe !important;
+    }
+
+    .action .mat-mdc-button:hover:not(:disabled) {
+        border-color: #d9c4ad !important;
+        color: #a56831 !important;
+        background: #fff8f1 !important;
+    }
+}
+
+/* Two-colour status system: no green states. */
+body .main-content .onHand,
+body .main-content .worked,
+body .main-content .status-success,
+body .main-content .text-success {
+    color: #247da9 !important;
+}
+
+body .main-content .onHand,
+body .main-content .status-success,
+body .main-content .bg-success {
+    border-color: #bfe1f1 !important;
+    background: #e7f6fd !important;
+}
+
+body .mat-mdc-card.trinta-card .to-do-list-table .mat-mdc-cell .aDown .ri-file-download-line,
+body .mat-mdc-card.trinta-card .to-do-list-table .mat-mdc-cell > .ri-file-download-line,
+body .mat-mdc-card.trinta-card .to-do-list-table .mat-mdc-cell h6 > .ri-file-download-line {
+    border-color: #c9e5f2 !important;
+    color: #247da9 !important;
+    background: #eaf7fd !important;
+}
+
+body .mat-mdc-card.trinta-card .to-do-list-table .mat-mdc-cell .aDown:hover .ri-file-download-line {
+    border-color: #a9d5e9 !important;
+    color: #176b94 !important;
+    background: #dff3fc !important;
+}
+
+@media only screen and (max-width: 767px) {
+    body .main-content .mat-mdc-card.trinta-card .to-do-list-table {
+        .table-responsive { padding: 6px 7px 1px !important; }
+        .mat-mdc-table { border-spacing: 0 6px !important; }
+    }
 }

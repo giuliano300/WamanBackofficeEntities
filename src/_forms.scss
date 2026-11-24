@@ -149,3 +149,40 @@
 
     .report-form__actions button { width: 100%; }
 }
+
+/* Sky & orange form language */
+.report-form__section-heading > span {
+    border-color: #ffd09a;
+    color: #b85c10;
+    background: #fff0de;
+}
+
+.report-form__section-heading h2 { color: #173b58; font-weight: 750; }
+.report-form__section-heading p { color: #7d91a3; }
+
+.mat-mdc-card.trinta-card.report-form__card {
+    border-color: #d9eaf3 !important;
+    border-radius: 20px !important;
+    background: linear-gradient(145deg, rgba(255,255,255,.98), rgba(245,251,254,.96)) !important;
+    box-shadow: 0 16px 38px rgba(27,87,122,.065) !important;
+}
+
+.report-form__card .mat-mdc-text-field-wrapper {
+    border: 1px solid #d9e9f2;
+    border-radius: 13px !important;
+    background: #f7fbfd !important;
+}
+
+.report-form__card .mat-mdc-form-field.mat-focused .mat-mdc-text-field-wrapper {
+    border-color: #55b7e9;
+    box-shadow: 0 0 0 4px rgba(22,139,210,.10);
+}
+
+.report-form__card .mat-mdc-form-field.mat-focused i-feather { color: #168bd2 !important; }
+
+.report-form__attachments .ngx-file-drop__drop-zone {
+    border-color: #9fd4ed !important;
+    background: linear-gradient(135deg, #edf9ff, #ffffff) !important;
+}
+
+.report-form__actions { border-top-color: #dfedf4; }

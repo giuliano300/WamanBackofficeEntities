@@ -173,17 +173,17 @@ a[mat-button]:focus-visible {
 /* Generation actions use a distinct pastel mint palette. */
 button.generateAllFiles.generateAllFiles,
 .btn-generation {
-    color: #197653 !important;
-    border-color: #c8e9d9 !important;
-    background: #e5f6ee !important;
-    box-shadow: 0 4px 12px rgba(35, 145, 99, .08) !important;
+    color: #247da9 !important;
+    border-color: #bfe1f1 !important;
+    background: #e7f6fd !important;
+    box-shadow: 0 4px 12px rgba(36, 125, 169, .08) !important;
 }
 
 button.generateAllFiles.generateAllFiles:hover:not(:disabled),
 .btn-generation:hover:not(:disabled) {
-    color: #126443 !important;
-    border-color: #b5dfca !important;
-    background: #d8f0e5 !important;
+    color: #176b94 !important;
+    border-color: #9fd3e9 !important;
+    background: #dff3fc !important;
 }
 
 i.generate,
@@ -193,29 +193,29 @@ i.re-generate {
     height: 38px !important;
     padding: 0 !important;
     place-items: center;
-    border: 1px solid #c8e9d9 !important;
+    border: 1px solid #bfe1f1 !important;
     border-radius: 10px !important;
-    color: #197653 !important;
-    background: #e5f6ee !important;
+    color: #247da9 !important;
+    background: #e7f6fd !important;
     cursor: pointer;
     font-size: 18px !important;
     transition: color .18s ease, background-color .18s ease, border-color .18s ease !important;
 }
 
 i.re-generate {
-    color: #966317 !important;
-    border-color: #f0ddb5 !important;
-    background: #fff3d8 !important;
+    color: #93643a !important;
+    border-color: #ead3bc !important;
+    background: #fff8f1 !important;
 }
 
 i.generate:hover {
-    border-color: #b5dfca !important;
-    background: #d8f0e5 !important;
+    border-color: #9fd3e9 !important;
+    background: #dff3fc !important;
 }
 
 i.re-generate:hover {
-    border-color: #e7cd97 !important;
-    background: #fbe9c2 !important;
+    border-color: #dfbea0 !important;
+    background: #fff2e6 !important;
 }
 
 .generation-action {
@@ -226,17 +226,17 @@ i.re-generate:hover {
     justify-content: center;
     gap: 7px;
     padding: 0 12px;
-    border: 1px solid #c8e9d9;
+    border: 1px solid #bfe1f1;
     border-radius: 10px;
-    color: #197653;
-    background: #e5f6ee;
+    color: #247da9;
+    background: #e7f6fd;
     cursor: pointer;
     font-family: var(--fontFamily);
     font-size: 12px;
     font-weight: 650;
     line-height: 1;
     letter-spacing: .01em;
-    box-shadow: 0 3px 9px rgba(35, 145, 99, .07);
+    box-shadow: 0 3px 9px rgba(36, 125, 169, .07);
     transition: color .18s ease, background-color .18s ease, border-color .18s ease, box-shadow .18s ease;
 }
 
@@ -246,10 +246,10 @@ i.re-generate:hover {
 }
 
 .generation-action:hover:not(:disabled) {
-    color: #126443;
-    border-color: #b5dfca;
-    background: #d8f0e5;
-    box-shadow: 0 5px 12px rgba(35, 145, 99, .1);
+    color: #176b94;
+    border-color: #9fd3e9;
+    background: #dff3fc;
+    box-shadow: 0 5px 12px rgba(36, 125, 169, .1);
 }
 
 .generation-action.is-regenerate {
@@ -297,4 +297,97 @@ i.re-generate:hover {
         width: 100%;
         min-width: 0 !important;
     }
+}
+
+/* Sky & orange button language */
+.btn:not(.btn-close),
+button.filter,
+button.generateAllFiles,
+button[mat-flat-button],
+button[mat-raised-button],
+button[mat-stroked-button],
+button[mat-button]:not([mat-icon-button]):not(.p-0):not(.min-w-auto),
+a[mat-button]:not(.p-0):not(.min-w-auto) {
+    --app-button-height: 46px;
+    --app-button-radius: 14px;
+    font-weight: 700 !important;
+    letter-spacing: -.01em !important;
+    box-shadow: 0 7px 18px rgba(25, 103, 148, .08) !important;
+}
+
+.btn-primary,
+.btn-export,
+button.filter,
+button[mat-flat-button]:not(.back),
+button[mat-raised-button],
+button[mat-button][type="submit"]:not(.back):not(.p-0):not(.min-w-auto) {
+    color: #0871b5 !important;
+    border-color: #b8e2f7 !important;
+    background: linear-gradient(135deg, #ddf3ff, #edf9ff) !important;
+}
+
+.btn-primary:hover:not(:disabled),
+.btn-export:hover:not(:disabled),
+button.filter:hover:not(:disabled),
+button[mat-flat-button]:not(.back):hover:not(:disabled),
+button[mat-raised-button]:hover:not(:disabled),
+button[mat-button][type="submit"]:not(.back):not(.p-0):not(.min-w-auto):hover:not(:disabled) {
+    color: #075f97 !important;
+    border-color: #82cbed !important;
+    background: #d2efff !important;
+    box-shadow: 0 9px 22px rgba(22, 139, 210, .16) !important;
+}
+
+button.back.back,
+.btn.btn-back.btn-back,
+button[mat-stroked-button] {
+    color: #597186 !important;
+    border-color: #d9e6ed !important;
+    background: #f4f9fb !important;
+}
+
+button.generateAllFiles.generateAllFiles,
+.btn-generation,
+.generation-action {
+    color: #93643a !important;
+    border-color: #ead3bc !important;
+    background: #fff8f1 !important;
+    box-shadow: 0 6px 16px rgba(155, 104, 56, .06) !important;
+}
+
+button.generateAllFiles:disabled,
+.generation-action:disabled {
+    color: #7da6ba !important;
+    border-color: #d5e8f1 !important;
+    background: #edf7fb !important;
+}
+
+button.generateAllFiles.generateAllFiles:hover:not(:disabled),
+.btn-generation:hover:not(:disabled),
+.generation-action:hover:not(:disabled) {
+    color: #7e522c !important;
+    border-color: #dfbea0 !important;
+    background: #fff2e6 !important;
+}
+
+button[mat-icon-button],
+.action .mat-mdc-button,
+.mat-mdc-paginator .mat-mdc-icon-button {
+    border-color: #d8e8f1 !important;
+    border-radius: 12px !important;
+    color: #4f7890 !important;
+    background: #f5fbfe !important;
+}
+
+button[mat-icon-button]:hover:not(:disabled),
+.action .mat-mdc-button:hover:not(:disabled) {
+    color: #d9761e !important;
+    border-color: #ffd09a !important;
+    background: #fff2e3 !important;
+}
+
+button:focus-visible,
+.btn:focus-visible,
+a[mat-button]:focus-visible {
+    outline-color: rgba(22, 139, 210, .24) !important;
 }

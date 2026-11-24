@@ -12,8 +12,8 @@
     };
     position: relative;
     background:
-        radial-gradient(circle at 18% 22%, rgba(109, 139, 255, .25), transparent 22rem),
-        linear-gradient(135deg, #14264f 0%, #254bb6 52%, #eef3ff 52%, #f7f9fc 100%);
+        radial-gradient(circle at 15% 18%, rgba(121, 151, 255, .24), transparent 24rem),
+        linear-gradient(135deg, #12264f 0%, #2850bd 51.8%, #edf2fb 52%, #f7f9fc 100%);
 
     &::before {
         position: absolute;
@@ -25,6 +25,18 @@
         border: 1px solid rgba(255, 255, 255, .14);
         border-radius: 50%;
         box-shadow: 0 0 0 70px rgba(255, 255, 255, .025), 0 0 0 140px rgba(255, 255, 255, .02);
+    }
+
+    &::after {
+        position: absolute;
+        width: 520px;
+        height: 520px;
+        right: -250px;
+        bottom: -280px;
+        content: '';
+        border-radius: 50%;
+        background: rgba(49, 87, 213, .065);
+        filter: blur(2px);
     }
 
     .auth-brand {
@@ -111,9 +123,10 @@
         margin-right: 7% !important;
         margin-left: auto !important;
         padding: 40px 38px;
-        border: 1px solid rgba(255, 255, 255, .8);
-        border-radius: 20px !important;
-        box-shadow: 0 28px 70px rgba(22, 39, 82, .18);
+        border: 1px solid rgba(226, 232, 242, .92);
+        border-radius: 22px !important;
+        background: rgba(255, 255, 255, .97) !important;
+        box-shadow: 0 30px 80px rgba(19, 38, 79, .16), 0 2px 8px rgba(19, 38, 79, .04);
         position: relative;
         overflow: hidden;
 
@@ -381,7 +394,9 @@
 @media only screen and (max-width : 767px) {
 
     .sign-in-area {
-        background: linear-gradient(160deg, #14264f 0%, #3157d5 30%, #f4f7fb 30%);
+        background:
+            radial-gradient(circle at 12% 5%, rgba(126, 156, 255, .25), transparent 17rem),
+            linear-gradient(160deg, #132953 0%, #3158c9 29.8%, #eef2f9 30%, #f7f9fc 100%);
 
         .auth-brand {
             top: 22px;
@@ -393,7 +408,8 @@
         .trinta-form {
             max-width: 100%;
             margin: 58px auto 0 !important;
-            padding: 30px 20px;
+            padding: 32px 21px;
+            border-radius: 20px !important;
         
             .title {
                 h3 {
